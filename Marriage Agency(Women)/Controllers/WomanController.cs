@@ -46,7 +46,7 @@ namespace Marriage_Agency_Women_.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Birthday,Age,Country,City,Nationality,Religion,Job,Education,MaritalStatus,NumberOfChildren,Height,Weight,EyeColor,HairColor,Smoking,Alcohol,DesiredAge,Hobby,PhoneNumber,Email,Skype,Facebook,Vk,Twitter,InternationalPassport")] Woman woman)
+        public ActionResult Create([Bind(Include = "Id,Status,FirstName,LastName,Birthday,Age,Country,City,Nationality,Religion,Job,Education,MaritalStatus,NumberOfChildren,Height,Weight,EyeColor,HairColor,Smoking,Alcohol,DesiredAge,Hobby,PhoneNumber,Email,Skype,Facebook,Vk,Twitter,InternationalPassport")] Woman woman)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace Marriage_Agency_Women_.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Birthday,Age,Country,City,Nationality,Religion,Job,Education,MaritalStatus,NumberOfChildren,Height,Weight,EyeColor,HairColor,Smoking,Alcohol,DesiredAge,Hobby,PhoneNumber,Email,Skype,Facebook,Vk,Twitter,InternationalPassport")] Woman woman)
+        public ActionResult Edit([Bind(Include = "Id,Status,FirstName,LastName,Birthday,Age,Country,City,Nationality,Religion,Job,Education,MaritalStatus,NumberOfChildren,Height,Weight,EyeColor,HairColor,Smoking,Alcohol,DesiredAge,Hobby,PhoneNumber,Email,Skype,Facebook,Vk,Twitter,InternationalPassport")] Woman woman)
         {
             if (ModelState.IsValid)
             {

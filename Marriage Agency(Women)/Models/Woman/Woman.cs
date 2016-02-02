@@ -7,6 +7,7 @@ namespace Marriage_Agency_Women_.Models.Woman
 {
     public class Woman
     {
+        public bool Status { get; set; }
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
