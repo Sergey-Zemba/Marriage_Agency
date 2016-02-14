@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Marriage_Agency_Women_.Models.Woman
 {
@@ -234,6 +235,22 @@ namespace Marriage_Agency_Women_.Models.Woman
         // 
         //
         //
+
+        public IList<SelectListItem> GetSelectListItems(IDictionary<int, string> values)
+        {
+            List<SelectListItem> listToReturn = new List<SelectListItem>();
+            foreach (KeyValuePair<int, string> keyValue in values)
+            {
+                listToReturn.Add(
+                    new SelectListItem
+                    {
+                        Value = keyValue.Key.ToString(),
+                        Text = keyValue.Value
+                    });
+            }
+            return listToReturn;
+        } 
+
         private void LocationsInit()
         {
             Locations = new Dictionary<int, string>
@@ -384,9 +401,9 @@ namespace Marriage_Agency_Women_.Models.Woman
             Relationships = new Dictionary<int, string>
             {
                 {1, "Нет"},
-                {1, "Была замужем"},
-                {1, "Вдова"},
-                {1, "В отношениях"}
+                {2, "Была замужем"},
+                {3, "Вдова"},
+                {4, "В отношениях"}
             };
         }
 

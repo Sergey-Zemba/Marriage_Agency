@@ -174,7 +174,9 @@
       <DependentUpon>201602021849487_MigrateDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountsInitializer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AccountViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Woman\DropdownValuesProvider.cs" />

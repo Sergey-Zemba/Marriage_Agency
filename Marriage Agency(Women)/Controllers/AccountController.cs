@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -9,6 +10,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Marriage_Agency_Women_.Models;
+using Marriage_Agency_Women_.Models.AccountViewModels;
+using Marriage_Agency_Women_.Models.Woman;
 
 namespace Marriage_Agency_Women_.Controllers
 {
@@ -17,9 +20,11 @@ namespace Marriage_Agency_Women_.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private DropdownValuesProvider _dropdownValuesProvider;
 
         public AccountController()
         {
+            _dropdownValuesProvider = new DropdownValuesProvider();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -151,7 +156,82 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //email +
+                //pass +
+                //confPass +
+                //firstname +
+                //lastname +
+                //romanname +
+                //birthdate +
+                // location +
+                //resPermit +
+                // religion +
+                //activity +
+                //post +
+                //education +
+                //languages +
+                //Marialstatus + 
+                //childrens +
+                //height +
+                //weight +
+                //figure +
+                //eye +
+                //hair +
+                //smoking +
+                //alko +
+                //desiredage +
+                //hobby +
+                //lifestyle + 
+                //knowledge +
+                //phone +
+                //skype +
+                //FB +
+                //VK +
+                //Twitter 
+                //InternationlalPass 
+
+
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    NameInRoman = model.NameInRoman,
+                    Birthday = model.Birthday,
+                    Location = model.Location,
+                    ResidencePermit = model.ResidencePermit,
+                    Religion = model.Religion,
+                    Activity = model.Activity,
+                    Post = model.Post,
+                    Education = model.Education,
+                    Languages = model.Languages,
+                    MaritalStatus = model.MaritalStatus,
+                    NumberOfChildren = model.NumberOfChildren,
+                    Height = model.Height,
+                    Weight = model.Weight,
+                    Figure = model.Figure,
+                    EyeColor = model.EyeColor,
+                    HairColor = model.HairColor,
+                    Smoking = model.Smoking,
+                    Alcohol = model.Alcohol,
+                    DesiredAge = model.DesiredAge,
+                    Hobby = model.Hobby,
+                    Lifestyle = model.Lifestyle,
+                    Knowledge = model.Knowledge,
+                    PhoneNumber = model.PhoneNumber,
+                    Skype = model.Skype,
+                    Facebook = model.Facebook,
+                    Vk = model.Vk,
+                    Twitter = model.Twitter,
+                    InternationalPassport = model.InternationalPassport,
+
+                    CreationDate = DateTime.Now,
+                    LastLoginTime = DateTime.Now
+                };
+
+                // инкрементировать номер анкеты. Пока нули дубасят.
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
