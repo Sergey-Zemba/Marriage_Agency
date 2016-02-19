@@ -13,7 +13,7 @@ namespace Marriage_Agency_Women_.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201602021811271_InitialCreate"; }
+            get { return "201602141915174_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

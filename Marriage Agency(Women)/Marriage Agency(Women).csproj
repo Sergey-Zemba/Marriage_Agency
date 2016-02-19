@@ -161,17 +161,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\WomanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602021811271_InitialCreate.cs" />
-    <Compile Include="Migrations\201602021811271_InitialCreate.Designer.cs">
-      <DependentUpon>201602021811271_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602021849487_MigrateDB.cs" />
-    <Compile Include="Migrations\201602021849487_MigrateDB.Designer.cs">
-      <DependentUpon>201602021849487_MigrateDB.cs</DependentUpon>
+    <Compile Include="Migrations\201602141915174_InitialCreate.cs" />
+    <Compile Include="Migrations\201602141915174_InitialCreate.Designer.cs">
+      <DependentUpon>201602141915174_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountsInitializer.cs" />
@@ -179,15 +174,7 @@
     <Compile Include="Models\AccountViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Woman\DropdownValuesProvider.cs" />
-    <Compile Include="Models\Woman\Education.cs" />
-    <Compile Include="Models\Woman\EyeColor.cs" />
-    <Compile Include="Models\Woman\HairColor.cs" />
-    <Compile Include="Models\Woman\Language.cs" />
-    <Compile Include="Models\Woman\MaritalStatus.cs" />
-    <Compile Include="Models\Woman\Religion.cs" />
-    <Compile Include="Models\Woman\Woman.cs" />
-    <Compile Include="Models\Woman\WomanContext.cs" />
+    <Compile Include="Models\DropdownValuesProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -247,11 +234,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Woman\Create.cshtml" />
-    <Content Include="Views\Woman\Delete.cshtml" />
-    <Content Include="Views\Woman\Details.cshtml" />
-    <Content Include="Views\Woman\Edit.cshtml" />
-    <Content Include="Views\Woman\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -264,11 +246,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602021811271_InitialCreate.resx">
-      <DependentUpon>201602021811271_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602021849487_MigrateDB.resx">
-      <DependentUpon>201602021849487_MigrateDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602141915174_InitialCreate.resx">
+      <DependentUpon>201602141915174_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

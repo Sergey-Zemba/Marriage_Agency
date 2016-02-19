@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace Marriage_Agency_Women_.Models.Woman
+namespace Marriage_Agency_Women_.Models
 {
     public class DropdownValuesProvider
     {

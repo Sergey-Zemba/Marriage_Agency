@@ -11,7 +11,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Marriage_Agency_Women_.Models;
 using Marriage_Agency_Women_.Models.AccountViewModels;
-using Marriage_Agency_Women_.Models.Woman;
 
 namespace Marriage_Agency_Women_.Controllers
 {
@@ -156,41 +155,6 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                //email +
-                //pass +
-                //confPass +
-                //firstname +
-                //lastname +
-                //romanname +
-                //birthdate +
-                // location +
-                //resPermit +
-                // religion +
-                //activity +
-                //post +
-                //education +
-                //languages +
-                //Marialstatus + 
-                //childrens +
-                //height +
-                //weight +
-                //figure +
-                //eye +
-                //hair +
-                //smoking +
-                //alko +
-                //desiredage +
-                //hobby +
-                //lifestyle + 
-                //knowledge +
-                //phone +
-                //skype +
-                //FB +
-                //VK +
-                //Twitter 
-                //InternationlalPass 
-
-
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,

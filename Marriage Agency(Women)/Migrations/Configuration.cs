@@ -5,15 +5,15 @@ namespace Marriage_Agency_Women_.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Marriage_Agency_Women_.Models.Woman.WomanContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Marriage_Agency_Women_.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Marriage_Agency_Women_.Models.Woman.WomanContext";
+            ContextKey = "Marriage_Agency_Women_.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(Marriage_Agency_Women_.Models.Woman.WomanContext context)
+        protected override void Seed(Marriage_Agency_Women_.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
