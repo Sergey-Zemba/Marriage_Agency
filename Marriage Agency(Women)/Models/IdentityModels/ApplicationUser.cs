@@ -1,126 +1,118 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
-using Marriage_Agency_Women_.Models.IdentityModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Marriage_Agency_Women_.Models.AccountViewModels
+namespace Marriage_Agency_Women_.Models.IdentityModels
 {
-    public class RegisterViewModel
+    public class ApplicationUser : IdentityUser
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        public ApplicationUser()
+        {
+            //Languages = new List<Language>();
+        }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        // Id уже есть в IdentityUser
+        //public int Id { get; set; }
+        [Display(Name = "Дата создания анкеты")]
+        public DateTime CreationDate { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-        
-        [Required]
+        [Display(Name = "Последний вход")]
+        public DateTime LastLoginTime { get; set; }
+
+        [Display(Name = "Номер")]
+        public int Number { get; set; }
+
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
 
-        [Required]
         [Display(Name = "Фамилия")]
         public string LastName { get; set; }
 
-        [Required]
         [Display(Name = "Имя латиницей")]
         public string NameInRoman { get; set; }
 
-        [Required]
         [Display(Name = "Дата рождения")]
+        [Column(TypeName = "DateTime2")]
         public DateTime Birthday { get; set; }
 
-        [Required]
+        [NotMapped]
+        [Display(Name = "Возраст")]
+        public int Age
+        {
+            get { return DateTime.Now.Year - Birthday.Year; }
+        }
+
         [Display(Name = "Место проживания")]
         public int Location { get; set; }
 
         [Display(Name = "Прописка")]
         public string ResidencePermit { get; set; }
 
-        [Required]
         [Display(Name = "Вера")]
         public int Religion { get; set; }
 
-        [Required]
         [Display(Name = "Сфера работы")]
         public int Activity { get; set; }
 
-        [Required]
         [Display(Name = "Должность")]
         public int Post { get; set; }
 
-        [Required]
         [Display(Name = "Образование")]
         public int Education { get; set; }
-      
-        [Display(Name = "Языки")]
-        public ICollection<int> Languages { get; set; }
 
-        [Required]
+        [Display(Name = "Языки")]
+        public virtual ICollection<Language> Languages { get; set; }
+
         [Display(Name = "Семейное положение")]
         public int MaritalStatus { get; set; }
 
-        [Required]
         [Display(Name = "Дети")]
         public int NumberOfChildren { get; set; }
 
-        [Required]
         [Display(Name = "Рост")]
         public int Height { get; set; }
 
-        [Required]
         [Display(Name = "Вес")]
         public int Weight { get; set; }
 
-        [Required]
         [Display(Name = "Фигура")]
         public int Figure { get; set; }
-       
-        [Required]
+
         [Display(Name = "Цвет глаз")]
         public int EyeColor { get; set; }
 
-        [Required]
         [Display(Name = "Цвет волос")]
         public int HairColor { get; set; }
 
-        [Required]
         [Display(Name = "Курение")]
         public bool Smoking { get; set; }
 
-        [Required]
         [Display(Name = "Алкоголь")]
         public int Alcohol { get; set; }
 
-        [Required]
         [Display(Name = "Желанный возраст партнера")]
         public int DesiredAge { get; set; }
 
         [Display(Name = "Спорт, искусство и музыка")]
         public int Hobby { get; set; }
-       
+
         [Display(Name = "Образ жизни и развлечения")]
         public int Lifestyle { get; set; }
 
         [Display(Name = "Еда и знания")]
         public int Knowledge { get; set; }
 
-        // PhoneNumber из IdentityUser
-        [Required]
-        [Display(Name = "Номер мобильного")]
-        [DataType(DataType.PhoneNumber)]
-        public string PhoneNumber { get; set; }
+        // PhoneNumber дублирует свойство из IdentityUser
+        // public string PhoneNumber { get; set; }
+        // Email уже есть в IdentityUser
+        //public string Email { get; set; }
 
         [Display(Name = "Скайп")]
         public string Skype { get; set; }
@@ -130,11 +122,24 @@ namespace Marriage_Agency_Women_.Models.AccountViewModels
 
         [Display(Name = "Вконтакте")]
         public string Vk { get; set; }
-        
+
         [Display(Name = "Твиттер")]
         public string Twitter { get; set; }
 
         [Display(Name = "Загранпаспорт")]
         public bool InternationalPassport { get; set; }
+
+        // ??
+        [Display(Name = "Статус")]
+        public bool Status { get; set; }
+
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            // Add custom user claims here
+            return userIdentity;
+        }
     }
 }

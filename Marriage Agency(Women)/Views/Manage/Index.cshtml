@@ -1,6 +1,25 @@
-﻿@model Marriage_Agency_Women_.Models.IndexViewModel
+﻿@using Marriage_Agency_Women_.Models
+@model Marriage_Agency_Women_.Models.ManageViewModels.IndexViewModel
 @{
     ViewBag.Title = "Manage";
+
+    DropdownValuesProvider values = new DropdownValuesProvider();
+
+    IList<SelectListItem> locations = values.GetSelectListItems(values.Locations);
+    IList<SelectListItem> religions = values.GetSelectListItems(values.Religions);
+    IList<SelectListItem> activities = values.GetSelectListItems(values.Activities);
+    IList<SelectListItem> posts = values.GetSelectListItems(values.Posts);
+    IList<SelectListItem> educations = values.GetSelectListItems(values.Educations);
+    IList<SelectListItem> relationships = values.GetSelectListItems(values.Relationships);
+    IList<SelectListItem> numberOfChildren = values.GetSelectListItems(values.NumberOfChildren);
+    IList<SelectListItem> figures = values.GetSelectListItems(values.Figures);
+    IList<SelectListItem> eyeColors = values.GetSelectListItems(values.EyeColors);
+    IList<SelectListItem> hairColors = values.GetSelectListItems(values.HairColors);
+    IList<SelectListItem> alcohol = values.GetSelectListItems(values.Alcohol);
+    IList<SelectListItem> desiredAges = values.GetSelectListItems(values.DesiredAges);
+    IList<SelectListItem> hobbies = values.GetSelectListItems(values.Hobbies);
+    IList<SelectListItem> lifestyles = values.GetSelectListItems(values.Lifestyles);
+    IList<SelectListItem> knowledge = values.GetSelectListItems(values.Knowledge);
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -23,62 +42,265 @@
             }
             ]
         </dd>
-        <dt>External Logins:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
-        @*
-            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
-             See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
-             Uncomment the following block after you have set up two-factor authentication
-        *@
-        @*  
-            <dt>Phone Number:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None") [
-                @if (Model.PhoneNumber != null)
-                {
-                    @Html.ActionLink("Change", "AddPhoneNumber")
-                    @: &nbsp;|&nbsp;
-                    @Html.ActionLink("Remove", "RemovePhoneNumber")
-                }
-                else
-                {
-                    @Html.ActionLink("Add", "AddPhoneNumber")
-                }
-                ]
-            </dd>
-        *@
-        <dt>Two-Factor Authentication:</dt>
-        <dd>
-            <p>
-                There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication.
-            </p>
-            @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Enabled
-                        <input type="submit" value="Disable" class="btn btn-link" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Disabled
-                        <input type="submit" value="Enable" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
-        </dd>
     </dl>
+
+    @using (Html.BeginForm("Edit", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.NameInRoman, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.NameInRoman, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Birthday, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(m => m.Birthday, new { @class = "form-control" })
+            </div>
+            <p>1/1/1990</p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Location, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Location, locations, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ResidencePermit, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.ResidencePermit, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Religion, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Religion, religions, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Activity, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Activity, activities, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Post, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Post, posts, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Education, new {@class = "col-md-2 control-label"})
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Education, educations, new {@class = "form-control"})
+            </div>
+        </div>
+
+        <div>
+            @foreach (KeyValuePair<int, string> keyValue in values.Languages)
+            {
+                <p>
+                    <label>
+                        @keyValue.Value &nbsp;
+                        <input type="checkbox" name="Languages" value="@keyValue.Key"
+                               @(Model.Languages.Contains(keyValue.Key) ? "checked='checked'" : "")/>
+                </label>
+            </p>
+            }
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.MaritalStatus, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.MaritalStatus, relationships, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Education, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Education, educations, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.NumberOfChildren, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.NumberOfChildren, numberOfChildren, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Height, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Height, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Weight, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Weight, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Figure, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Figure, figures, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.EyeColor, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.EyeColor, eyeColors, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.HairColor, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.HairColor, hairColors, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Smoking)
+            <p>
+                <label>
+                    Нет&nbsp;
+                    <input type="radio" name="Smoking" value="false"
+                           @(!Model.Smoking ? "checked='checked'" : "") />
+                </label>
+            </p>
+            <p>
+                <label>
+                    Да&nbsp;
+                    <input type="radio" name="Smoking" value="true"
+                           @(Model.Smoking ? "checked='checked'" : "") />
+                </label>
+            </p>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Alcohol, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Alcohol, alcohol, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.DesiredAge, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.DesiredAge, desiredAges, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Hobby, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Hobby, hobbies, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Lifestyle, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Lifestyle, lifestyles, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Knowledge, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Knowledge, knowledge, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(m => m.PhoneNumber, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Skype, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Skype, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Facebook, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Facebook, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Vk, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Vk, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Twitter, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Twitter, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.InternationalPassport)
+            <p>
+                <label>
+                    Нет&nbsp;
+                    <input type="radio" name="InternationalPassport" value="false"
+                           @( !Model.InternationalPassport ? "checked='checked'" : "") />
+                </label>
+            </p>
+            <p>
+                <label>
+                    Да&nbsp;
+                    <input type="radio" name="InternationalPassport" value="true"
+                           @( Model.InternationalPassport ? "checked='checked'" : "") />
+                </label>
+            </p>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Обновить" />
+            </div>
+        </div>
+    }
+
 </div>

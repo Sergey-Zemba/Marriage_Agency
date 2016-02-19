@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Marriage_Agency_Women_.Models;
+using Marriage_Agency_Women_.Models.IdentityModels;
 
 namespace Marriage_Agency_Women_
 {

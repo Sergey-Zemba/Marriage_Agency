@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -7,6 +8,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Marriage_Agency_Women_.Models;
+using Marriage_Agency_Women_.Models.IdentityModels;
+using Marriage_Agency_Women_.Models.ManageViewModels;
 
 namespace Marriage_Agency_Women_.Controllers
 {
@@ -32,9 +35,9 @@ namespace Marriage_Agency_Women_.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -64,15 +67,61 @@ namespace Marriage_Agency_Women_.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            ApplicationUser user = await UserManager.FindByIdAsync(userId);
+
+            ICollection<int> languages = new List<int>();
+            foreach (Language language in user.Languages)
+            {
+                languages.Add(language.Id);
+            }
+
+            IndexViewModel model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                NameInRoman = user.NameInRoman,
+                Birthday = user.Birthday,
+                Location = user.Location,
+                ResidencePermit = user.ResidencePermit,
+                Religion = user.Religion,
+                Activity = user.Activity,
+                Post = user.Post,
+                Education = user.Education,
+                Languages = languages,
+                MaritalStatus = user.MaritalStatus,
+                NumberOfChildren = user.NumberOfChildren,
+                Height = user.Height,
+                Weight = user.Weight,
+                Figure = user.Figure,
+                EyeColor = user.EyeColor,
+                HairColor = user.HairColor,
+                Smoking = user.Smoking,
+                Alcohol = user.Alcohol,
+                DesiredAge = user.DesiredAge,
+                Hobby = user.Hobby,
+                Lifestyle = user.Lifestyle,
+                Knowledge = user.Knowledge,
+                PhoneNumber = user.PhoneNumber,
+                Skype = user.Skype,
+                Facebook = user.Facebook,
+                Vk = user.Vk,
+                Twitter = user.Twitter,
+                InternationalPassport = user.InternationalPassport
             };
+
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(IndexViewModel model)
+        {
+            // update user info
+            // var result = await UserManager. ...
+
+            ManageMessageId message = ManageMessageId.EditSuccess;
+            return RedirectToAction("ManageLogins", new { Message = message });
         }
 
         //
@@ -331,7 +380,7 @@ namespace Marriage_Agency_Women_.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -371,17 +420,6 @@ namespace Marriage_Agency_Women_.Controllers
             return false;
         }
 
-        public enum ManageMessageId
-        {
-            AddPhoneSuccess,
-            ChangePasswordSuccess,
-            SetTwoFactorSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            RemovePhoneSuccess,
-            Error
-        }
-
-#endregion
+        #endregion
     }
 }

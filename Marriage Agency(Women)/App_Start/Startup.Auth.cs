@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Marriage_Agency_Women_.Models;
+using Marriage_Agency_Women_.Models.IdentityModels;
 
 namespace Marriage_Agency_Women_
 {
