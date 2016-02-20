@@ -18,6 +18,7 @@ namespace Marriage_Agency_Women_.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _applicationDbContext;
 
         public ManageController()
         {
@@ -50,6 +51,18 @@ namespace Marriage_Agency_Women_.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        private ApplicationDbContext DbContext
+        {
+            get
+            {
+                if (_applicationDbContext == null)
+                {
+                    _applicationDbContext = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+                }
+                return _applicationDbContext;
             }
         }
 
@@ -115,13 +128,71 @@ namespace Marriage_Agency_Women_.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(IndexViewModel model)
         {
-            // update user info
-            // var result = await UserManager. ...
+            if (ModelState.IsValid)
+            {
+                List<Language> languages = new List<Language>();
 
-            ManageMessageId message = ManageMessageId.EditSuccess;
-            return RedirectToAction("ManageLogins", new { Message = message });
+                foreach (int id in model.Languages)
+                {
+                    var lang = DbContext.Languages.Find(id);
+                    languages.Add(lang);
+                }
+
+                var userName = User.Identity.Name;
+                var user = await UserManager.FindByNameAsync(userName);
+
+                if (user == null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.NameInRoman = model.NameInRoman;
+                user.Birthday = model.Birthday;
+                user.Location = model.Location;
+                user.ResidencePermit = model.ResidencePermit;
+                user.Religion = model.Religion;
+                user.Activity = model.Activity;
+                user.Post = model.Post;
+                user.Education = model.Education;
+
+                // Очистка обязательна, иначе Cannot insert duplicate key in object
+                user.Languages.Clear();
+                user.Languages = languages;
+
+                user.MaritalStatus = model.MaritalStatus;
+                user.NumberOfChildren = model.NumberOfChildren;
+                user.Height = model.Height;
+                user.Weight = model.Weight;
+                user.Figure = model.Figure;
+                user.EyeColor = model.EyeColor;
+                user.HairColor = model.HairColor;
+                user.Smoking = model.Smoking;
+                user.Alcohol = model.Alcohol;
+                user.DesiredAge = model.DesiredAge;
+                user.Hobby = model.Hobby;
+                user.Lifestyle = model.Lifestyle;
+                user.Knowledge = model.Knowledge;
+                user.PhoneNumber = model.PhoneNumber;
+                user.Skype = model.Skype;
+                user.Facebook = model.Facebook;
+                user.Vk = model.Vk;
+                user.Twitter = model.Twitter;
+                user.InternationalPassport = model.InternationalPassport;
+                
+                var result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    ManageMessageId message = ManageMessageId.EditSuccess;
+                    return RedirectToAction("Index", new { Message = message });
+                }
+                AddErrors(result);
+            }
+            return View("Index", model);
         }
 
         //
