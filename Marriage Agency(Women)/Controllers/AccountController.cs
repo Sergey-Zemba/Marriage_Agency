@@ -21,6 +21,7 @@ namespace Marriage_Agency_Women_.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _applicationDbContext;
         private DropdownValuesProvider _dropdownValuesProvider;
 
         public AccountController()
@@ -55,6 +56,18 @@ namespace Marriage_Agency_Women_.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        private ApplicationDbContext DbContext
+        {
+            get
+            {
+                if (_applicationDbContext == null)
+                {
+                    _applicationDbContext = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+                }
+                return _applicationDbContext;
             }
         }
 
@@ -157,6 +170,14 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<Language> languages = new List<Language>();
+
+                foreach (int id in model.Languages)
+                {
+                    var lang = DbContext.Languages.Find(id);
+                    languages.Add(lang);
+                }
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -171,6 +192,7 @@ namespace Marriage_Agency_Women_.Controllers
                     Activity = model.Activity,
                     Post = model.Post,
                     Education = model.Education,
+                    Languages = languages,
                     MaritalStatus = model.MaritalStatus,
                     NumberOfChildren = model.NumberOfChildren,
                     Height = model.Height,
@@ -194,7 +216,7 @@ namespace Marriage_Agency_Women_.Controllers
                     LastLoginTime = DateTime.Now
                 };
                 // инкрементировать номер анкеты. Пока нули дубасят.
-                
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -206,19 +228,6 @@ namespace Marriage_Agency_Women_.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    string usrId = UserManager.FindByEmail(model.Email).Id;
-                    
-                    using (ApplicationDbContext db = new ApplicationDbContext())
-                    {
-                        var usr = db.Users.Find(usrId);
-                        usr.Languages = new List<Language>();
-                        foreach (int id in model.Languages)
-                        {
-                            var lang = db.Languages.Find(id);
-                            usr.Languages.Add(lang);
-                        }
-                        db.SaveChanges();
-                    }
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
