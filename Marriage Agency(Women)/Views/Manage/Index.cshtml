@@ -1,25 +1,25 @@
-﻿@using Marriage_Agency_Women_.Models
+﻿@using Marriage_Agency_Women_.Models.Values
 @model Marriage_Agency_Women_.Models.ManageViewModels.IndexViewModel
 @{
     ViewBag.Title = "Manage";
 
-    DropdownValuesProvider values = new DropdownValuesProvider();
+    Values values = new Values();
 
-    IList<SelectListItem> locations = values.GetSelectListItems(values.Locations);
-    IList<SelectListItem> religions = values.GetSelectListItems(values.Religions);
-    IList<SelectListItem> activities = values.GetSelectListItems(values.Activities);
-    IList<SelectListItem> posts = values.GetSelectListItems(values.Posts);
-    IList<SelectListItem> educations = values.GetSelectListItems(values.Educations);
-    IList<SelectListItem> relationships = values.GetSelectListItems(values.Relationships);
-    IList<SelectListItem> numberOfChildren = values.GetSelectListItems(values.NumberOfChildren);
-    IList<SelectListItem> figures = values.GetSelectListItems(values.Figures);
-    IList<SelectListItem> eyeColors = values.GetSelectListItems(values.EyeColors);
-    IList<SelectListItem> hairColors = values.GetSelectListItems(values.HairColors);
-    IList<SelectListItem> alcohol = values.GetSelectListItems(values.Alcohol);
-    IList<SelectListItem> desiredAges = values.GetSelectListItems(values.DesiredAges);
-    IList<SelectListItem> hobbies = values.GetSelectListItems(values.Hobbies);
-    IList<SelectListItem> lifestyles = values.GetSelectListItems(values.Lifestyles);
-    IList<SelectListItem> knowledge = values.GetSelectListItems(values.Knowledge);
+    IList<SelectListItem> locations = values.GetSelectListItems(values.Locations, ValuesLanguage.Russian);
+    IList<SelectListItem> religions = values.GetSelectListItems(values.Religions, ValuesLanguage.Russian);
+    IList<SelectListItem> activities = values.GetSelectListItems(values.Activities, ValuesLanguage.Russian);
+    IList<SelectListItem> posts = values.GetSelectListItems(values.Posts, ValuesLanguage.Russian);
+    IList<SelectListItem> educations = values.GetSelectListItems(values.Educations, ValuesLanguage.Russian);
+    IList<SelectListItem> relationships = values.GetSelectListItems(values.Relationships, ValuesLanguage.Russian);
+    IList<SelectListItem> numberOfChildren = values.GetSelectListItems(values.NumberOfChildren, ValuesLanguage.Russian);
+    IList<SelectListItem> figures = values.GetSelectListItems(values.Figures, ValuesLanguage.Russian);
+    IList<SelectListItem> eyeColors = values.GetSelectListItems(values.EyeColors, ValuesLanguage.Russian);
+    IList<SelectListItem> hairColors = values.GetSelectListItems(values.HairColors, ValuesLanguage.Russian);
+    IList<SelectListItem> alcohol = values.GetSelectListItems(values.Alcohol, ValuesLanguage.Russian);
+    IList<SelectListItem> desiredAges = values.GetSelectListItems(values.DesiredAges, ValuesLanguage.Russian);
+    IList<SelectListItem> hobbies = values.GetSelectListItems(values.Hobbies, ValuesLanguage.Russian);
+    IList<SelectListItem> lifestyles = values.GetSelectListItems(values.Lifestyles, ValuesLanguage.Russian);
+    IList<SelectListItem> knowledge = values.GetSelectListItems(values.Knowledge, ValuesLanguage.Russian);
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -122,11 +122,11 @@
         </div>
 
         <div>
-            @foreach (KeyValuePair<int, string> keyValue in values.Languages)
+            @foreach (KeyValuePair<int, ViewValue> keyValue in values.Languages)
             {
                 <p>
                     <label>
-                        @keyValue.Value &nbsp;
+                        @keyValue.Value.Russian &nbsp;
                         <input type="checkbox" name="Languages" value="@keyValue.Key"
                                @(Model.Languages.Contains(keyValue.Key) ? "checked='checked'" : "")/>
                 </label>

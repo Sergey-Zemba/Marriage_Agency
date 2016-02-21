@@ -22,12 +22,8 @@ namespace Marriage_Agency_Women_.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext _applicationDbContext;
-        private DropdownValuesProvider _dropdownValuesProvider;
 
-        public AccountController()
-        {
-            _dropdownValuesProvider = new DropdownValuesProvider();
-        }
+        public AccountController() { }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {

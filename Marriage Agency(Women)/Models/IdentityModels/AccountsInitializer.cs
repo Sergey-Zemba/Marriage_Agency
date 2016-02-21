@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Marriage_Agency_Women_.Models.Values;
 
 namespace Marriage_Agency_Women_.Models.IdentityModels
 {
@@ -10,11 +11,11 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
     {
         protected override void Seed(ApplicationDbContext context)
         {
-            DropdownValuesProvider values = new DropdownValuesProvider();
-            IDictionary<int, string> languages = values.Languages;
+            Values.Values values = new Values.Values();
+            IDictionary<int, ViewValue> languages = values.Languages;
             ICollection<Language> dbLanguages = new List<Language>();
 
-            foreach (KeyValuePair<int, string> keyValue in languages)
+            foreach (KeyValuePair<int, ViewValue> keyValue in languages)
             {
                 dbLanguages.Add(new Language(keyValue.Key));
             }
