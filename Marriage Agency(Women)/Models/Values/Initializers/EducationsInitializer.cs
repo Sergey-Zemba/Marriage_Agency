@@ -12,11 +12,11 @@ namespace Marriage_Agency_Women_.Models.Values.Initializers
         {
             dictionary = new Dictionary<int, ViewValue>
             {
-                {1, new ViewValue(1, "Аспирантура", "", "")},
-                {2, new ViewValue(2, "Университет", "", "")},
-                {3, new ViewValue(3, "ПТУ", "", "")},
-                {4, new ViewValue(4, "Средняя школа", "", "")},
-                {5, new ViewValue(5, "Учусь", "", "")}
+                {1, new ViewValue(1, "Аспирантура", "Graduate school", "")},
+                {2, new ViewValue(2, "Университет", "University", "大学")},
+                {3, new ViewValue(3, "ПТУ", "Vocational school", "専門学校")},
+                {4, new ViewValue(4, "Средняя школа", "High school", "高等学校")},
+                {5, new ViewValue(5, "Учусь", "Student", "在学中")}
             };
         }
     }

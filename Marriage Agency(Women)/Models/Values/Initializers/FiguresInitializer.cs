@@ -11,11 +11,11 @@ namespace Marriage_Agency_Women_.Models.Values.Initializers
         {
             dictionary = new Dictionary<int, ViewValue>
             {
-                {1, new ViewValue(1, "Худое", "", "")},
-                {2, new ViewValue(2, "Спортивное", "", "")},
-                {3, new ViewValue(3, "Стандартное", "", "")},
-                {4, new ViewValue(4, "Роскошное", "", "")},
-                {5, new ViewValue(5, "Полное", "", "")}
+                {1, new ViewValue(1, "Худое", "Slender", "細身")},
+                {2, new ViewValue(2, "Спортивное", "Athletic", "アスリート")},
+                {3, new ViewValue(3, "Стандартное", "Standards", "標準")},
+                {4, new ViewValue(4, "Роскошное", "Voluptuous", "官能的")},
+                {5, new ViewValue(5, "Полное", "Plump", "豊満")}
             };
         }
     }

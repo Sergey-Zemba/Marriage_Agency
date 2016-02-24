@@ -15,17 +15,6 @@ namespace Marriage_Agency_Women_.Models.Values
             _initializer.Init(out _dictionary);
         }
 
-        //public IDictionary<int, ViewValue> Dictionary
-        //{
-        //    get
-        //    {
-        //        if (_dictionary == null)
-        //        {
-        //            _initializer.Init(out _dictionary);
-        //        }
-        //        return _dictionary;
-        //    }
-        //}
         public IDictionary<int, ViewValue> Dictionary
         {
             get { return _dictionary; }
