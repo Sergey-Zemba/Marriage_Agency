@@ -53,7 +53,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         public int Location { get; set; }
 
         [Display(Name = "Прописка")]
-        public string ResidencePermit { get; set; }
+        public int ResidencePermit { get; set; }
 
         [Display(Name = "Вера")]
         public int Religion { get; set; }

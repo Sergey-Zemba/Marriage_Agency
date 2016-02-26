@@ -168,10 +168,13 @@ namespace Marriage_Agency_Women_.Controllers
             {
                 List<Language> languages = new List<Language>();
 
-                foreach (int id in model.Languages)
+                if (model.Languages != null)
                 {
-                    var lang = DbContext.Languages.Find(id);
-                    languages.Add(lang);
+                    foreach (int id in model.Languages)
+                    {
+                        var lang = DbContext.Languages.Find(id);
+                        languages.Add(lang);
+                    }
                 }
 
                 var user = new ApplicationUser
@@ -183,7 +186,7 @@ namespace Marriage_Agency_Women_.Controllers
                     NameInRoman = model.NameInRoman,
                     Birthday = model.Birthday,
                     Location = model.Location,
-                    ResidencePermit = model.ResidencePermit,
+                    ResidencePermit = model.Location, // не ошибка
                     Religion = model.Religion,
                     Activity = model.Activity,
                     Post = model.Post,
@@ -202,7 +205,7 @@ namespace Marriage_Agency_Women_.Controllers
                     Hobby = model.Hobby,
                     Lifestyle = model.Lifestyle,
                     Knowledge = model.Knowledge,
-                    PhoneNumber = model.PhoneNumber,
+                    PhoneNumber = "+38" + model.PhoneNumber,
                     Skype = model.Skype,
                     Facebook = model.Facebook,
                     Vk = model.Vk,
@@ -462,6 +465,22 @@ namespace Marriage_Agency_Women_.Controllers
         public ActionResult ExternalLoginFailure()
         {
             return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<JsonResult> CheckEmail(string email)
+        {
+            bool result = false;
+            if (email != null)
+            {
+                ApplicationUser user = await UserManager.FindByEmailAsync(email);
+                if (user == null)
+                {
+                    result = true;
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

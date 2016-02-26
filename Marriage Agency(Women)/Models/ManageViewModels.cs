@@ -5,7 +5,7 @@ using Microsoft.Owin.Security;
 
 namespace Marriage_Agency_Women_.Models
 {
-    //public class IndexViewModel
+    //public class EditViewModel
     //{
        // уехали в Models.ManageViewModels
     //}

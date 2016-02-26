@@ -70,6 +70,9 @@ namespace Marriage_Agency_Women_.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+            //
+            // Перенести содержимое метода в другое место (скорее всего в Edit(get)), индексная будет другой
+            //
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -82,13 +85,21 @@ namespace Marriage_Agency_Women_.Controllers
             var userId = User.Identity.GetUserId();
             ApplicationUser user = await UserManager.FindByIdAsync(userId);
 
-            ICollection<int> languages = new List<int>();
-            foreach (Language language in user.Languages)
+            if (user == null)
             {
-                languages.Add(language.Id);
+                return RedirectToAction("Login", "Account");
             }
 
-            IndexViewModel model = new IndexViewModel
+            ICollection<int> languages = new List<int>();
+            if (user.Languages != null)
+            {
+                foreach (Language language in user.Languages)
+                {
+                    languages.Add(language.Id);
+                }
+            }
+
+            EditViewModel model = new EditViewModel
             {
                 HasPassword = HasPassword(),
 
@@ -97,7 +108,6 @@ namespace Marriage_Agency_Women_.Controllers
                 NameInRoman = user.NameInRoman,
                 Birthday = user.Birthday,
                 Location = user.Location,
-                ResidencePermit = user.ResidencePermit,
                 Religion = user.Religion,
                 Activity = user.Activity,
                 Post = user.Post,
@@ -116,7 +126,7 @@ namespace Marriage_Agency_Women_.Controllers
                 Hobby = user.Hobby,
                 Lifestyle = user.Lifestyle,
                 Knowledge = user.Knowledge,
-                PhoneNumber = user.PhoneNumber,
+                PhoneNumber = user.PhoneNumber.Substring(3),
                 Skype = user.Skype,
                 Facebook = user.Facebook,
                 Vk = user.Vk,
@@ -129,16 +139,19 @@ namespace Marriage_Agency_Women_.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(IndexViewModel model)
+        public async Task<ActionResult> Edit(EditViewModel model)
         {
             if (ModelState.IsValid)
             {
                 List<Language> languages = new List<Language>();
 
-                foreach (int id in model.Languages)
+                if (model.Languages != null)
                 {
-                    var lang = DbContext.Languages.Find(id);
-                    languages.Add(lang);
+                    foreach (int id in model.Languages)
+                    {
+                        var lang = DbContext.Languages.Find(id);
+                        languages.Add(lang);
+                    }
                 }
 
                 var userName = User.Identity.Name;
@@ -154,7 +167,6 @@ namespace Marriage_Agency_Women_.Controllers
                 user.NameInRoman = model.NameInRoman;
                 user.Birthday = model.Birthday;
                 user.Location = model.Location;
-                user.ResidencePermit = model.ResidencePermit;
                 user.Religion = model.Religion;
                 user.Activity = model.Activity;
                 user.Post = model.Post;
@@ -177,7 +189,7 @@ namespace Marriage_Agency_Women_.Controllers
                 user.Hobby = model.Hobby;
                 user.Lifestyle = model.Lifestyle;
                 user.Knowledge = model.Knowledge;
-                user.PhoneNumber = model.PhoneNumber;
+                user.PhoneNumber = "+38" + model.PhoneNumber;
                 user.Skype = model.Skype;
                 user.Facebook = model.Facebook;
                 user.Vk = model.Vk;
