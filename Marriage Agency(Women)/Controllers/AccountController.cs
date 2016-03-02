@@ -166,53 +166,53 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<Language> languages = new List<Language>();
+                //List<Language> languages = new List<Language>();
 
-                if (model.Languages != null)
-                {
-                    foreach (int id in model.Languages)
-                    {
-                        var lang = DbContext.Languages.Find(id);
-                        languages.Add(lang);
-                    }
-                }
+                //if (model.Languages != null)
+                //{
+                //    foreach (int id in model.Languages)
+                //    {
+                //        var lang = DbContext.Languages.Find(id);
+                //        languages.Add(lang);
+                //    }
+                //}
 
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    NameInRoman = model.NameInRoman,
-                    Birthday = model.Birthday,
-                    Location = model.Location,
-                    ResidencePermit = model.Location, // не ошибка
-                    Religion = model.Religion,
+                    //FirstName = model.FirstName,
+                    //LastName = model.LastName,
+                    //NameInRoman = model.NameInRoman,
+                    //Birthday = model.Birthday,
+                    //Location = model.Location,
+                    //ResidencePermit = model.Location, // не ошибка
+                    //Religion = model.Religion,
                     Activity = model.Activity,
-                    Post = model.Post,
-                    Education = model.Education,
-                    Languages = languages,
-                    MaritalStatus = model.MaritalStatus,
-                    NumberOfChildren = model.NumberOfChildren,
-                    Height = model.Height,
-                    Weight = model.Weight,
-                    Figure = model.Figure,
-                    EyeColor = model.EyeColor,
-                    HairColor = model.HairColor,
-                    Smoking = model.Smoking,
-                    Alcohol = model.Alcohol,
-                    DesiredAge = model.DesiredAge,
-                    Hobby = model.Hobby,
-                    Lifestyle = model.Lifestyle,
-                    Knowledge = model.Knowledge,
-                    PhoneNumber = "+38" + model.PhoneNumber,
-                    Skype = model.Skype,
-                    Facebook = model.Facebook,
-                    Vk = model.Vk,
-                    Twitter = model.Twitter,
-                    InternationalPassport = model.InternationalPassport,
-                    CreationDate = DateTime.Now,
-                    LastLoginTime = DateTime.Now
+                    //Post = model.Post,
+                    //Education = model.Education,
+                    //Languages = languages,
+                    //MaritalStatus = model.MaritalStatus,
+                    //NumberOfChildren = model.NumberOfChildren,
+                    //Height = model.Height,
+                    //Weight = model.Weight,
+                    //Figure = model.Figure,
+                    //EyeColor = model.EyeColor,
+                    //HairColor = model.HairColor,
+                    //Smoking = model.Smoking,
+                    //Alcohol = model.Alcohol,
+                    //DesiredAge = model.DesiredAge,
+                    //Hobby = model.Hobby,
+                    //Lifestyle = model.Lifestyle,
+                    //Knowledge = model.Knowledge,
+                    //PhoneNumber = "+38" + model.PhoneNumber,
+                    //Skype = model.Skype,
+                    //Facebook = model.Facebook,
+                    //Vk = model.Vk,
+                    //Twitter = model.Twitter,
+                    //InternationalPassport = model.InternationalPassport,
+                    //CreationDate = DateTime.Now,
+                    //LastLoginTime = DateTime.Now
                 };
                 // инкрементировать номер анкеты. Пока нули дубасят.
 
@@ -471,6 +471,7 @@ namespace Marriage_Agency_Women_.Controllers
         [AllowAnonymous]
         public async Task<JsonResult> CheckEmail(string email)
         {
+
             bool result = false;
             if (email != null)
             {

@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -165,23 +166,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Characteristics\Activity.cs" />
+    <Compile Include="Models\Characteristics\Alcohol.cs" />
+    <Compile Include="Models\Characteristics\DesiredAge.cs" />
+    <Compile Include="Models\Characteristics\Education.cs" />
+    <Compile Include="Models\Characteristics\EyeColor.cs" />
+    <Compile Include="Models\Characteristics\HairColor.cs" />
+    <Compile Include="Models\Characteristics\Hobby.cs" />
+    <Compile Include="Models\Characteristics\Job.cs" />
+    <Compile Include="Models\Characteristics\Knowledge.cs" />
+    <Compile Include="Models\Characteristics\Language.cs" />
+    <Compile Include="Models\Characteristics\Lifestyle.cs" />
+    <Compile Include="Models\Characteristics\Location.cs" />
+    <Compile Include="Models\Characteristics\NumberOfChildren.cs" />
+    <Compile Include="Models\Characteristics\PersonalData.cs" />
+    <Compile Include="Models\Characteristics\Relationship.cs" />
+    <Compile Include="Models\Characteristics\Religion.cs" />
+    <Compile Include="Models\Characteristics\Shape.cs" />
     <Compile Include="Models\SharedViewModels\BaseViewModel.cs" />
     <Compile Include="Models\IdentityModels\AccountsInitializer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AccountViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\IdentityModels\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels\ApplicationUser.cs" />
-    <Compile Include="Models\IdentityModels\Language.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ManageViewModels\EditViewModel.cs" />
-    <Compile Include="Models\Values\Initializers\ActivitiesInitializer.cs" />
     <Compile Include="Models\Values\ViewValue.cs" />
-    <Compile Include="Models\Values\Initializers\AlcoholInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\DesiredAgesInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\EducationsInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\EyeColorsInitializer.cs" />
     <Compile Include="Models\Values\Initializers\FiguresInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\HairColorsInitializer.cs" />
     <Compile Include="Models\Values\Initializers\HobbiesInitializer.cs" />
     <Compile Include="Models\Values\Initializers\KnowledgeInitializer.cs" />
     <Compile Include="Models\Values\Initializers\LanguagesInitializer.cs" />
