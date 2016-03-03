@@ -145,6 +145,53 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
                 new Hobby(58, "Мюзикл", "Musical", "ミュージカル"),
                 new Hobby(59, "Нет", "No", "なし")
             };
+            ICollection<Job> jobs = new List<Job>
+            {
+                new Job(1, "Должностное лицо", "Executive", "役員"),
+                new Job(2, "Сотрудник компании", "Employee", "会社員"),
+                new Job(3, "Частный предприниматель", "Self-employment", "自営業 "),
+                new Job(4, "Частный специалист", "Professional", "専門家 "),
+                new Job(5, "Госслужащий", "Public servant", "公務員"),
+                new Job(6, "Студент", "Student", "学生 "),
+                new Job(7, "Домохозяйка", "Housewife", "家事手伝い "),
+                new Job(8, "Неполная занятость", "Underemployment", "パート"),
+                new Job(9, "В поисках работы", "Looking for work", "無職"),
+                new Job(10, "Другое", "Оther", "その他")
+            };
+            ICollection<Knowledge> knowledges = new List<Knowledge>
+            {
+                new Knowledge(1, "Кулинария", "Cooking", "料理"),
+                new Knowledge(2, "Кондитерские изделия", "Pastry making", "お菓子作り"),
+                new Knowledge(3, "Прогулка по ресторанам", "Eating tour", "食べ歩き"),
+                new Knowledge(4, "Кафе-тур", "Cafe Tours", "カフェめぐり"),
+                new Knowledge(5, "Чай", "Tea", "紅茶"),
+                new Knowledge(6, "Кофе", "Coffee", "コーヒー"),
+                new Knowledge(7, "Коктейли", "Cocktails", "カクテル"),
+                new Knowledge(8, "Духи", "Perfumes", "香水"),
+                new Knowledge(9, "Поэзия", "Poetry", "詩"),
+                new Knowledge(10, "Чтение", "Reading", "読書"),
+                new Knowledge(11, "Писание", "Writing", "執筆"),
+                new Knowledge(12, "Массаж", "Massage", "マッサージ"),
+                new Knowledge(13, "Медитация", "Meditation", "瞑想"),
+                new Knowledge(14, "Изучение языков", "Language Learning", "語学"),
+                new Knowledge(15, "Тренировка мозга", "Brain Workout", "脳力トレーニング"),
+                new Knowledge(16, "Форекс", "Forex", "FX取引"),
+                new Knowledge(17, "Изобретения", "Invention", "発明"),
+                new Knowledge(18, "Отгадывать загадки", "Riddles", "クイズ"),
+                new Knowledge(19, "Приобретение квалификации", "Qualification acquisition", "資格取得"),
+                new Knowledge(20, "Физика", "Physics", "物理学"),
+                new Knowledge(21, "Психология", "Psychology", "心理学"),
+                new Knowledge(22, "Программирование", "Programming", "プログラミング"),
+                new Knowledge(23, "3D графика", "3D graphics", "3Dグラフィック"),
+                new Knowledge(24, "Радиоконструктор", "Radio constructor", "電子工作"),
+                new Knowledge(25, "Роботы", "Robots", "ロボット"),
+                new Knowledge(26, "Косплей", "Cosplay", "コスプレ"),
+                new Knowledge(27, "Динозавры", "Dinosaurs", "恐竜"),
+                new Knowledge(28, "Военное дело", "Military", "軍事"),
+                new Knowledge(29, "Посещать заседания судов", "Court hearing", "裁判傍聴"),
+                new Knowledge(30, "НЛО", "UFO", "UFO"),
+                new Knowledge(31, "Нет", "No", "なし")
+            };
             context.Activities.AddRange(activities);
             base.Seed(context);
         }

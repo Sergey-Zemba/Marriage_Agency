@@ -193,12 +193,9 @@
     <Compile Include="Models\ManageViewModels\EditViewModel.cs" />
     <Compile Include="Models\Values\ViewValue.cs" />
     <Compile Include="Models\Values\Initializers\FiguresInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\HobbiesInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\KnowledgeInitializer.cs" />
     <Compile Include="Models\Values\Initializers\LanguagesInitializer.cs" />
     <Compile Include="Models\Values\Initializers\LifestylesInitializer.cs" />
     <Compile Include="Models\Values\Initializers\NumberOfChildrenInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\PostsInitializer.cs" />
     <Compile Include="Models\Values\Initializers\RelationshipsInitializer.cs" />
     <Compile Include="Models\Values\IValuesInitializer.cs" />
     <Compile Include="Models\Values\Initializers\LocationsInitializer.cs" />
