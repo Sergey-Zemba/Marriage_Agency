@@ -1,26 +1,23 @@
-﻿@using Marriage_Agency_Women_.Models
-@using Marriage_Agency_Women_.Models.Values
-@model Marriage_Agency_Women_.Models.AccountViewModels.RegisterViewModel
-@*@{
-    ViewBag.Title = "Register";
-    Values values = new Values();
+﻿@model Marriage_Agency_Women_.Models.AccountViewModels.RegisterViewModel
 
-    IList<SelectListItem> locations = values.GetSelectListItems(values.Locations, ValuesLanguage.Russian);
-    IList<SelectListItem> religions = values.GetSelectListItems(values.Religions, ValuesLanguage.Russian);
-    IList<SelectListItem> activities = values.GetSelectListItems(values.Activities, ValuesLanguage.Russian);
-    IList<SelectListItem> posts = values.GetSelectListItems(values.Posts, ValuesLanguage.Russian);
-    IList<SelectListItem> educations = values.GetSelectListItems(values.Educations, ValuesLanguage.Russian);
-    IList<SelectListItem> relationships = values.GetSelectListItems(values.Relationships, ValuesLanguage.Russian);
-    IList<SelectListItem> numberOfChildren = values.GetSelectListItems(values.NumberOfChildren, ValuesLanguage.Russian);
-    IList<SelectListItem> figures = values.GetSelectListItems(values.Figures, ValuesLanguage.Russian);
-    IList<SelectListItem> eyeColors = values.GetSelectListItems(values.EyeColors, ValuesLanguage.Russian);
-    IList<SelectListItem> hairColors = values.GetSelectListItems(values.HairColors, ValuesLanguage.Russian);
-    IList<SelectListItem> alcohol = values.GetSelectListItems(values.Alcohol, ValuesLanguage.Russian);
-    IList<SelectListItem> desiredAges = values.GetSelectListItems(values.DesiredAges, ValuesLanguage.Russian);
-    IList<SelectListItem> hobbies = values.GetSelectListItems(values.Hobbies, ValuesLanguage.Russian);
-    IList<SelectListItem> lifestyles = values.GetSelectListItems(values.Lifestyles, ValuesLanguage.Russian);
-    IList<SelectListItem> knowledge = values.GetSelectListItems(values.Knowledge, ValuesLanguage.Russian);
-}*@
+@{
+    IList<SelectListItem> activities = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["activities"];
+    IList<SelectListItem> alcohols = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["alcohols"];
+    IList<SelectListItem> desiredAges = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["desiredAges"];
+    IList<SelectListItem> educations = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["educations"];
+    IList<SelectListItem> eyeColors = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["eyeColors"];
+    IList<SelectListItem> hairColors = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["hairColors"];
+    IList<SelectListItem> hobbies = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["hobbies"];
+    IList<SelectListItem> jobs = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["jobs"];
+    IList<SelectListItem> knowledges = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["knowledges"];
+    IList<SelectListItem> languages = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["languages"];
+    IList<SelectListItem> lifestyles = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["lifestyles"];
+    IList<SelectListItem> locations = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["locations"];
+    IList<SelectListItem> numbersOfChildren = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["numbersOfChildren"];
+    IList<SelectListItem> relationships = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["relationships"];
+    IList<SelectListItem> religions = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["religions"];
+    IList<SelectListItem> shapes = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["shapes"];
+}
 
 <h2>@ViewBag.Title.</h2>
 
@@ -52,7 +49,7 @@
         </div>
     </div>
 
-    @*<div class="form-group">
+    <div class="form-group">
         @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
         <div class="col-sm-10">
             @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
@@ -96,23 +93,23 @@
         <div class="col-sm-10">
             @Html.DropDownListFor(m => m.Religion, religions, new { @class = "form-control" })
         </div>
-    </div>*@
+    </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.Activity, new {@class = "col-md-2 control-label"})
         <div class="col-sm-10">
 
-            @{
-                IEnumerable<SelectListItem> activities = new List<SelectListItem>();
-            }
-            @Html.DropDownListFor(m => m.Activity, activities, new { @class = "form-control" })
-        </div>
-    </div>
+            
+                @Html.DropDownListFor(m => m.Activity, activities, new { @class = "form-control" })
+            </div>
 
-    @*<div class="form-group">
-        @Html.LabelFor(m => m.Post, new {@class = "col-md-2 control-label"})
+
+        </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Job, new {@class = "col-md-2 control-label"})
         <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Post, posts, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Job, jobs, new { @class = "form-control" })
         </div>
     </div>
 
@@ -123,7 +120,7 @@
         </div>
     </div>
 
-    <div>
+    @*<div>
         @foreach (KeyValuePair<int, ViewValue> keyValue in values.Languages)
         {
             <p>
@@ -132,12 +129,12 @@
                 </label>
             </p>
         }
-    </div>
+    </div>*@
 
     <div class="form-group">
-        @Html.LabelFor(m => m.MaritalStatus, new {@class = "col-md-2 control-label"})
+        @Html.LabelFor(m => m.Relationship, new {@class = "col-md-2 control-label"})
         <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.MaritalStatus, relationships, new {@class = "form-control"})
+            @Html.DropDownListFor(m => m.Relationship, relationships, new {@class = "form-control"})
         </div>
     </div>
 
@@ -151,7 +148,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.NumberOfChildren, new { @class = "col-md-2 control-label" })
         <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.NumberOfChildren, numberOfChildren, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.NumberOfChildren, numbersOfChildren, new { @class = "form-control" })
         </div>
     </div>
 
@@ -172,9 +169,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Figure, new {@class = "col-md-2 control-label"})
+        @Html.LabelFor(m => m.Shape, new {@class = "col-md-2 control-label"})
         <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Figure, figures, new {@class = "form-control"})
+            @Html.DropDownListFor(m => m.Shape, shapes, new {@class = "form-control"})
         </div>
     </div>
 
@@ -211,7 +208,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Alcohol, new {@class = "col-md-2 control-label"})
         <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Alcohol, alcohol, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Alcohol, alcohols, new { @class = "form-control" })
         </div>
     </div>
 
@@ -239,7 +236,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Knowledge, new {@class = "col-md-2 control-label"})
         <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Knowledge, knowledge, new {@class = "form-control"})
+            @Html.DropDownListFor(m => m.Knowledge, knowledges, new {@class = "form-control"})
         </div>
     </div>
 
@@ -277,9 +274,9 @@
         <div class="col-sm-10">
             @Html.TextBoxFor(m => m.Twitter, new { @class = "form-control" })
         </div>
-    </div>*@
+    </div>
 
-    @*<div>
+    <div>
         @Html.LabelFor(m => m.InternationalPassport)
         <p>
             <label>
@@ -293,7 +290,7 @@
                 <input type="radio" name="InternationalPassport" value="false"  />
             </label>
         </p>
-    </div>*@
+    </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

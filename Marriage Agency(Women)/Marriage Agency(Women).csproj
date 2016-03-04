@@ -191,18 +191,6 @@
     <Compile Include="Models\IdentityModels\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ManageViewModels\EditViewModel.cs" />
-    <Compile Include="Models\Values\ViewValue.cs" />
-    <Compile Include="Models\Values\Initializers\FiguresInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\LanguagesInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\LifestylesInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\NumberOfChildrenInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\RelationshipsInitializer.cs" />
-    <Compile Include="Models\Values\IValuesInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\LocationsInitializer.cs" />
-    <Compile Include="Models\Values\Initializers\ReligionsInitializer.cs" />
-    <Compile Include="Models\Values\ValuesProvider.cs" />
-    <Compile Include="Models\Values\ValuesLanguageType.cs" />
-    <Compile Include="Models\Values\Values.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

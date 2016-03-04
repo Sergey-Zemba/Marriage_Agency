@@ -7,6 +7,10 @@ namespace Marriage_Agency_Women_.Models.Characteristics
 {
     public class Language : PersonalData
     {
+        public Language() : base()
+        {
+
+        }
         public Language(int position, string russian, string english, string japanese) : base(position, russian, english, japanese)
         {
         }

@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Marriage_Agency_Women_.Models;
 using Marriage_Agency_Women_.Models.AccountViewModels;
+using Marriage_Agency_Women_.Models.Characteristics;
 using Marriage_Agency_Women_.Models.IdentityModels;
 
 namespace Marriage_Agency_Women_.Controllers
@@ -154,6 +155,40 @@ namespace Marriage_Agency_Women_.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            IDictionary<string, IList<SelectListItem>> personalData = new Dictionary<string, IList<SelectListItem>>();
+            IList<SelectListItem> data = GetSelectListItems(new List<PersonalData>(DbContext.Activities));
+            personalData.Add("activities", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Alcohols));
+            personalData.Add("alcohols", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.DesiredAges));
+            personalData.Add("desiredAges", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Educations));
+            personalData.Add("educations", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.EyeColors));
+            personalData.Add("eyeColors", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.HairColors));
+            personalData.Add("hairColors", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Hobbies));
+            personalData.Add("hobbies", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Jobs));
+            personalData.Add("jobs", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Knowledges));
+            personalData.Add("knowledges", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Languages));
+            personalData.Add("languages", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Lifestyles));
+            personalData.Add("lifestyles", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Locations));
+            personalData.Add("locations", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.NumbersOfChildren));
+            personalData.Add("numbersOfChildren", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Relationships));
+            personalData.Add("relationships", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Religions));
+            personalData.Add("religions", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Shapes));
+            personalData.Add("shapes", data);
+            ViewBag.PersonalData = personalData;
             return View();
         }
 
@@ -166,53 +201,53 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                //List<Language> languages = new List<Language>();
+                List<Language> languages = new List<Language>();
 
-                //if (model.Languages != null)
-                //{
-                //    foreach (int id in model.Languages)
-                //    {
-                //        var lang = DbContext.Languages.Find(id);
-                //        languages.Add(lang);
-                //    }
-                //}
+                if (model.Languages != null)
+                {
+                    foreach (Language language in model.Languages)
+                    {
+                        var lang = DbContext.Languages.Find(language);
+                        languages.Add(lang);
+                    }
+                }
 
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    //FirstName = model.FirstName,
-                    //LastName = model.LastName,
-                    //NameInRoman = model.NameInRoman,
-                    //Birthday = model.Birthday,
-                    //Location = model.Location,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    NameInRoman = model.NameInRoman,
+                    Birthday = model.Birthday,
+                    Location = model.Location,
                     //ResidencePermit = model.Location, // не ошибка
-                    //Religion = model.Religion,
+                    Religion = model.Religion,
                     Activity = model.Activity,
-                    //Post = model.Post,
-                    //Education = model.Education,
-                    //Languages = languages,
-                    //MaritalStatus = model.MaritalStatus,
-                    //NumberOfChildren = model.NumberOfChildren,
-                    //Height = model.Height,
-                    //Weight = model.Weight,
-                    //Figure = model.Figure,
-                    //EyeColor = model.EyeColor,
-                    //HairColor = model.HairColor,
-                    //Smoking = model.Smoking,
-                    //Alcohol = model.Alcohol,
-                    //DesiredAge = model.DesiredAge,
-                    //Hobby = model.Hobby,
-                    //Lifestyle = model.Lifestyle,
-                    //Knowledge = model.Knowledge,
-                    //PhoneNumber = "+38" + model.PhoneNumber,
-                    //Skype = model.Skype,
-                    //Facebook = model.Facebook,
-                    //Vk = model.Vk,
-                    //Twitter = model.Twitter,
-                    //InternationalPassport = model.InternationalPassport,
-                    //CreationDate = DateTime.Now,
-                    //LastLoginTime = DateTime.Now
+                    Job = model.Job,
+                    Education = model.Education,
+                    Languages = languages,
+                    Relationship = model.Relationship,
+                    NumberOfChildren = model.NumberOfChildren,
+                    Height = model.Height,
+                    Weight = model.Weight,
+                    Shape = model.Shape,
+                    EyeColor = model.EyeColor,
+                    HairColor = model.HairColor,
+                    Smoking = model.Smoking,
+                    Alcohol = model.Alcohol,
+                    DesiredAge = model.DesiredAge,
+                    Hobby = model.Hobby,
+                    Lifestyle = model.Lifestyle,
+                    Knowledge = model.Knowledge,
+                    PhoneNumber = "+38" + model.PhoneNumber,
+                    Skype = model.Skype,
+                    Facebook = model.Facebook,
+                    Vk = model.Vk,
+                    Twitter = model.Twitter,
+                    InternationalPassport = model.InternationalPassport,
+                    CreationDate = DateTime.Now,
+                    LastLoginTime = DateTime.Now
                 };
                 // инкрементировать номер анкеты. Пока нули дубасят.
 
@@ -482,6 +517,19 @@ namespace Marriage_Agency_Women_.Controllers
                 }
             }
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public IList<SelectListItem> GetSelectListItems(List<PersonalData> personalData)
+        {
+            List<SelectListItem> listToReturn = new List<SelectListItem>();
+            foreach (PersonalData data in personalData.OrderBy(d => d.Position))
+            {
+                SelectListItem item = new SelectListItem();
+                item.Value = data.RussianName;
+                item.Text = data.RussianName;
+                listToReturn.Add(item);
+            }
+            return listToReturn;
         }
 
         protected override void Dispose(bool disposing)

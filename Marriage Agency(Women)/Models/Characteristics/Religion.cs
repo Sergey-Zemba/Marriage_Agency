@@ -7,6 +7,10 @@ namespace Marriage_Agency_Women_.Models.Characteristics
 {
     public class Religion : PersonalData
     {
+        public Religion() : base()
+        {
+
+        }
         public Religion(int position, string russian, string english, string japanese) : base(position, russian, english, japanese)
         {
         }

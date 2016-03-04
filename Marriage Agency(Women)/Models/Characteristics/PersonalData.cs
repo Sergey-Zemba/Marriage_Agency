@@ -7,6 +7,10 @@ namespace Marriage_Agency_Women_.Models.Characteristics
 {
     public abstract class PersonalData
     {
+        public PersonalData()
+        {
+            
+        }
         public PersonalData(int position, string russian, string english, string japanese)
         {
             Position = position;
@@ -14,6 +18,8 @@ namespace Marriage_Agency_Women_.Models.Characteristics
             EnglishName = english;
             JapaneseName = japanese;
         }
+        
+
         public int Id { get; set; }
         public int Position { get; set; }
         public string RussianName { get; set; }

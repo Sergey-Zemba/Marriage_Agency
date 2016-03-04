@@ -5,7 +5,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Marriage_Agency_Women_.Models.Characteristics;
-using Marriage_Agency_Women_.Models.Values;
 
 namespace Marriage_Agency_Women_.Models.IdentityModels
 {
@@ -192,7 +191,168 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
                 new Knowledge(30, "НЛО", "UFO", "UFO"),
                 new Knowledge(31, "Нет", "No", "なし")
             };
+            ICollection<Language> languages = new List<Language>
+            {
+                new Language(1, "Английский", "English", "英語"),
+                new Language(2, "Китайский", "Chinese", "中国語"),
+                new Language(3, "Японский", "Japanese", "日本語"),
+                new Language(4, "Испанский", "Spanish", "スペイン語"),
+                new Language(5, "Немецкий", "German", "ドイツ語"),
+                new Language(6, "Французский", "French", "フランス語"),
+                new Language(7, "Итальянский", "Italian", "イタリア語"),
+                new Language(8, "Португальский", "Portuguese", "ポルトガル語"),
+                new Language(9, "Турецкий", "Turkish", "トルコ語"),
+                new Language(10, "Арабский", "Arabic", "アラビア語"),
+                new Language(11, "Корейский", "Korean", "韓国語"),
+                new Language(12, "Бенгальский", "Bengali", "ベンガル語"),
+                new Language(13, "Хинди", "Hindi", "ヒンディー語"),
+                new Language(14, "Яванский", "Javanese", "ジャワ語"),
+                new Language(15, "Вьетнамский", "Vietnamese", "ベトナム語"),
+                new Language(16, "Урду", "Urdu", "ウルドゥー語"),
+                new Language(17, "Панджаби", "Punjabi", "パンジャブ語"),
+                new Language(18, "Гуджарати", "Gujarati", "グジャラート語"),
+                new Language(19, "Тайский", "Thai", "タイ語"),
+                new Language(20, "Польский", "Polish", "ポーランド語"),
+                new Language(21, "Малаялам", "Malayalam", "マラヤーラム語"),
+                new Language(22, "Бирманский", "Burmese", "ビルマ語"),
+                new Language(23, "Азербайджанский", "Azerbaijani", "アゼルバイジャン語"),
+                new Language(24, "Персидский", "Persian", "ペルシア語"),
+                new Language(25, "Румынский", "Romanian", "ルーマニア語"),
+                new Language(26, "Майтхили", "Maithili", "マイティリー語"),
+                new Language(27, "Сербохорватский", "Serbo-Croatian", "セルボクロアチア語"),
+                new Language(28, "Узбекский", "Uzbek", "ウズベク語"),
+                new Language(29, "Йоруба", "Yoruba", "ヨルバ語"),
+                new Language(30, "Нидерландский", "Dutch", "オランダ語"),
+                new Language(31, "Синдхи", "Sindhi", "シンド語"),
+                new Language(32, "Индонезийский", "Indonesian", "インドネシア語"),
+                new Language(33, "Тагальский", "Tagalog", "タガログ語"),
+                new Language(34, "Непальский", "Nepali", "ネパール語"),
+                new Language(35, "Ассамский", "Assamese", "アッサム語"),
+                new Language(36, "Венгерский", "Hungarian", "ハンガリー語"),
+                new Language(37, "Сингальский", "Sinhalese", "シンハラ語"),
+                new Language(38, "Греческий", "Greek", "ギリシャ語"),
+                new Language(39, "Чешский", "Czech", "チェコ語")
+            };
+            ICollection<Lifestyle> lifestyles = new List<Lifestyle>
+            {
+                new Lifestyle(1, "Йога", "Yoga", "ヨガ"),
+                new Lifestyle(2, "Проводить время с питомцами", "Spending time with pets", "ペット飼育"),
+                new Lifestyle(3, "Шоппинг", "Shopping", "ショッピング"),
+                new Lifestyle(4, "Интеренет шоппинг", "Internet shopping", "ネットショッピング"),
+                new Lifestyle(5, "Мода", "Fashion", "ファッション"),
+                new Lifestyle(6, "Макияж", "Makeup", "メイク"),
+                new Lifestyle(7, "Заниматься интерьером", "Interior Design", "インテリア"),
+                new Lifestyle(8, "Путешествия за границу", "Foreign tour", "海外旅行"),
+                new Lifestyle(9, "Загорать", "Sunbathe", "日焼け"),
+                new Lifestyle(10, "Садоводство", "Gardening", "ガーデニング"),
+                new Lifestyle(11, "Рыбалка", "Fishing", "釣り"),
+                new Lifestyle(12, "Лотереи", "Lottery", "宝くじ"),
+                new Lifestyle(13, "Гадание", "Fortune-telling", "占い"),
+                new Lifestyle(14, "Интернет", "Internet", "インターネット"),
+                new Lifestyle(15, "Аниме", "Anime", "アニメ"),
+                new Lifestyle(16, "Онлайн-игры", "Online games", "オンラインゲーム"),
+                new Lifestyle(17, "Компьютерные игры", "Computer games", "コンピューターゲーム"),
+                new Lifestyle(18, "Шахматы", "Chess", "チェス"),
+                new Lifestyle(19, "Карточные игры", "Card games", "トランプ"),
+                new Lifestyle(20, "Настольные игры", "Board games", "ボードゲーム"),
+                new Lifestyle(21, "Фокусы", "Magic", "マジック"),
+                new Lifestyle(22, "Общение", "Communication", "コミュニケーション"),
+                new Lifestyle(23, "Ходить в поход", "Camping", "キャンプ"),
+                new Lifestyle(24, "Кататься на авто", "Drive", "ドライブ"),
+                new Lifestyle(25, "Волонтёрство", "Volunteering", "ボランティア"),
+                new Lifestyle(26, "Посещать семинары", "Seminars", "セミナー"),
+                new Lifestyle(27, "Ходить в аквариум", "Going to the aquarium", "水族館"),
+                new Lifestyle(28, "Ходить в зоопарк", "Going to the zoo", "動物園"),
+                new Lifestyle(29, "Ходить на концерты", "Going to concerts", "コンサート"),
+                new Lifestyle(30, "Смотреть сериалы", "Watch TV shows", "ドラマ鑑賞"),
+                new Lifestyle(31, "Смотреть кино", "Watch movies", "映画鑑賞"),
+                new Lifestyle(32, "Слушать музыку", "Listen music", "音楽鑑賞"),
+                new Lifestyle(33, "Юмор", "Humor", "お笑い"),
+                new Lifestyle(34, "Коллекционирование", "Collecting", "収集"),
+                new Lifestyle(35, "История", "History", "歴史"),
+                new Lifestyle(36, "Железная дорога и поезда", "Railroad and train", "鉄道"),
+                new Lifestyle(37, "Астрономия", "Astronomy", "天文学"),
+                new Lifestyle(38, "Сон", "Sleep", "睡眠"),
+                new Lifestyle(39, "Уборка", "Cleaning", "整理整頓"),
+                new Lifestyle(40, "Проводить время с семьей", "Spend time with family", "家族と過ごす"),
+                new Lifestyle(41, "Нет", "No", "なし")
+            };
+            ICollection<Location> locations = new List<Location>
+            {
+                new Location(1, "Крым", "Crimea", "クリミア半島"),
+                new Location(2, "Винницкая область", "Vinnytsia Oblast", "ヴィーンヌィツャ州"),
+                new Location(3, "Волынская область", "Volyn Oblast", "ヴォルィーニ州"),
+                new Location(4, "Днепропетровская область", "Dnipropetrovsk Oblast", "ドニプロペトロウシク州"),
+                new Location(5, "Донецкая область", "Donetsk Oblast", "ドネツク州"),
+                new Location(6, "Житомирская область", "Zhytomyr Oblast", "ジトームィル州"),
+                new Location(7, "Закарпатская область", "Zakarpattia Oblast", "ザカルパッチャ州"),
+                new Location(8, "Запорожская область", "Zaporizhia Oblast", "ザポリージャ州"),
+                new Location(9, "Ивано-Франковская область", "Ivano-Frankivsk Oblast", "イヴァーノ=フランキーウシク州"),
+                new Location(-10, "Киев", "Kiev", "キエフ市"),
+                new Location(11, "Киевская область", "Kiev Oblast", "キエフ州"),
+                new Location(12, "Кировоградская область", "Kirovohrad Oblast", "キロヴォフラード州"),
+                new Location(13, "Луганская область", "Lugansk Oblast", "ルガンスク州"),
+                new Location(14, "Львовская область", "Lviv Oblast", "リヴィウ州"),
+                new Location(15, "Николаевская область", "Nikolaevkskaya Oblast", "ニコラーエフ州"),
+                new Location(16, "Одесская область", "Odessa Oblast", "オデッサ州"),
+                new Location(17, "Полтавская область", "Poltava Oblast", "ポルタヴァ州"),
+                new Location(18, "Ровенская область", "Rovenskaya Oblast", "ロブノ州"),
+                new Location(19, "Сумская область", "Sumy Oblast", "スームィ州"),
+                new Location(20, "Тернопольская область", "Ternopil Oblast", "テルノーピリ州"),
+                new Location(21, "Харьковская область", "Kharkov Oblast", "ハリコフ州"),
+                new Location(22, "Херсонская область", "Kherson Oblast", "ヘルソン州"),
+                new Location(23, "Хмельницкая область", "Khmelnitsky Oblast", "フメリニツキー州"),
+                new Location(24, "Черкасская область", "Cherkasy Oblast", "チェルカースィ州"),
+                new Location(25, "Черниговская область", "Chernihiv Oblast", "チェルニーヒウ州"),
+                new Location(26, "Черновицкая область", "Chernivtsi Oblast", "チェルニウツィー州")
+            };
+            ICollection<NumberOfChildren> numbersOfChildren = new List<NumberOfChildren>
+            {
+                new NumberOfChildren(1, "Нет", "No", "なし"),
+                new NumberOfChildren(2, "Один", "One", "1 人"),
+                new NumberOfChildren(3, "Двое", "Two", "2 人"),
+                new NumberOfChildren(4, "Трое", "Three", "3 人"),
+                new NumberOfChildren(5, "Более трех", "More than three", "3 人以上")
+            };
+            ICollection<Relationship> relationships = new List<Relationship>
+            {
+                new Relationship(1, "Нет", "No", "なし"),
+                new Relationship(2, "Была замужем", "Yes", "あり"),
+                new Relationship(3, "Вдова", "Widow", "未亡人"),
+                new Relationship(4, "В отношениях", "NO", "なし")
+            };
+            ICollection<Religion> religions = new List<Religion>
+            {
+                new Religion(1, "Христианство", "Christian", "キリスト教"),
+                new Religion(2, "Мусульманство", "Muslim", "イスラム教"),
+                new Religion(3, "Буддизм", "Buddhism", "仏教"),
+                new Religion(4, "Иррелигиозность", "Irreligion", "無宗教"),
+                new Religion(5, "Другое", "Оther", "その他")
+            };
+            ICollection<Shape> shapes = new List<Shape>
+            {
+                new Shape(1, "Худое", "Slender", "細身"),
+                new Shape(2, "Спортивное", "Athletic", "アスリート"),
+                new Shape(3, "Стандартное", "Standards", "標準"),
+                new Shape(4, "Роскошное", "Voluptuous", "官能的"),
+                new Shape(5, "Полное", "Plump", "豊満")
+            };
             context.Activities.AddRange(activities);
+            context.Alcohols.AddRange(alcohols);
+            context.DesiredAges.AddRange(desiredAges);
+            context.Educations.AddRange(educations);
+            context.EyeColors.AddRange(eyeColors);
+            context.HairColors.AddRange(hairColors);
+            context.Hobbies.AddRange(hobbies);
+            context.Jobs.AddRange(jobs);
+            context.Knowledges.AddRange(knowledges);
+            context.Languages.AddRange(languages);
+            context.Lifestyles.AddRange(lifestyles);
+            context.Locations.AddRange(locations);
+            context.NumbersOfChildren.AddRange(numbersOfChildren);
+            context.Relationships.AddRange(relationships);
+            context.Religions.AddRange(religions);
+            context.Shapes.AddRange(shapes);
             base.Seed(context);
         }
     }

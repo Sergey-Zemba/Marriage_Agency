@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Marriage_Agency_Women_.Models;
+using Marriage_Agency_Women_.Models.Characteristics;
 using Marriage_Agency_Women_.Models.IdentityModels;
 using Marriage_Agency_Women_.Models.ManageViewModels;
 
@@ -90,48 +91,48 @@ namespace Marriage_Agency_Women_.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            ICollection<int> languages = new List<int>();
-            //if (user.Languages != null)
-            //{
-            //    foreach (Language language in user.Languages)
-            //    {
-            //        languages.Add(language.Id);
-            //    }
-            //}
+            ICollection<Language> languages = new List<Language>();
+            if (user.Languages != null)
+            {
+                foreach (Language language in user.Languages)
+                {
+                    languages.Add(language);
+                }
+            }
 
             EditViewModel model = new EditViewModel
             {
                 HasPassword = HasPassword(),
 
-                //FirstName = user.FirstName,
-                //LastName = user.LastName,
-                //NameInRoman = user.NameInRoman,
-                //Birthday = user.Birthday,
-                //Location = user.Location,
-                //Religion = user.Religion,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                NameInRoman = user.NameInRoman,
+                Birthday = user.Birthday,
+                Location = user.Location,
+                Religion = user.Religion,
                 Activity = user.Activity,
-                //Post = user.Post,
-                //Education = user.Education,
-                //Languages = languages,
-                //MaritalStatus = user.MaritalStatus,
-                //NumberOfChildren = user.NumberOfChildren,
-                //Height = user.Height,
-                //Weight = user.Weight,
-                //Figure = user.Figure,
-                //EyeColor = user.EyeColor,
-                //HairColor = user.HairColor,
-                //Smoking = user.Smoking,
-                //Alcohol = user.Alcohol,
-                //DesiredAge = user.DesiredAge,
-                //Hobby = user.Hobby,
-                //Lifestyle = user.Lifestyle,
-                //Knowledge = user.Knowledge,
-                //PhoneNumber = user.PhoneNumber.Substring(3),
-                //Skype = user.Skype,
-                //Facebook = user.Facebook,
-                //Vk = user.Vk,
-                //Twitter = user.Twitter,
-                //InternationalPassport = user.InternationalPassport
+                Job = user.Job,
+                Education = user.Education,
+                Languages = languages,
+                Relationship = user.Relationship,
+                NumberOfChildren = user.NumberOfChildren,
+                Height = user.Height,
+                Weight = user.Weight,
+                Shape = user.Shape,
+                EyeColor = user.EyeColor,
+                HairColor = user.HairColor,
+                Smoking = user.Smoking,
+                Alcohol = user.Alcohol,
+                DesiredAge = user.DesiredAge,
+                Hobby = user.Hobby,
+                Lifestyle = user.Lifestyle,
+                Knowledge = user.Knowledge,
+                PhoneNumber = user.PhoneNumber.Substring(3),
+                Skype = user.Skype,
+                Facebook = user.Facebook,
+                Vk = user.Vk,
+                Twitter = user.Twitter,
+                InternationalPassport = user.InternationalPassport
             };
 
             return View(model);
@@ -143,16 +144,16 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                //List<Language> languages = new List<Language>();
+                List<Language> languages = new List<Language>();
 
-                //if (model.Languages != null)
-                //{
-                //    foreach (int id in model.Languages)
-                //    {
-                //        var lang = DbContext.Languages.Find(id);
-                //        languages.Add(lang);
-                //    }
-                //}
+                if (model.Languages != null)
+                {
+                    foreach (Language language in model.Languages)
+                    {
+                        var lang = DbContext.Languages.Find(language);
+                        languages.Add(lang);
+                    }
+                }
 
                 var userName = User.Identity.Name;
                 var user = await UserManager.FindByNameAsync(userName);
@@ -162,40 +163,40 @@ namespace Marriage_Agency_Women_.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                //user.FirstName = model.FirstName;
-                //user.LastName = model.LastName;
-                //user.NameInRoman = model.NameInRoman;
-                //user.Birthday = model.Birthday;
-                //user.Location = model.Location;
-                //user.Religion = model.Religion;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.NameInRoman = model.NameInRoman;
+                user.Birthday = model.Birthday;
+                user.Location = model.Location;
+                user.Religion = model.Religion;
                 user.Activity = model.Activity;
-                //user.Post = model.Post;
-                //user.Education = model.Education;
+                user.Job = model.Job;
+                user.Education = model.Education;
 
-                //// Очистка обязательна, иначе Cannot insert duplicate key in object
-                //user.Languages.Clear();
-                //user.Languages = languages;
+                // Очистка обязательна, иначе Cannot insert duplicate key in object
+                user.Languages.Clear();
+                user.Languages = languages;
 
-                //user.MaritalStatus = model.MaritalStatus;
-                //user.NumberOfChildren = model.NumberOfChildren;
-                //user.Height = model.Height;
-                //user.Weight = model.Weight;
-                //user.Figure = model.Figure;
-                //user.EyeColor = model.EyeColor;
-                //user.HairColor = model.HairColor;
-                //user.Smoking = model.Smoking;
-                //user.Alcohol = model.Alcohol;
-                //user.DesiredAge = model.DesiredAge;
-                //user.Hobby = model.Hobby;
-                //user.Lifestyle = model.Lifestyle;
-                //user.Knowledge = model.Knowledge;
-                //user.PhoneNumber = "+38" + model.PhoneNumber;
-                //user.Skype = model.Skype;
-                //user.Facebook = model.Facebook;
-                //user.Vk = model.Vk;
-                //user.Twitter = model.Twitter;
-                //user.InternationalPassport = model.InternationalPassport;
-                
+                user.Relationship = model.Relationship;
+                user.NumberOfChildren = model.NumberOfChildren;
+                user.Height = model.Height;
+                user.Weight = model.Weight;
+                user.Shape = model.Shape;
+                user.EyeColor = model.EyeColor;
+                user.HairColor = model.HairColor;
+                user.Smoking = model.Smoking;
+                user.Alcohol = model.Alcohol;
+                user.DesiredAge = model.DesiredAge;
+                user.Hobby = model.Hobby;
+                user.Lifestyle = model.Lifestyle;
+                user.Knowledge = model.Knowledge;
+                user.PhoneNumber = "+38" + model.PhoneNumber;
+                user.Skype = model.Skype;
+                user.Facebook = model.Facebook;
+                user.Vk = model.Vk;
+                user.Twitter = model.Twitter;
+                user.InternationalPassport = model.InternationalPassport;
+
                 var result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
