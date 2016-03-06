@@ -224,32 +224,32 @@ namespace Marriage_Agency_Women_.Controllers
                     LastName = model.LastName,
                     NameInRoman = model.NameInRoman,
                     Birthday = model.Birthday,
-                    Location = model.Location,
+                    Location = DbContext.Locations.Find(model.Location),
                     //ResidencePermit = model.Location, // не ошибка
-                    Religion = model.Religion,
-                    Activity = model.Activity,
-                    Job = model.Job,
-                    Education = model.Education,
+                    Religion = DbContext.Religions.Find(model.Religion),
+                    Activity = DbContext.Activities.Find(model.Activity),
+                    Job = DbContext.Jobs.Find(model.Job),
+                    Education = DbContext.Educations.Find(model.Education),
                     Languages = languages,
-                    Relationship = model.Relationship,
-                    NumberOfChildren = model.NumberOfChildren,
+                    Relationship = DbContext.Relationships.Find(model.Relationship),
+                    NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren),
                     Height = model.Height,
                     Weight = model.Weight,
-                    Shape = model.Shape,
-                    EyeColor = model.EyeColor,
-                    HairColor = model.HairColor,
-                    Smoking = model.Smoking,
-                    Alcohol = model.Alcohol,
-                    DesiredAge = model.DesiredAge,
-                    Hobby = model.Hobby,
-                    Lifestyle = model.Lifestyle,
-                    Knowledge = model.Knowledge,
+                    Shape = DbContext.Shapes.Find(model.Shape),
+                    EyeColor = DbContext.EyeColors.Find(model.EyeColor),
+                    HairColor = DbContext.HairColors.Find(model.HairColor),
+                    Smoking = DbContext.Smokings.Find(model.Smoking),
+                    Alcohol = DbContext.Alcohols.Find(model.Alcohol),
+                    DesiredAge = DbContext.DesiredAges.Find(model.DesiredAge),
+                    Hobby = DbContext.Hobbies.Find(model.Hobby),
+                    Lifestyle = DbContext.Lifestyles.Find(model.Lifestyle),
+                    Knowledge = DbContext.Knowledges.Find(model.Knowledge),
                     PhoneNumber = "+38" + model.PhoneNumber,
                     Skype = model.Skype,
                     Facebook = model.Facebook,
                     Vk = model.Vk,
                     Twitter = model.Twitter,
-                    InternationalPassport = model.InternationalPassport,
+                    InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport),
                     CreationDate = DateTime.Now,
                     LastLoginTime = DateTime.Now
                 };
@@ -529,7 +529,7 @@ namespace Marriage_Agency_Women_.Controllers
             foreach (PersonalData data in personalData.OrderBy(d => d.Position))
             {
                 SelectListItem item = new SelectListItem();
-                item.Value = data.RussianName;
+                item.Value = data.Id.ToString();
                 item.Text = data.RussianName;
                 listToReturn.Add(item);
             }

@@ -108,31 +108,31 @@ namespace Marriage_Agency_Women_.Controllers
                 LastName = user.LastName,
                 NameInRoman = user.NameInRoman,
                 Birthday = user.Birthday,
-                Location = user.Location,
-                Religion = user.Religion,
-                Activity = user.Activity,
-                Job = user.Job,
-                Education = user.Education,
+                //Location = user.Location,
+                //Religion = user.Religion,
+                //Activity = user.Activity,
+                //Job = user.Job,
+                //Education = user.Education,
                 Languages = languages,
-                Relationship = user.Relationship,
-                NumberOfChildren = user.NumberOfChildren,
+                //Relationship = user.Relationship,
+                //NumberOfChildren = user.NumberOfChildren,
                 Height = user.Height,
                 Weight = user.Weight,
-                Shape = user.Shape,
-                EyeColor = user.EyeColor,
-                HairColor = user.HairColor,
-                Smoking = user.Smoking,
-                Alcohol = user.Alcohol,
-                DesiredAge = user.DesiredAge,
-                Hobby = user.Hobby,
-                Lifestyle = user.Lifestyle,
-                Knowledge = user.Knowledge,
+                //Shape = user.Shape,
+                //EyeColor = user.EyeColor,
+                //HairColor = user.HairColor,
+                //Smoking = user.Smoking,
+                //Alcohol = user.Alcohol,
+                //DesiredAge = user.DesiredAge,
+                //Hobby = user.Hobby,
+                //Lifestyle = user.Lifestyle,
+                //Knowledge = user.Knowledge,
                 PhoneNumber = user.PhoneNumber.Substring(3),
                 Skype = user.Skype,
                 Facebook = user.Facebook,
                 Vk = user.Vk,
                 Twitter = user.Twitter,
-                InternationalPassport = user.InternationalPassport
+                //InternationalPassport = user.InternationalPassport
             };
 
             return View(model);
@@ -167,35 +167,35 @@ namespace Marriage_Agency_Women_.Controllers
                 user.LastName = model.LastName;
                 user.NameInRoman = model.NameInRoman;
                 user.Birthday = model.Birthday;
-                user.Location = model.Location;
-                user.Religion = model.Religion;
-                user.Activity = model.Activity;
-                user.Job = model.Job;
-                user.Education = model.Education;
+                //user.Location = model.Location;
+                //user.Religion = model.Religion;
+                //user.Activity = model.Activity;
+                //user.Job = model.Job;
+                //user.Education = model.Education;
 
                 // Очистка обязательна, иначе Cannot insert duplicate key in object
                 user.Languages.Clear();
                 user.Languages = languages;
 
-                user.Relationship = model.Relationship;
-                user.NumberOfChildren = model.NumberOfChildren;
+                //user.Relationship = model.Relationship;
+                //user.NumberOfChildren = model.NumberOfChildren;
                 user.Height = model.Height;
                 user.Weight = model.Weight;
-                user.Shape = model.Shape;
-                user.EyeColor = model.EyeColor;
-                user.HairColor = model.HairColor;
-                user.Smoking = model.Smoking;
-                user.Alcohol = model.Alcohol;
-                user.DesiredAge = model.DesiredAge;
-                user.Hobby = model.Hobby;
-                user.Lifestyle = model.Lifestyle;
-                user.Knowledge = model.Knowledge;
+                //user.Shape = model.Shape;
+                //user.EyeColor = model.EyeColor;
+                //user.HairColor = model.HairColor;
+                //user.Smoking = model.Smoking;
+                //user.Alcohol = model.Alcohol;
+                //user.DesiredAge = model.DesiredAge;
+                //user.Hobby = model.Hobby;
+                //user.Lifestyle = model.Lifestyle;
+                //user.Knowledge = model.Knowledge;
                 user.PhoneNumber = "+38" + model.PhoneNumber;
                 user.Skype = model.Skype;
                 user.Facebook = model.Facebook;
                 user.Vk = model.Vk;
                 user.Twitter = model.Twitter;
-                user.InternationalPassport = model.InternationalPassport;
+                //user.InternationalPassport = model.InternationalPassport;
 
                 var result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)

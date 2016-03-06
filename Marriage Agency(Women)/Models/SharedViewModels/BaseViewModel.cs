@@ -33,34 +33,34 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
 
         [Required]
         [Display(Name = "Место проживания")]
-        public Location Location { get; set; }
+        public int Location { get; set; }
 
         [Required]
         [Display(Name = "Вера")]
-        public Religion Religion { get; set; }
+        public int Religion { get; set; }
 
         [Required]
         [Display(Name = "Сфера работы")]
-        public Activity Activity { get; set; }
+        public int Activity { get; set; }
 
         [Required]
         [Display(Name = "Должность")]
-        public Job Job { get; set; }
+        public int Job { get; set; }
 
         [Required]
         [Display(Name = "Образование")]
-        public Education Education { get; set; }
+        public int Education { get; set; }
 
         [Display(Name = "Языки")]
         public ICollection<Language> Languages { get; set; }
 
         [Required]
         [Display(Name = "Семейное положение")]
-        public Relationship Relationship { get; set; }
+        public int Relationship { get; set; }
 
         [Required]
         [Display(Name = "Дети")]
-        public NumberOfChildren NumberOfChildren { get; set; }
+        public int NumberOfChildren { get; set; }
 
         [Required]
         [Range(140, 200, ErrorMessage = "Значение должно быть в пределах от {1} до {2}")]
@@ -74,36 +74,36 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
 
         [Required]
         [Display(Name = "Фигура")]
-        public Shape Shape { get; set; }
+        public int Shape { get; set; }
 
         [Required]
         [Display(Name = "Цвет глаз")]
-        public EyeColor EyeColor { get; set; }
+        public int EyeColor { get; set; }
 
         [Required]
         [Display(Name = "Цвет волос")]
-        public HairColor HairColor { get; set; }
+        public int HairColor { get; set; }
 
         [Required]
         [Display(Name = "Курение")]
-        public Smoking Smoking { get; set; }
+        public int Smoking { get; set; }
 
         [Required]
         [Display(Name = "Алкоголь")]
-        public Alcohol Alcohol { get; set; }
+        public int Alcohol { get; set; }
 
         [Required]
         [Display(Name = "Желанный возраст партнера")]
-        public DesiredAge DesiredAge { get; set; }
+        public int DesiredAge { get; set; }
 
         [Display(Name = "Спорт, искусство и музыка")]
-        public Hobby Hobby { get; set; }
+        public int Hobby { get; set; }
 
         [Display(Name = "Образ жизни и развлечения")]
-        public Lifestyle Lifestyle { get; set; }
+        public int Lifestyle { get; set; }
 
         [Display(Name = "Еда и знания")]
-        public Knowledge Knowledge { get; set; }
+        public int Knowledge { get; set; }
 
         // PhoneNumber из IdentityUser
         [Required]
@@ -125,6 +125,6 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
         public string Twitter { get; set; }
 
         [Display(Name = "Загранпаспорт")]
-        public InternationalPassport InternationalPassport { get; set; }
+        public int InternationalPassport { get; set; }
     }
 }
