@@ -27,6 +27,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         public DbSet<EyeColor> EyeColors { get; set; }
         public DbSet<HairColor> HairColors { get; set; }
         public DbSet<Hobby> Hobbies { get; set; }
+        public DbSet<InternationalPassport> InternationalPassports { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Knowledge> Knowledges { get; set; }
         public DbSet<Language> Languages { get; set; }
@@ -36,6 +37,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         public DbSet<Relationship> Relationships { get; set; }
         public DbSet<Religion> Religions { get; set; }
         public DbSet<Shape> Shapes { get; set; }
+        public DbSet<Smoking> Smokings { get; set; }
 
         public static ApplicationDbContext Create()
         {

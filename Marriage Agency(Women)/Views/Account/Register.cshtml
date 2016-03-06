@@ -1,22 +1,25 @@
 ﻿@model Marriage_Agency_Women_.Models.AccountViewModels.RegisterViewModel
 
 @{
-    IList<SelectListItem> activities = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["activities"];
-    IList<SelectListItem> alcohols = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["alcohols"];
-    IList<SelectListItem> desiredAges = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["desiredAges"];
-    IList<SelectListItem> educations = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["educations"];
-    IList<SelectListItem> eyeColors = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["eyeColors"];
-    IList<SelectListItem> hairColors = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["hairColors"];
-    IList<SelectListItem> hobbies = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["hobbies"];
-    IList<SelectListItem> jobs = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["jobs"];
-    IList<SelectListItem> knowledges = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["knowledges"];
-    IList<SelectListItem> languages = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["languages"];
-    IList<SelectListItem> lifestyles = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["lifestyles"];
-    IList<SelectListItem> locations = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["locations"];
-    IList<SelectListItem> numbersOfChildren = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["numbersOfChildren"];
-    IList<SelectListItem> relationships = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["relationships"];
-    IList<SelectListItem> religions = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["religions"];
-    IList<SelectListItem> shapes = ((IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData)["shapes"];
+    IDictionary<string, IList<SelectListItem>> content = (IDictionary<string, IList<SelectListItem>>) ViewBag.PersonalData;
+    IList<SelectListItem> activities = content["activities"];
+    IList<SelectListItem> alcohols = content["alcohols"];
+    IList<SelectListItem> desiredAges = content["desiredAges"];
+    IList<SelectListItem> educations = content["educations"];
+    IList<SelectListItem> eyeColors = content["eyeColors"];
+    IList<SelectListItem> hairColors = content["hairColors"];
+    IList<SelectListItem> hobbies = content["hobbies"];
+    IList<SelectListItem> internationalPassports = content["internationalPassports"];
+    IList<SelectListItem> jobs = content["jobs"];
+    IList<SelectListItem> knowledges = content["knowledges"];
+    IList<SelectListItem> languages = content["languages"];
+    IList<SelectListItem> lifestyles = content["lifestyles"];
+    IList<SelectListItem> locations = content["locations"];
+    IList<SelectListItem> numbersOfChildren = content["numbersOfChildren"];
+    IList<SelectListItem> relationships = content["relationships"];
+    IList<SelectListItem> religions = content["religions"];
+    IList<SelectListItem> shapes = content["shapes"];
+    IList<SelectListItem> smokings = content["smokings"];
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -189,20 +192,11 @@
         </div>
     </div>
 
-    <div>
-        @Html.LabelFor(m => m.Smoking)
-        <p>
-            <label>
-                Нет&nbsp;
-                <input type="radio" name="Smoking" value="false" checked="checked" />
-            </label>
-        </p>
-        <p>
-            <label>
-                Да&nbsp;
-                <input type="radio" name="Smoking" value="true" />
-            </label>
-        </p>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Smoking, new { @class = "col-md-2 control-label" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(m => m.Smoking, smokings, new { @class = "form-control" })
+        </div>
     </div>
 
     <div class="form-group">
@@ -276,20 +270,11 @@
         </div>
     </div>
 
-    <div>
-        @Html.LabelFor(m => m.InternationalPassport)
-        <p>
-            <label>
-                Да&nbsp;
-                <input type="radio" name="InternationalPassport" value="true" checked="checked" />
-            </label>
-        </p>
-        <p>
-            <label>
-                Нет&nbsp;
-                <input type="radio" name="InternationalPassport" value="false"  />
-            </label>
-        </p>
+    <div class="form-group">
+        @Html.LabelFor(m => m.InternationalPassport, new { @class = "col-md-2 control-label" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(m => m.InternationalPassport, internationalPassports, new { @class = "form-control" })
+        </div>
     </div>
 
     <div class="form-group">

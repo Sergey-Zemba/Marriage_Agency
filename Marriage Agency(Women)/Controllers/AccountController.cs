@@ -170,6 +170,8 @@ namespace Marriage_Agency_Women_.Controllers
             personalData.Add("hairColors", data);
             data = GetSelectListItems(new List<PersonalData>(DbContext.Hobbies));
             personalData.Add("hobbies", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.InternationalPassports));
+            personalData.Add("internationalPassports", data);
             data = GetSelectListItems(new List<PersonalData>(DbContext.Jobs));
             personalData.Add("jobs", data);
             data = GetSelectListItems(new List<PersonalData>(DbContext.Knowledges));
@@ -188,6 +190,8 @@ namespace Marriage_Agency_Women_.Controllers
             personalData.Add("religions", data);
             data = GetSelectListItems(new List<PersonalData>(DbContext.Shapes));
             personalData.Add("shapes", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Smokings));
+            personalData.Add("smokings", data);
             ViewBag.PersonalData = personalData;
             return View();
         }

@@ -173,6 +173,7 @@
     <Compile Include="Models\Characteristics\EyeColor.cs" />
     <Compile Include="Models\Characteristics\HairColor.cs" />
     <Compile Include="Models\Characteristics\Hobby.cs" />
+    <Compile Include="Models\Characteristics\InternationalPassport.cs" />
     <Compile Include="Models\Characteristics\Job.cs" />
     <Compile Include="Models\Characteristics\Knowledge.cs" />
     <Compile Include="Models\Characteristics\Language.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Models\Characteristics\Relationship.cs" />
     <Compile Include="Models\Characteristics\Religion.cs" />
     <Compile Include="Models\Characteristics\Shape.cs" />
+    <Compile Include="Models\Characteristics\Smoking.cs" />
     <Compile Include="Models\SharedViewModels\BaseViewModel.cs" />
     <Compile Include="Models\IdentityModels\AccountsInitializer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />

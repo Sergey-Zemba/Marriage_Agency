@@ -89,7 +89,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         public virtual HairColor HairColor { get; set; }
 
         [Display(Name = "Курение")]
-        public bool Smoking { get; set; }
+        public virtual Smoking Smoking { get; set; }
 
         [Display(Name = "Алкоголь")]
         public virtual Alcohol Alcohol { get; set; }
@@ -124,7 +124,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         public string Twitter { get; set; }
 
         [Display(Name = "Загранпаспорт")]
-        public bool InternationalPassport { get; set; }
+        public virtual InternationalPassport InternationalPassport { get; set; }
 
         // ??
         [Display(Name = "Статус")]

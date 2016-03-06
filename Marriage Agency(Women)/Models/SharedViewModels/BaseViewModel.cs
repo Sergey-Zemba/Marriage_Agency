@@ -86,7 +86,7 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
 
         [Required]
         [Display(Name = "Курение")]
-        public bool Smoking { get; set; }
+        public Smoking Smoking { get; set; }
 
         [Required]
         [Display(Name = "Алкоголь")]
@@ -125,6 +125,6 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
         public string Twitter { get; set; }
 
         [Display(Name = "Загранпаспорт")]
-        public bool InternationalPassport { get; set; }
+        public InternationalPassport InternationalPassport { get; set; }
     }
 }

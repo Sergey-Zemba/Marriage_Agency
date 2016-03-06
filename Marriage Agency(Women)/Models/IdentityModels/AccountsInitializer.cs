@@ -144,6 +144,11 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
                 new Hobby(58, "Мюзикл", "Musical", "ミュージカル"),
                 new Hobby(59, "Нет", "No", "なし")
             };
+            ICollection<InternationalPassport> internationalPassports = new List<InternationalPassport>
+            {
+                new InternationalPassport(1, "Да", "Yes", "はい"),
+                new InternationalPassport(1, "Нет", "No", "いいえ")
+            };
             ICollection<Job> jobs = new List<Job>
             {
                 new Job(1, "Должностное лицо", "Executive", "役員"),
@@ -337,6 +342,11 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
                 new Shape(4, "Роскошное", "Voluptuous", "官能的"),
                 new Shape(5, "Полное", "Plump", "豊満")
             };
+            ICollection<Smoking> smokings = new List<Smoking>
+            {
+                new Smoking(1, "Да", "Yes", "はい"),
+                new Smoking(1, "Нет", "No", "いいえ")
+            };
             context.Activities.AddRange(activities);
             context.Alcohols.AddRange(alcohols);
             context.DesiredAges.AddRange(desiredAges);
@@ -344,6 +354,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             context.EyeColors.AddRange(eyeColors);
             context.HairColors.AddRange(hairColors);
             context.Hobbies.AddRange(hobbies);
+            context.InternationalPassports.AddRange(internationalPassports);
             context.Jobs.AddRange(jobs);
             context.Knowledges.AddRange(knowledges);
             context.Languages.AddRange(languages);
@@ -353,6 +364,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             context.Relationships.AddRange(relationships);
             context.Religions.AddRange(religions);
             context.Shapes.AddRange(shapes);
+            context.Smokings.AddRange(smokings);
             base.Seed(context);
         }
     }
