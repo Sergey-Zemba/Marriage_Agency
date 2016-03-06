@@ -91,12 +91,12 @@ namespace Marriage_Agency_Women_.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            ICollection<Language> languages = new List<Language>();
+            ICollection<int> languages = new List<int>();
             if (user.Languages != null)
             {
                 foreach (Language language in user.Languages)
                 {
-                    languages.Add(language);
+                    languages.Add(language.Id);
                 }
             }
 
@@ -108,32 +108,72 @@ namespace Marriage_Agency_Women_.Controllers
                 LastName = user.LastName,
                 NameInRoman = user.NameInRoman,
                 Birthday = user.Birthday,
-                //Location = user.Location,
-                //Religion = user.Religion,
-                //Activity = user.Activity,
-                //Job = user.Job,
-                //Education = user.Education,
+                Location = user.Location.Id,
+                Religion = user.Religion.Id,
+                Activity = user.Activity.Id,
+                Job = user.Job.Id,
+                Education = user.Education.Id,
                 Languages = languages,
-                //Relationship = user.Relationship,
-                //NumberOfChildren = user.NumberOfChildren,
+                Relationship = user.Relationship.Id,
+                NumberOfChildren = user.NumberOfChildren.Id,
                 Height = user.Height,
                 Weight = user.Weight,
-                //Shape = user.Shape,
-                //EyeColor = user.EyeColor,
-                //HairColor = user.HairColor,
-                //Smoking = user.Smoking,
-                //Alcohol = user.Alcohol,
-                //DesiredAge = user.DesiredAge,
-                //Hobby = user.Hobby,
-                //Lifestyle = user.Lifestyle,
-                //Knowledge = user.Knowledge,
+                Shape = user.Shape.Id,
+                EyeColor = user.EyeColor.Id,
+                HairColor = user.HairColor.Id,
+                Smoking = user.Smoking.Id,
+                Alcohol = user.Alcohol.Id,
+                DesiredAge = user.DesiredAge.Id,
+                Hobby = user.Hobby.Id,
+                Lifestyle = user.Lifestyle.Id,
+                Knowledge = user.Knowledge.Id,
                 PhoneNumber = user.PhoneNumber.Substring(3),
                 Skype = user.Skype,
                 Facebook = user.Facebook,
                 Vk = user.Vk,
                 Twitter = user.Twitter,
-                //InternationalPassport = user.InternationalPassport
+                InternationalPassport = user.InternationalPassport.Id
             };
+
+            IDictionary<string, IList<SelectListItem>> personalData = new Dictionary<string, IList<SelectListItem>>();
+            IList<SelectListItem> data = GetSelectListItems(new List<PersonalData>(DbContext.Activities));
+            personalData.Add("activities", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Alcohols));
+            personalData.Add("alcohols", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.DesiredAges));
+            personalData.Add("desiredAges", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Educations));
+            personalData.Add("educations", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.EyeColors));
+            personalData.Add("eyeColors", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.HairColors));
+            personalData.Add("hairColors", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Hobbies));
+            personalData.Add("hobbies", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.InternationalPassports));
+            personalData.Add("internationalPassports", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Jobs));
+            personalData.Add("jobs", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Knowledges));
+            personalData.Add("knowledges", data);
+
+            ViewBag.languages = DbContext.Languages.ToList();
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Lifestyles));
+            personalData.Add("lifestyles", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Locations));
+            personalData.Add("locations", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.NumbersOfChildren));
+            personalData.Add("numbersOfChildren", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Relationships));
+            personalData.Add("relationships", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Religions));
+            personalData.Add("religions", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Shapes));
+            personalData.Add("shapes", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Smokings));
+            personalData.Add("smokings", data);
+            ViewBag.PersonalData = personalData;
 
             return View(model);
         }
@@ -148,9 +188,9 @@ namespace Marriage_Agency_Women_.Controllers
 
                 if (model.Languages != null)
                 {
-                    foreach (Language language in model.Languages)
+                    foreach (int id in model.Languages)
                     {
-                        var lang = DbContext.Languages.Find(language);
+                        var lang = DbContext.Languages.Find(id);
                         languages.Add(lang);
                     }
                 }
@@ -167,35 +207,35 @@ namespace Marriage_Agency_Women_.Controllers
                 user.LastName = model.LastName;
                 user.NameInRoman = model.NameInRoman;
                 user.Birthday = model.Birthday;
-                //user.Location = model.Location;
-                //user.Religion = model.Religion;
-                //user.Activity = model.Activity;
-                //user.Job = model.Job;
-                //user.Education = model.Education;
+                user.Location = DbContext.Locations.Find(model.Location);
+                user.Religion = DbContext.Religions.Find(model.Religion);
+                user.Activity = DbContext.Activities.Find(model.Activity);
+                user.Job = DbContext.Jobs.Find(model.Job);
+                user.Education = DbContext.Educations.Find(model.Education);
 
                 // Очистка обязательна, иначе Cannot insert duplicate key in object
                 user.Languages.Clear();
                 user.Languages = languages;
 
-                //user.Relationship = model.Relationship;
-                //user.NumberOfChildren = model.NumberOfChildren;
+                user.Relationship = DbContext.Relationships.Find(model.Relationship);
+                user.NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren);
                 user.Height = model.Height;
                 user.Weight = model.Weight;
-                //user.Shape = model.Shape;
-                //user.EyeColor = model.EyeColor;
-                //user.HairColor = model.HairColor;
-                //user.Smoking = model.Smoking;
-                //user.Alcohol = model.Alcohol;
-                //user.DesiredAge = model.DesiredAge;
-                //user.Hobby = model.Hobby;
-                //user.Lifestyle = model.Lifestyle;
-                //user.Knowledge = model.Knowledge;
+                user.Shape = DbContext.Shapes.Find(model.Shape);
+                user.EyeColor = DbContext.EyeColors.Find(model.EyeColor);
+                user.HairColor = DbContext.HairColors.Find(model.HairColor);
+                user.Smoking = DbContext.Smokings.Find(model.Smoking);
+                user.Alcohol = DbContext.Alcohols.Find(model.Alcohol);
+                user.DesiredAge = DbContext.DesiredAges.Find(model.DesiredAge);
+                user.Hobby = DbContext.Hobbies.Find(model.Hobby);
+                user.Lifestyle = DbContext.Lifestyles.Find(model.Lifestyle);
+                user.Knowledge = DbContext.Knowledges.Find(model.Knowledge);
                 user.PhoneNumber = "+38" + model.PhoneNumber;
                 user.Skype = model.Skype;
                 user.Facebook = model.Facebook;
                 user.Vk = model.Vk;
                 user.Twitter = model.Twitter;
-                //user.InternationalPassport = model.InternationalPassport;
+                user.InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport);
 
                 var result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)
@@ -205,6 +245,47 @@ namespace Marriage_Agency_Women_.Controllers
                 }
                 AddErrors(result);
             }
+
+            IDictionary<string, IList<SelectListItem>> personalData = new Dictionary<string, IList<SelectListItem>>();
+            IList<SelectListItem> data = GetSelectListItems(new List<PersonalData>(DbContext.Activities));
+            personalData.Add("activities", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Alcohols));
+            personalData.Add("alcohols", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.DesiredAges));
+            personalData.Add("desiredAges", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Educations));
+            personalData.Add("educations", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.EyeColors));
+            personalData.Add("eyeColors", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.HairColors));
+            personalData.Add("hairColors", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Hobbies));
+            personalData.Add("hobbies", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.InternationalPassports));
+            personalData.Add("internationalPassports", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Jobs));
+            personalData.Add("jobs", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Knowledges));
+            personalData.Add("knowledges", data);
+
+            ViewBag.languages = DbContext.Languages.ToList();
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Lifestyles));
+            personalData.Add("lifestyles", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Locations));
+            personalData.Add("locations", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.NumbersOfChildren));
+            personalData.Add("numbersOfChildren", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Relationships));
+            personalData.Add("relationships", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Religions));
+            personalData.Add("religions", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Shapes));
+            personalData.Add("shapes", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Smokings));
+            personalData.Add("smokings", data);
+            ViewBag.PersonalData = personalData;
+
             return View("Index", model);
         }
 
@@ -467,6 +548,19 @@ namespace Marriage_Agency_Women_.Controllers
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
+
+        public IList<SelectListItem> GetSelectListItems(List<PersonalData> personalData)
+        {
+            List<SelectListItem> listToReturn = new List<SelectListItem>();
+            foreach (PersonalData data in personalData.OrderBy(d => d.Position))
+            {
+                SelectListItem item = new SelectListItem();
+                item.Value = data.Id.ToString();
+                item.Text = data.RussianName;
+                listToReturn.Add(item);
+            }
+            return listToReturn;
+        }
 
         private IAuthenticationManager AuthenticationManager
         {

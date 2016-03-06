@@ -209,9 +209,9 @@ namespace Marriage_Agency_Women_.Controllers
 
                 if (model.Languages != null)
                 {
-                    foreach (Language language in model.Languages)
+                    foreach (int langId in model.Languages)
                     {
-                        var lang = DbContext.Languages.Find(language);
+                        var lang = DbContext.Languages.Find(langId);
                         languages.Add(lang);
                     }
                 }

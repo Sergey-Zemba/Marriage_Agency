@@ -1,25 +1,25 @@
-﻿@using Marriage_Agency_Women_.Models.Values
+﻿@using Marriage_Agency_Women_.Models.Characteristics
 @model Marriage_Agency_Women_.Models.ManageViewModels.EditViewModel
 @{
-    ViewBag.Title = "Manage";
-
-    Values values = new Values();
-
-    IList<SelectListItem> locations = values.GetSelectListItems(values.Locations, ValuesLanguage.Russian);
-    IList<SelectListItem> religions = values.GetSelectListItems(values.Religions, ValuesLanguage.Russian);
-    IList<SelectListItem> activities = values.GetSelectListItems(values.Activities, ValuesLanguage.Russian);
-    IList<SelectListItem> posts = values.GetSelectListItems(values.Posts, ValuesLanguage.Russian);
-    IList<SelectListItem> educations = values.GetSelectListItems(values.Educations, ValuesLanguage.Russian);
-    IList<SelectListItem> relationships = values.GetSelectListItems(values.Relationships, ValuesLanguage.Russian);
-    IList<SelectListItem> numberOfChildren = values.GetSelectListItems(values.NumberOfChildren, ValuesLanguage.Russian);
-    IList<SelectListItem> figures = values.GetSelectListItems(values.Figures, ValuesLanguage.Russian);
-    IList<SelectListItem> eyeColors = values.GetSelectListItems(values.EyeColors, ValuesLanguage.Russian);
-    IList<SelectListItem> hairColors = values.GetSelectListItems(values.HairColors, ValuesLanguage.Russian);
-    IList<SelectListItem> alcohol = values.GetSelectListItems(values.Alcohol, ValuesLanguage.Russian);
-    IList<SelectListItem> desiredAges = values.GetSelectListItems(values.DesiredAges, ValuesLanguage.Russian);
-    IList<SelectListItem> hobbies = values.GetSelectListItems(values.Hobbies, ValuesLanguage.Russian);
-    IList<SelectListItem> lifestyles = values.GetSelectListItems(values.Lifestyles, ValuesLanguage.Russian);
-    IList<SelectListItem> knowledge = values.GetSelectListItems(values.Knowledge, ValuesLanguage.Russian);
+    IDictionary<string, IList<SelectListItem>> content = (IDictionary<string, IList<SelectListItem>>)ViewBag.PersonalData;
+    IList<SelectListItem> activities = content["activities"];
+    IList<SelectListItem> alcohols = content["alcohols"];
+    IList<SelectListItem> desiredAges = content["desiredAges"];
+    IList<SelectListItem> educations = content["educations"];
+    IList<SelectListItem> eyeColors = content["eyeColors"];
+    IList<SelectListItem> hairColors = content["hairColors"];
+    IList<SelectListItem> hobbies = content["hobbies"];
+    IList<SelectListItem> internationalPassports = content["internationalPassports"];
+    IList<SelectListItem> jobs = content["jobs"];
+    IList<SelectListItem> knowledges = content["knowledges"];
+    IList<Language> languages = (IList<Language>)(ViewBag.languages);
+    IList<SelectListItem> lifestyles = content["lifestyles"];
+    IList<SelectListItem> locations = content["locations"];
+    IList<SelectListItem> numbersOfChildren = content["numbersOfChildren"];
+    IList<SelectListItem> relationships = content["relationships"];
+    IList<SelectListItem> religions = content["religions"];
+    IList<SelectListItem> shapes = content["shapes"];
+    IList<SelectListItem> smokings = content["smokings"];
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -104,9 +104,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Post, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Job, new { @class = "col-md-2 control-label" })
             <div class="col-sm-10">
-                @Html.DropDownListFor(m => m.Post, posts, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Job, jobs, new { @class = "form-control" })
             </div>
         </div>
 
@@ -118,22 +118,22 @@
         </div>
 
         <div>
-            @foreach (KeyValuePair<int, ViewValue> keyValue in values.Languages)
+            @foreach (PersonalData lang in languages.OrderBy(l => l.Position))
             {
                 <p>
                     <label>
-                        @keyValue.Value.Russian &nbsp;
-                        <input type="checkbox" name="Languages" value="@keyValue.Key"
-                               @if (Model.Languages != null) { @(Model.Languages.Contains(keyValue.Key) ? "checked='checked'" : "")  } />
+                        @lang.RussianName &nbsp;
+                        <input type="checkbox" name="Languages" value="@lang.Id"
+                               @if (Model.Languages != null) { @(Model.Languages.Contains(lang.Id) ? "checked='checked'" : "")     } />
                     </label>
                 </p>
             }
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.MaritalStatus, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Relationship, new { @class = "col-md-2 control-label" })
             <div class="col-sm-10">
-                @Html.DropDownListFor(m => m.MaritalStatus, relationships, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Relationship, relationships, new { @class = "form-control" })
             </div>
         </div>
 
@@ -147,7 +147,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.NumberOfChildren, new { @class = "col-md-2 control-label" })
             <div class="col-sm-10">
-                @Html.DropDownListFor(m => m.NumberOfChildren, numberOfChildren, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.NumberOfChildren, numbersOfChildren, new { @class = "form-control" })
             </div>
         </div>
 
@@ -168,9 +168,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Figure, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Shape, new { @class = "col-md-2 control-label" })
             <div class="col-sm-10">
-                @Html.DropDownListFor(m => m.Figure, figures, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Shape, shapes, new { @class = "form-control" })
             </div>
         </div>
 
@@ -188,28 +188,17 @@
             </div>
         </div>
 
-        <div>
-            @Html.LabelFor(m => m.Smoking)
-            <p>
-                <label>
-                    Нет&nbsp;
-                    <input type="radio" name="Smoking" value="false"
-                           @(!Model.Smoking ? "checked='checked'" : "") />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Да&nbsp;
-                    <input type="radio" name="Smoking" value="true"
-                           @(Model.Smoking ? "checked='checked'" : "") />
-                </label>
-            </p>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Smoking, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.Smoking, smokings, new { @class = "form-control" })
+            </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Alcohol, new { @class = "col-md-2 control-label" })
             <div class="col-sm-10">
-                @Html.DropDownListFor(m => m.Alcohol, alcohol, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Alcohol, alcohols, new { @class = "form-control" })
             </div>
         </div>
 
@@ -237,7 +226,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Knowledge, new { @class = "col-md-2 control-label" })
             <div class="col-sm-10">
-                @Html.DropDownListFor(m => m.Knowledge, knowledge, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Knowledge, knowledges, new { @class = "form-control" })
             </div>
         </div>
 
@@ -277,22 +266,11 @@
             </div>
         </div>
 
-        <div>
-            @Html.LabelFor(m => m.InternationalPassport)
-            <p>
-                <label>
-                    Нет&nbsp;
-                    <input type="radio" name="InternationalPassport" value="false"
-                           @( !Model.InternationalPassport ? "checked='checked'" : "") />
-                </label>
-            </p>
-            <p>
-                <label>
-                    Да&nbsp;
-                    <input type="radio" name="InternationalPassport" value="true"
-                           @( Model.InternationalPassport ? "checked='checked'" : "") />
-                </label>
-            </p>
+        <div class="form-group">
+            @Html.LabelFor(m => m.InternationalPassport, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.InternationalPassport, internationalPassports, new { @class = "form-control" })
+            </div>
         </div>
 
         <div class="form-group">

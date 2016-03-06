@@ -52,7 +52,7 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
         public int Education { get; set; }
 
         [Display(Name = "Языки")]
-        public ICollection<Language> Languages { get; set; }
+        public ICollection<int> Languages { get; set; }
 
         [Required]
         [Display(Name = "Семейное положение")]
