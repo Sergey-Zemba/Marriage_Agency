@@ -31,6 +31,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Knowledge> Knowledges { get; set; }
         public DbSet<Language> Languages { get; set; }
+        public DbSet<Level> Levels { get; set; }
         public DbSet<Lifestyle> Lifestyles { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<NumberOfChildren> NumbersOfChildren { get; set; }

@@ -177,6 +177,7 @@
     <Compile Include="Models\Characteristics\Job.cs" />
     <Compile Include="Models\Characteristics\Knowledge.cs" />
     <Compile Include="Models\Characteristics\Language.cs" />
+    <Compile Include="Models\Characteristics\Level.cs" />
     <Compile Include="Models\Characteristics\Lifestyle.cs" />
     <Compile Include="Models\Characteristics\Location.cs" />
     <Compile Include="Models\Characteristics\NumberOfChildren.cs" />

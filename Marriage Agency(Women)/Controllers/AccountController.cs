@@ -178,6 +178,8 @@ namespace Marriage_Agency_Women_.Controllers
             personalData.Add("knowledges", data);
             data = GetSelectListItems(new List<PersonalData>(DbContext.Languages));
             personalData.Add("languages", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Levels));
+            personalData.Add("levels", data);
             data = GetSelectListItems(new List<PersonalData>(DbContext.Lifestyles));
             personalData.Add("lifestyles", data);
             data = GetSelectListItems(new List<PersonalData>(DbContext.Locations));
@@ -205,16 +207,16 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<Language> languages = new List<Language>();
+                //List<Language> languages = new List<Language>();
 
-                if (model.Languages != null)
-                {
-                    foreach (int langId in model.Languages)
-                    {
-                        var lang = DbContext.Languages.Find(langId);
-                        languages.Add(lang);
-                    }
-                }
+                //if (model.Languages != null)
+                //{
+                //    foreach (int langId in model.Languages)
+                //    {
+                //        var lang = DbContext.Languages.Find(langId);
+                //        languages.Add(lang);
+                //    }
+                //}
 
                 var user = new ApplicationUser
                 {
@@ -230,7 +232,12 @@ namespace Marriage_Agency_Women_.Controllers
                     Activity = DbContext.Activities.Find(model.Activity),
                     Job = DbContext.Jobs.Find(model.Job),
                     Education = DbContext.Educations.Find(model.Education),
-                    Languages = languages,
+                    FirstLanguage = DbContext.Languages.Find(model.FirstLanguage),
+                    FirstLanguageLevel = DbContext.Levels.Find(model.FirstLanguageLevel),
+                    SecondLanguage = DbContext.Languages.Find(model.SecondLanguage),
+                    SecondLanguageLevel = DbContext.Levels.Find(model.SecondLanguageLevel),
+                    ThirdLanguage = DbContext.Languages.Find(model.ThirdLanguage),
+                    ThirdLanguageLevel = DbContext.Levels.Find(model.ThirdLanguageLevel),
                     Relationship = DbContext.Relationships.Find(model.Relationship),
                     NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren),
                     Height = model.Height,

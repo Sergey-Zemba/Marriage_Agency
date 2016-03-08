@@ -51,8 +51,31 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
         [Display(Name = "Образование")]
         public int Education { get; set; }
 
-        [Display(Name = "Языки")]
-        public ICollection<int> Languages { get; set; }
+        //[Display(Name = "Языки")]
+        //public ICollection<int> Languages { get; set; }
+        [Required]
+        [Display(Name = "Первый язык")]
+        public int FirstLanguage { get; set; }
+
+        [Required]
+        [Display(Name = "Уровень")]
+        public int FirstLanguageLevel { get; set; }
+
+        [Required]
+        [Display(Name = "Второй язык")]
+        public int SecondLanguage { get; set; }
+
+        [Required]
+        [Display(Name = "Уровень")]
+        public int SecondLanguageLevel { get; set; }
+
+        [Required]
+        [Display(Name = "Третий язык")]
+        public int ThirdLanguage { get; set; }
+
+        [Required]
+        [Display(Name = "Уровень")]
+        public int ThirdLanguageLevel { get; set; }
 
         [Required]
         [Display(Name = "Семейное положение")]

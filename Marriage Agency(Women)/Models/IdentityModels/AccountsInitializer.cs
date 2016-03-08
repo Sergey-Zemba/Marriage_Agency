@@ -238,6 +238,13 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
                 new Language(38, "Греческий", "Greek", "ギリシャ語"),
                 new Language(39, "Чешский", "Czech", "チェコ語")
             };
+            ICollection<Level> levels = new List<Level>
+            {
+                new Level(1, "Базовый", "Elementary", "エレメンタリー"),
+                new Level(2, "Средний", "Intermediate", "中間体"),
+                new Level(3, "Продвинутый", "Upper", "アッパー"),
+                new Level(4, "Родной", "Native", "ネイティブ")
+            };
             ICollection<Lifestyle> lifestyles = new List<Lifestyle>
             {
                 new Lifestyle(1, "Йога", "Yoga", "ヨガ"),
@@ -358,6 +365,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             context.Jobs.AddRange(jobs);
             context.Knowledges.AddRange(knowledges);
             context.Languages.AddRange(languages);
+            context.Levels.AddRange(levels);
             context.Lifestyles.AddRange(lifestyles);
             context.Locations.AddRange(locations);
             context.NumbersOfChildren.AddRange(numbersOfChildren);

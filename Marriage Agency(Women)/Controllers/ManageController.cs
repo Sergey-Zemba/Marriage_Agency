@@ -91,14 +91,14 @@ namespace Marriage_Agency_Women_.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            ICollection<int> languages = new List<int>();
-            if (user.Languages != null)
-            {
-                foreach (Language language in user.Languages)
-                {
-                    languages.Add(language.Id);
-                }
-            }
+            //ICollection<int> languages = new List<int>();
+            //if (user.Languages != null)
+            //{
+            //    foreach (Language language in user.Languages)
+            //    {
+            //        languages.Add(language.Id);
+            //    }
+            //}
 
             EditViewModel model = new EditViewModel
             {
@@ -113,7 +113,7 @@ namespace Marriage_Agency_Women_.Controllers
                 Activity = user.Activity.Id,
                 Job = user.Job.Id,
                 Education = user.Education.Id,
-                Languages = languages,
+                //Languages = languages,
                 Relationship = user.Relationship.Id,
                 NumberOfChildren = user.NumberOfChildren.Id,
                 Height = user.Height,
@@ -184,16 +184,16 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<Language> languages = new List<Language>();
+                //List<Language> languages = new List<Language>();
 
-                if (model.Languages != null)
-                {
-                    foreach (int id in model.Languages)
-                    {
-                        var lang = DbContext.Languages.Find(id);
-                        languages.Add(lang);
-                    }
-                }
+                //if (model.Languages != null)
+                //{
+                //    foreach (int id in model.Languages)
+                //    {
+                //        var lang = DbContext.Languages.Find(id);
+                //        languages.Add(lang);
+                //    }
+                //}
 
                 var userName = User.Identity.Name;
                 var user = await UserManager.FindByNameAsync(userName);
@@ -214,8 +214,8 @@ namespace Marriage_Agency_Women_.Controllers
                 user.Education = DbContext.Educations.Find(model.Education);
 
                 // Очистка обязательна, иначе Cannot insert duplicate key in object
-                user.Languages.Clear();
-                user.Languages = languages;
+                //user.Languages.Clear();
+                //user.Languages = languages;
 
                 user.Relationship = DbContext.Relationships.Find(model.Relationship);
                 user.NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren);

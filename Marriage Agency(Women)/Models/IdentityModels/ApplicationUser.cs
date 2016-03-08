@@ -64,8 +64,26 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         [Display(Name = "Образование")]
         public virtual Education Education { get; set; }
 
-        [Display(Name = "Языки")]
-        public virtual ICollection<Language> Languages { get; set; }
+        //[Display(Name = "Языки")]
+        //public virtual ICollection<Language> Languages { get; set; }
+
+        [Display(Name = "Первый язык")]
+        public virtual Language FirstLanguage { get; set; }
+
+        [Display(Name = "Уровень")]
+        public virtual Level FirstLanguageLevel { get; set; }
+
+        [Display(Name = "Второй язык")]
+        public virtual Language SecondLanguage { get; set; }
+
+        [Display(Name = "Уровень")]
+        public virtual Level SecondLanguageLevel { get; set; }
+
+        [Display(Name = "Третий язык")]
+        public virtual Language ThirdLanguage { get; set; }
+
+        [Display(Name = "Уровень")]
+        public virtual Level ThirdLanguageLevel { get; set; }
 
         [Display(Name = "Семейное положение")]
         public virtual Relationship Relationship { get; set; }
