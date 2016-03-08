@@ -12,7 +12,8 @@
     IList<SelectListItem> internationalPassports = content["internationalPassports"];
     IList<SelectListItem> jobs = content["jobs"];
     IList<SelectListItem> knowledges = content["knowledges"];
-    IList<Language> languages = (IList<Language>)(ViewBag.languages);
+    IList<SelectListItem> languages = content["languages"];
+    IList<SelectListItem> levels = content["levels"];
     IList<SelectListItem> lifestyles = content["lifestyles"];
     IList<SelectListItem> locations = content["locations"];
     IList<SelectListItem> numbersOfChildren = content["numbersOfChildren"];
@@ -117,17 +118,37 @@
             </div>
         </div>
 
-        <div>
-            @foreach (PersonalData lang in languages.OrderBy(l => l.Position))
-            {
-                <p>
-                    <label>
-                        @lang.RussianName &nbsp;
-                        <input type="checkbox" name="Languages" value="@lang.Id"
-                               @if (Model.Languages != null) { @(Model.Languages.Contains(lang.Id) ? "checked='checked'" : "")     } />
-                    </label>
-                </p>
-            }
+        <div class="form-group">
+            @Html.LabelFor(m => m.FirstLanguage, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.FirstLanguage, languages, new { @class = "form-control" })
+            </div>
+            @Html.LabelFor(m => m.FirstLanguageLevel, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.FirstLanguageLevel, levels, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.SecondLanguage, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.SecondLanguage, languages, new { @class = "form-control" })
+            </div>
+            @Html.LabelFor(m => m.SecondLanguageLevel, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.SecondLanguageLevel, levels, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ThirdLanguage, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.ThirdLanguage, languages, new { @class = "form-control" })
+            </div>
+            @Html.LabelFor(m => m.ThirdLanguageLevel, new { @class = "col-md-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(m => m.ThirdLanguageLevel, levels, new { @class = "form-control" })
+            </div>
         </div>
 
         <div class="form-group">

@@ -91,14 +91,7 @@ namespace Marriage_Agency_Women_.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            //ICollection<int> languages = new List<int>();
-            //if (user.Languages != null)
-            //{
-            //    foreach (Language language in user.Languages)
-            //    {
-            //        languages.Add(language.Id);
-            //    }
-            //}
+            
 
             EditViewModel model = new EditViewModel
             {
@@ -113,7 +106,12 @@ namespace Marriage_Agency_Women_.Controllers
                 Activity = user.Activity.Id,
                 Job = user.Job.Id,
                 Education = user.Education.Id,
-                //Languages = languages,
+                FirstLanguage = user.FirstLanguage.Id,
+                FirstLanguageLevel = user.FirstLanguageLevel.Id,
+                SecondLanguage = user.SecondLanguage.Id,
+                SecondLanguageLevel = user.SecondLanguageLevel.Id,
+                ThirdLanguage = user.ThirdLanguage.Id,
+                ThirdLanguageLevel = user.ThirdLanguageLevel.Id,
                 Relationship = user.Relationship.Id,
                 NumberOfChildren = user.NumberOfChildren.Id,
                 Height = user.Height,
@@ -157,7 +155,12 @@ namespace Marriage_Agency_Women_.Controllers
             data = GetSelectListItems(new List<PersonalData>(DbContext.Knowledges));
             personalData.Add("knowledges", data);
 
-            ViewBag.languages = DbContext.Languages.ToList();
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Languages));
+            personalData.Add("languages", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Levels));
+            personalData.Add("levels", data);
+
 
             data = GetSelectListItems(new List<PersonalData>(DbContext.Lifestyles));
             personalData.Add("lifestyles", data);
@@ -184,16 +187,7 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                //List<Language> languages = new List<Language>();
-
-                //if (model.Languages != null)
-                //{
-                //    foreach (int id in model.Languages)
-                //    {
-                //        var lang = DbContext.Languages.Find(id);
-                //        languages.Add(lang);
-                //    }
-                //}
+                
 
                 var userName = User.Identity.Name;
                 var user = await UserManager.FindByNameAsync(userName);
@@ -212,10 +206,12 @@ namespace Marriage_Agency_Women_.Controllers
                 user.Activity = DbContext.Activities.Find(model.Activity);
                 user.Job = DbContext.Jobs.Find(model.Job);
                 user.Education = DbContext.Educations.Find(model.Education);
-
-                // Очистка обязательна, иначе Cannot insert duplicate key in object
-                //user.Languages.Clear();
-                //user.Languages = languages;
+                user.FirstLanguage = DbContext.Languages.Find(model.FirstLanguage);
+                user.FirstLanguageLevel = DbContext.Levels.Find(model.FirstLanguageLevel);
+                user.SecondLanguage = DbContext.Languages.Find(model.SecondLanguage);
+                user.SecondLanguageLevel = DbContext.Levels.Find(model.SecondLanguageLevel);
+                user.ThirdLanguage = DbContext.Languages.Find(model.ThirdLanguage);
+                user.ThirdLanguageLevel = DbContext.Levels.Find(model.ThirdLanguageLevel);
 
                 user.Relationship = DbContext.Relationships.Find(model.Relationship);
                 user.NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren);
