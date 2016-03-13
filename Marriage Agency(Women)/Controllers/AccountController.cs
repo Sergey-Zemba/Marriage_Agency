@@ -86,6 +86,23 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var user = await UserManager.FindAsync(model.Email, model.Password);
+                if (user != null)
+                {
+                    if (user.EmailConfirmed == true)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToLocal(returnUrl);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Не подтвержден email.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Неверный логин или пароль");
+                }
                 return View(model);
             }
 
@@ -207,17 +224,6 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                //List<Language> languages = new List<Language>();
-
-                //if (model.Languages != null)
-                //{
-                //    foreach (int langId in model.Languages)
-                //    {
-                //        var lang = DbContext.Languages.Find(langId);
-                //        languages.Add(lang);
-                //    }
-                //}
-
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -265,15 +271,16 @@ namespace Marriage_Agency_Women_.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "user");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
+                        protocol: Request.Url.Scheme);
+                    await
+                        UserManager.SendEmailAsync(user.Id, "Confirm your account",
+                            "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    return View("DisplayEmail");
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

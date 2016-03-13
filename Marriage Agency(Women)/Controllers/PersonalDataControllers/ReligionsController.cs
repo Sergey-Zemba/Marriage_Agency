@@ -18,7 +18,7 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         // GET: Religions
         public ActionResult Index()
         {
-            return View(db.Religions.ToList());
+            return View(db.Religions.ToList().OrderBy(r => r.Position));
         }
 
         // GET: Religions/Details/5

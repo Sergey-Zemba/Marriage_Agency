@@ -18,7 +18,7 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         // GET: Activities
         public ActionResult Index()
         {
-            return View(db.Activities.ToList());
+            return View(db.Activities.ToList().OrderBy(a => a.Position));
         }
 
         // GET: Activities/Details/5

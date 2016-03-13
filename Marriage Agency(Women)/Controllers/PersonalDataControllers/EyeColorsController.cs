@@ -18,7 +18,7 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         // GET: EyeColors
         public ActionResult Index()
         {
-            return View(db.EyeColors.ToList());
+            return View(db.EyeColors.ToList().OrderBy(e => e.Position));
         }
 
         // GET: EyeColors/Details/5

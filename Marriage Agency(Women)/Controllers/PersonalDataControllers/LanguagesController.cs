@@ -18,7 +18,7 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         // GET: Languages
         public ActionResult Index()
         {
-            return View(db.Languages.ToList());
+            return View(db.Languages.ToList().OrderBy(l => l.Position));
         }
 
         // GET: Languages/Details/5

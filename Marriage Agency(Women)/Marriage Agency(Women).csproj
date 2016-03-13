@@ -367,6 +367,7 @@
     <Content Include="Views\Smokings\Details.cshtml" />
     <Content Include="Views\Smokings\Edit.cshtml" />
     <Content Include="Views\Smokings\Index.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

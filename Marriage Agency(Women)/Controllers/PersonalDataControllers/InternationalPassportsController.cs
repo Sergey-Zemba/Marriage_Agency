@@ -18,7 +18,7 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         // GET: InternationalPassports
         public ActionResult Index()
         {
-            return View(db.InternationalPassports.ToList());
+            return View(db.InternationalPassports.ToList().OrderBy(i => i.Position));
         }
 
         // GET: InternationalPassports/Details/5

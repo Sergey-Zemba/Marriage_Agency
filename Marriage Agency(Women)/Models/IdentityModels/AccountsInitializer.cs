@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Marriage_Agency_Women_.Models.Characteristics;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Marriage_Agency_Women_.Models.IdentityModels
 {
@@ -12,15 +14,15 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
     {
         protected override void Seed(ApplicationDbContext context)
         {
-            //Values.Values values = new Values.Values();
-            //IDictionary<int, ViewValue> languages = values.Languages;
-            //ICollection<Language> dbLanguages = new List<Language>();
-
-            //foreach (KeyValuePair<int, ViewValue> keyValue in languages)
-            //{
-            //    dbLanguages.Add(new Language(keyValue.Key));
-            //}
-            //context.Languages.AddRange(dbLanguages);
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var role1 = new IdentityRole { Name = "superadmin" };
+            var role2 = new IdentityRole { Name = "admin" };
+            var role3 = new IdentityRole { Name = "editor" };
+            var role4 = new IdentityRole { Name = "user" };
+            roleManager.Create(role1);
+            roleManager.Create(role2);
+            roleManager.Create(role3);
+            roleManager.Create(role4);
             ICollection<Activity> activities = new List<Activity>
             {
                 new Activity(1, "Горная промышленность", "Mining industry", "鉱業"),

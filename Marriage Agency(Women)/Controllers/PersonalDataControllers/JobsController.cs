@@ -18,7 +18,7 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         // GET: Jobs
         public ActionResult Index()
         {
-            return View(db.Jobs.ToList());
+            return View(db.Jobs.ToList().OrderBy(j => j.Position));
         }
 
         // GET: Jobs/Details/5

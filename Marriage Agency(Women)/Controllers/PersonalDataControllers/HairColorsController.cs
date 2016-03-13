@@ -18,7 +18,7 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         // GET: HairColors
         public ActionResult Index()
         {
-            return View(db.HairColors.ToList());
+            return View(db.HairColors.ToList().OrderBy(h => h.Position));
         }
 
         // GET: HairColors/Details/5
