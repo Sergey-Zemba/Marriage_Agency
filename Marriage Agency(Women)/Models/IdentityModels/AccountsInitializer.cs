@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Marriage_Agency_Women_.Models.IdentityModels
 {
-    public class AccountsInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    public class AccountsInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {
