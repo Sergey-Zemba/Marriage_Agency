@@ -11,6 +11,7 @@ using Marriage_Agency_Women_.Models.IdentityModels;
 
 namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
 {
+    [Authorize(Roles = "admin,superadmin")]
     public class LanguagesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

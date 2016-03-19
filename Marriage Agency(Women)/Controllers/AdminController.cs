@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -9,6 +10,7 @@ using Marriage_Agency_Women_.Models.IdentityModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using Newtonsoft.Json;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
@@ -27,11 +29,27 @@ namespace Marriage_Agency_Women_.Controllers
 
         public ActionResult ShowAccounts()
         {
-            List<ApplicationUser> users = GetUsersInRole("user");
+            List<ApplicationUser> users = GetUsersInRole("user").OrderBy(u => u.Status).ToList();
             List<ApplicationUser> admins = GetUsersInRole("admin");
 
             ViewBag.admins = admins;
             return View(users);
+        }
+
+        public async Task<ActionResult> ToggleConfirmation(string userId)
+        {
+            ApplicationUser user =  await UserManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                user.Status = !user.Status;
+                await UserManager.UpdateAsync(user);
+            }
+            return RedirectToAction("ShowAccounts");
+        }
+
+        public ActionResult TablesEditor()
+        {
+            return View();
         }
 
         public FileContentResult GetExcel()

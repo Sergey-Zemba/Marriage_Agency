@@ -8,20 +8,139 @@
     IEnumerable<ApplicationUser> admins = (IEnumerable<ApplicationUser>)(ViewBag.admins);
 }
 
+@section styles{
+
+}
+
 <h2>@ViewBag.Title</h2>
 
 <h4>Юзеры</h4>
-@foreach (ApplicationUser user in Model)
-{
-    <p>
-        @user.UserName
-    </p>
-}
+<table class="table">
+    <thead>
+    <tr>
+        <th>Статус</th>
+
+        <th>Email</th>
+        <th>PhoneNumber</th>
+
+        <th>Activity</th>
+        <th>Age</th>
+        <th>Alcohol</th>
+        <th>BirthDay</th>
+        <th>CreationDate</th>
+        <th>DesiredAge</th>
+        <th>Education</th>
+        <th>EyeColor</th>
+        <th>Facebook</th>
+        <th>FirstLanguage</th>
+        <th>FirstLanguageLevel</th>
+        <th>FirstName</th>
+        <th>HairColor</th>
+        <th>Height</th>
+        <th>Hobby</th>
+        <th>InternationalPassport</th>
+        <th>Job</th>
+        <th>Knowledge</th>
+        <th>LastLoginTime</th>
+        <th>LastName</th>
+        <th>LifeStyle</th>
+        <th>Location</th>
+        <th>NameInRoman</th>
+        <th>Number</th>
+        <th>NumberOfChildren</th>
+        <th>OpenPassword</th>
+        <th>Relationshp</th>
+        <th>Religion</th>
+        <th>ResidencePermit</th>
+        <th>SecondLanguage</th>
+        <th>SecondLanguageLevel</th>
+        <th>Shape</th>
+        <th>Skype</th>
+        <th>Smoking</th>
+        
+        <th>ThirdLanguage</th>
+        <th>ThirdLanguageLevel</th>
+        <th>Twitter</th>
+        <th>Vk</th>
+        <th>Weight</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (ApplicationUser user in Model)
+        {
+            <tr>
+                <td>
+                    @if (user.Status)
+                    {
+                        @Html.ActionLink("Сделать неподтвержденным", "ToggleConfirmation", new { userId = user.Id })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Подтвердить", "ToggleConfirmation", new { userId = user.Id })
+                    }
+
+                </td>
+
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+
+                <td>@user.Activity.RussianName</td>
+                <td>@user.Age</td>
+                <td>@user.Alcohol.RussianName</td>
+                <td>@user.Birthday.ToLongDateString()</td>
+                <td>@user.CreationDate.ToLongDateString()</td>
+                <td>@user.DesiredAge.RussianName</td>
+                <td>@user.Education.RussianName</td>
+                <td>@user.EyeColor.RussianName</td>
+                <td>@user.Facebook</td>
+                <td>@user.FirstLanguage.RussianName</td>
+                <td>@user.FirstLanguageLevel.RussianName</td>
+                <td>@user.FirstName</td>
+                <td>@user.HairColor.RussianName</td>
+                <td>@user.Height</td>
+                <td>@user.Hobby.RussianName</td>
+                <td>@user.InternationalPassport.RussianName</td>
+                <td>@user.Job.RussianName</td>
+                <td>@user.Knowledge.RussianName</td>
+                <td>@user.LastLoginTime.ToLongDateString()</td>
+                <td>@user.LastName</td>
+                <td>@user.Lifestyle.RussianName</td>
+                <td>@user.Location.RussianName</td>
+                <td>@user.NameInRoman</td>
+                <td>@user.Number</td>
+                <td>@user.NumberOfChildren.RussianName</td>
+                <td>@user.OpenPassword</td>
+                <td>@user.Relationship.RussianName</td>
+                <td>@user.Religion.RussianName</td>
+                <td>@user.ResidencePermit</td>
+                <td>@user.SecondLanguage.RussianName</td>
+                <td>@user.SecondLanguageLevel.RussianName</td>
+                <td>@user.Shape.RussianName</td>
+                <td>@user.Skype</td>
+                <td>@user.Smoking.RussianName</td>
+
+                <td>@user.ThirdLanguage.RussianName</td>
+                <td>@user.ThirdLanguageLevel.RussianName</td>
+                <td>@user.Twitter</td>
+                <td>@user.Vk</td>
+                <td>@user.Weight</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
 
 <h4>Админы</h4>
 @foreach (ApplicationUser admin in admins)
 {
-    <p>
-        @admin.UserName
-    </p>
+    <p>@admin.UserName</p>
+}
+
+<table id="jqg"></table>
+
+@section scripts{
+
 }

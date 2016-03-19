@@ -193,6 +193,8 @@ namespace Marriage_Agency_Women_.Controllers
                 user.Twitter = model.Twitter;
                 user.InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport);
 
+                user.Status = false;
+
                 var result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
