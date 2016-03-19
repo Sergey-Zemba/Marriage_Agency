@@ -11,70 +11,9 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Marriage_Agency_Women_.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : ApplicationBaseController
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-        private ApplicationDbContext _applicationDbContext;
-        private ApplicationRoleManager _roleManager;
-
         public AdminController() { }
-
-        public AdminController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-            RoleManager = roleManager;
-        }
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
-        private ApplicationDbContext DbContext
-        {
-            get
-            {
-                if (_applicationDbContext == null)
-                {
-                    _applicationDbContext = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-                }
-                return _applicationDbContext;
-            }
-        }
-
-        private ApplicationRoleManager RoleManager
-        {
-            get
-            {
-                if (_roleManager == null)
-                {
-                    _roleManager = HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
-                }
-                return _roleManager;
-            }
-            set { _roleManager = value; } 
-        }
 
         // GET: Admin
         public ActionResult Index()

@@ -15,12 +15,8 @@ using Marriage_Agency_Women_.Models.ManageViewModels;
 namespace Marriage_Agency_Women_.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : ApplicationBaseController
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-        private ApplicationDbContext _applicationDbContext;
-
         public ManageController()
         {
         }
@@ -29,42 +25,6 @@ namespace Marriage_Agency_Women_.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
-        }
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
-        private ApplicationDbContext DbContext
-        {
-            get
-            {
-                if (_applicationDbContext == null)
-                {
-                    _applicationDbContext = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-                }
-                return _applicationDbContext;
-            }
         }
 
         //
@@ -530,50 +490,7 @@ namespace Marriage_Agency_Women_.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && _userManager != null)
-            {
-                _userManager.Dispose();
-                _userManager = null;
-            }
-
-            base.Dispose(disposing);
-        }
-
         #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        public IList<SelectListItem> GetSelectListItems(List<PersonalData> personalData)
-        {
-            List<SelectListItem> listToReturn = new List<SelectListItem>();
-            foreach (PersonalData data in personalData.OrderBy(d => d.Position))
-            {
-                SelectListItem item = new SelectListItem();
-                item.Value = data.Id.ToString();
-                item.Text = data.RussianName;
-                listToReturn.Add(item);
-            }
-            return listToReturn;
-        }
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
-
         private bool HasPassword()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
