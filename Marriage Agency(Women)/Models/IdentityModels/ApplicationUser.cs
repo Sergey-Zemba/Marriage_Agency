@@ -14,14 +14,13 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
 {
     public class ApplicationUser : IdentityUser
     {
-
-        // Id уже есть в IdentityUser
-        //public int Id { get; set; }
         [Display(Name = "Дата создания анкеты")]
         public DateTime CreationDate { get; set; }
 
         [Display(Name = "Последний вход")]
         public DateTime LastLoginTime { get; set; }
+
+        public string OpenPassword { get; set; }
 
         [Display(Name = "Номер")]
         public int Number { get; set; }
@@ -63,9 +62,6 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
 
         [Display(Name = "Образование")]
         public virtual Education Education { get; set; }
-
-        //[Display(Name = "Языки")]
-        //public virtual ICollection<Language> Languages { get; set; }
 
         [Display(Name = "Первый язык")]
         public virtual Language FirstLanguage { get; set; }
@@ -123,11 +119,6 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
 
         [Display(Name = "Еда и знания")]
         public virtual Knowledge Knowledge { get; set; }
-
-        // PhoneNumber дублирует свойство из IdentityUser
-        // public string PhoneNumber { get; set; }
-        // Email уже есть в IdentityUser
-        //public string Email { get; set; }
 
         [Display(Name = "Скайп")]
         public string Skype { get; set; }

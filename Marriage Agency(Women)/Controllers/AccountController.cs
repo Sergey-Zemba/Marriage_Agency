@@ -191,6 +191,7 @@ namespace Marriage_Agency_Women_.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
+                    OpenPassword = model.Password,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     NameInRoman = model.NameInRoman,
@@ -337,6 +338,8 @@ namespace Marriage_Agency_Women_.Controllers
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
+                user.OpenPassword = model.Password;
+                await UserManager.UpdateAsync(user);
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);

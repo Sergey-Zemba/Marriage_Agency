@@ -404,6 +404,8 @@ namespace Marriage_Agency_Women_.Controllers
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                 if (user != null)
                 {
+                    user.OpenPassword = model.NewPassword;
+                    await UserManager.UpdateAsync(user);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
                 return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });

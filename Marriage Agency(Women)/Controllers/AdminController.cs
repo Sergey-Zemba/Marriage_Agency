@@ -97,11 +97,11 @@ namespace Marriage_Agency_Women_.Controllers
                 ws.Cells[i + 2, 2].Value = dataSource.ElementAt(i).FirstName;
                 ws.Cells[i + 2, 3].Value = dataSource.ElementAt(i).LastName;
                 ws.Cells[i + 2, 4].Value = dataSource.ElementAt(i).NameInRoman;
-                ws.Cells[i + 2, 5].Value = dataSource.ElementAt(i).Birthday;
+                ws.Cells[i + 2, 5].Value = dataSource.ElementAt(i).Birthday.ToLongDateString();
                 ws.Cells[i + 2, 6].Value = dataSource.ElementAt(i).Age;
                 ws.Cells[i + 2, 7].Value = dataSource.ElementAt(i).PhoneNumber;
                 ws.Cells[i + 2, 8].Value = dataSource.ElementAt(i).Email;
-                ws.Cells[i + 2, 9].Value = dataSource.ElementAt(i).PasswordHash;
+                ws.Cells[i + 2, 9].Value = dataSource.ElementAt(i).OpenPassword;
                 ws.Cells[i + 2, 10].Value = dataSource.ElementAt(i).Location.RussianName;
                 ws.Cells[i + 2, 11].Value = dataSource.ElementAt(i).Religion.RussianName;
                 ws.Cells[i + 2, 12].Value = dataSource.ElementAt(i).Activity.RussianName;
@@ -130,7 +130,16 @@ namespace Marriage_Agency_Women_.Controllers
                 ws.Cells[i + 2, 35].Value = dataSource.ElementAt(i).Vk;
                 ws.Cells[i + 2, 36].Value = dataSource.ElementAt(i).Twitter;
                 ws.Cells[i + 2, 37].Value = dataSource.ElementAt(i).InternationalPassport.RussianName;
-                ws.Cells[i + 2, 38].Value = dataSource.ElementAt(i).Status;
+
+                if (dataSource.ElementAt(i).Status == true)
+                {
+                    ws.Cells[i + 2, 38].Value = "Подтвержден";
+                }
+                else
+                {
+                    ws.Cells[i + 2, 38].Value = "Не подтвержден";
+                }
+                
             }
             using (ExcelRange rng = ws.Cells["A1:AL1"])
             {
