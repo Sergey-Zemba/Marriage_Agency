@@ -1,0 +1,27 @@
+﻿@using Marriage_Agency_Women_.Models.IdentityModels
+
+@model IEnumerable<ApplicationUser>
+
+@{
+    ViewBag.Title = "Список анкет";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<ApplicationUser> admins = (IEnumerable<ApplicationUser>)(ViewBag.admins);
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h4>Юзеры</h4>
+@foreach (ApplicationUser user in Model)
+{
+    <p>
+        @user.UserName
+    </p>
+}
+
+<h4>Админы</h4>
+@foreach (ApplicationUser admin in admins)
+{
+    <p>
+        @admin.UserName
+    </p>
+}
