@@ -7,4 +7,6 @@
 
 <h2>@ViewBag.Title</h2>
 
-@Html.ActionLink("Список анкет", "ShowAccounts")
+<p>@Html.ActionLink("Список анкет", "ShowAccounts")</p>
+
+<p>@Html.ActionLink("Get Excel", "GetExcel", routeValues: null, htmlAttributes: new { id = "getExcelLink" })</p>
