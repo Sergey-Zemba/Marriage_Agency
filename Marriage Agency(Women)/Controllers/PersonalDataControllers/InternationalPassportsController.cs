@@ -112,6 +112,11 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         public ActionResult DeleteConfirmed(int id)
         {
             InternationalPassport internationalPassport = db.InternationalPassports.Find(id);
+            var users = db.Users.Where(u => u.InternationalPassport.RussianName == internationalPassport.RussianName);
+            foreach (var user in users)
+            {
+                user.InternationalPassport = null;
+            }
             db.InternationalPassports.Remove(internationalPassport);
             db.SaveChanges();
             return RedirectToAction("Index");

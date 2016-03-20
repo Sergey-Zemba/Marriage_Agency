@@ -12,8 +12,9 @@ using Microsoft.Owin;
 
 namespace Marriage_Agency_Women_.Models.IdentityModels
 {
-    public class AccountsInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class AccountsInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
+
         protected override void Seed(ApplicationDbContext context)
         {
             ApplicationUserManager userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();

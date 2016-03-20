@@ -112,6 +112,11 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         public ActionResult DeleteConfirmed(int id)
         {
             DesiredAge desiredAge = db.DesiredAges.Find(id);
+            var users = db.Users.Where(u => u.DesiredAge.RussianName == desiredAge.RussianName);
+            foreach (var user in users)
+            {
+                user.DesiredAge = null;
+            }
             db.DesiredAges.Remove(desiredAge);
             db.SaveChanges();
             return RedirectToAction("Index");

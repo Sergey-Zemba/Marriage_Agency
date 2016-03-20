@@ -112,6 +112,21 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         public ActionResult DeleteConfirmed(int id)
         {
             Level level = db.Levels.Find(id);
+            var usersFirst = db.Users.Where(u => u.FirstLanguageLevel.RussianName == level.RussianName).ToList();
+            var usersSecond = db.Users.Where(u => u.SecondLanguageLevel.RussianName == level.RussianName).ToList();
+            var usersThird = db.Users.Where(u => u.ThirdLanguage.RussianName == level.RussianName).ToList();
+            foreach (var user in usersFirst)
+            {
+                user.FirstLanguageLevel = null;
+            }
+            foreach (var user in usersSecond)
+            {
+                user.SecondLanguageLevel = null;
+            }
+            foreach (var user in usersThird)
+            {
+                user.ThirdLanguageLevel = null;
+            }
             db.Levels.Remove(level);
             db.SaveChanges();
             return RedirectToAction("Index");

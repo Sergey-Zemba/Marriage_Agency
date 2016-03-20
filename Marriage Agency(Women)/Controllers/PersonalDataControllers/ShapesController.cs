@@ -112,6 +112,11 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         public ActionResult DeleteConfirmed(int id)
         {
             Shape shape = db.Shapes.Find(id);
+            var users = db.Users.Where(u => u.Shape.RussianName == shape.RussianName);
+            foreach (var user in users)
+            {
+                user.Shape = null;
+            }
             db.Shapes.Remove(shape);
             db.SaveChanges();
             return RedirectToAction("Index");

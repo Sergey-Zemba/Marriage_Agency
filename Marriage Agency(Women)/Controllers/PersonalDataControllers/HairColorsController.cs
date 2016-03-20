@@ -112,6 +112,11 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         public ActionResult DeleteConfirmed(int id)
         {
             HairColor hairColor = db.HairColors.Find(id);
+            var users = db.Users.Where(u => u.HairColor.RussianName == hairColor.RussianName);
+            foreach (var user in users)
+            {
+                user.HairColor = null;
+            }
             db.HairColors.Remove(hairColor);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -112,6 +112,11 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         public ActionResult DeleteConfirmed(int id)
         {
             NumberOfChildren numberOfChildren = db.NumbersOfChildren.Find(id);
+            var users = db.Users.Where(u => u.NumberOfChildren.RussianName == numberOfChildren.RussianName);
+            foreach (var user in users)
+            {
+                user.NumberOfChildren = null;
+            }
             db.NumbersOfChildren.Remove(numberOfChildren);
             db.SaveChanges();
             return RedirectToAction("Index");

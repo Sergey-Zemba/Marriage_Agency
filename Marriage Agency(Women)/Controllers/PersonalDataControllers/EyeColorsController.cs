@@ -112,6 +112,11 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         public ActionResult DeleteConfirmed(int id)
         {
             EyeColor eyeColor = db.EyeColors.Find(id);
+            var users = db.Users.Where(u => u.EyeColor.RussianName == eyeColor.RussianName);
+            foreach (var user in users)
+            {
+                user.EyeColor = null;
+            }
             db.EyeColors.Remove(eyeColor);
             db.SaveChanges();
             return RedirectToAction("Index");

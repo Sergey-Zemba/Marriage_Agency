@@ -112,6 +112,11 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         public ActionResult DeleteConfirmed(int id)
         {
             Religion religion = db.Religions.Find(id);
+            var users = db.Users.Where(u => u.Religion.RussianName == religion.RussianName);
+            foreach (var user in users)
+            {
+                user.Religion = null;
+            }
             db.Religions.Remove(religion);
             db.SaveChanges();
             return RedirectToAction("Index");
