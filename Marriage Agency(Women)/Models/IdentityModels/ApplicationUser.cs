@@ -135,6 +135,10 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         [Display(Name = "Загранпаспорт")]
         public virtual InternationalPassport InternationalPassport { get; set; }
 
+        public virtual ICollection<Photo> Photos { get; set; }
+
+        public Photo Avatar { get; set; }
+
         // ??
         [Display(Name = "Статус")]
         public bool Status { get; set; }

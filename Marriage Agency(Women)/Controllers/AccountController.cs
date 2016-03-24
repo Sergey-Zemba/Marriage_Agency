@@ -222,6 +222,7 @@ namespace Marriage_Agency_Women_.Controllers
                     Lifestyle = DbContext.Lifestyles.Find(model.Lifestyle),
                     Knowledge = DbContext.Knowledges.Find(model.Knowledge),
                     PhoneNumber = "+38" + model.PhoneNumber,
+                    Avatar = model.Avatar,
                     Skype = model.Skype,
                     Facebook = model.Facebook,
                     Vk = model.Vk,

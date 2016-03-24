@@ -135,6 +135,10 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
+        [Required]
+        [Display(Name = "Образ жизни и развлечения")]
+        public Photo Avatar { get; set; }
+
         [Display(Name = "Скайп")]
         public string Skype { get; set; }
 

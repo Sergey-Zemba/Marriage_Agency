@@ -183,6 +183,7 @@
     <Compile Include="Controllers\PersonalDataControllers\LifestylesController.cs" />
     <Compile Include="Controllers\PersonalDataControllers\LocationsController.cs" />
     <Compile Include="Controllers\PersonalDataControllers\NumberOfChildrensController.cs" />
+    <Compile Include="Controllers\PersonalDataControllers\PhotosController.cs" />
     <Compile Include="Controllers\PersonalDataControllers\RelationshipsController.cs" />
     <Compile Include="Controllers\PersonalDataControllers\ReligionsController.cs" />
     <Compile Include="Controllers\PersonalDataControllers\ShapesController.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Models\Characteristics\Location.cs" />
     <Compile Include="Models\Characteristics\NumberOfChildren.cs" />
     <Compile Include="Models\Characteristics\PersonalData.cs" />
+    <Compile Include="Models\Characteristics\Photo.cs" />
     <Compile Include="Models\Characteristics\Relationship.cs" />
     <Compile Include="Models\Characteristics\Religion.cs" />
     <Compile Include="Models\Characteristics\Shape.cs" />
@@ -376,6 +378,11 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\ShowAccounts.cshtml" />
     <Content Include="Views\Admin\TablesEditor.cshtml" />
+    <Content Include="Views\Photos\Create.cshtml" />
+    <Content Include="Views\Photos\Delete.cshtml" />
+    <Content Include="Views\Photos\Details.cshtml" />
+    <Content Include="Views\Photos\Edit.cshtml" />
+    <Content Include="Views\Photos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
