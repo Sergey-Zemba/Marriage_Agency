@@ -90,7 +90,8 @@ namespace Marriage_Agency_Women_.Controllers
                 Facebook = user.Facebook,
                 Vk = user.Vk,
                 Twitter = user.Twitter,
-                InternationalPassport = user.InternationalPassport.Id
+                InternationalPassport = user.InternationalPassport.Id,
+                Photos = user.Photos
             };
 
             IDictionary<string, IList<SelectListItem>> personalData = new Dictionary<string, IList<SelectListItem>>();
@@ -143,7 +144,7 @@ namespace Marriage_Agency_Women_.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(EditViewModel model)
+        public async Task<ActionResult> Edit(EditViewModel model, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -194,6 +195,24 @@ namespace Marriage_Agency_Women_.Controllers
                 user.InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport);
 
                 user.Status = false;
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    if (user.Photos.Any(f => f.FileType == FileType.Avatar))
+                    {
+                        DbContext.Photos.Remove(user.Photos.First(f => f.FileType == FileType.Avatar));
+                    }
+                    var avatar = new Photo
+                    {
+                        PhotoName = System.IO.Path.GetFileName(upload.FileName),
+                        FileType = FileType.Avatar,
+                        ContentType = upload.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        avatar.Content = reader.ReadBytes(upload.ContentLength);
+                    }
+                    user.Photos = new List<Photo> { avatar };
+                }
 
                 var result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)

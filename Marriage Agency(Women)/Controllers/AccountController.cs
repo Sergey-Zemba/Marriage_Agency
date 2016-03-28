@@ -187,6 +187,7 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
+                var photos = new List<Photo>();
                 if (upload != null && upload.ContentLength > 0)
                 {
                     var avatar = new Photo
@@ -199,69 +200,70 @@ namespace Marriage_Agency_Women_.Controllers
                     {
                         avatar.Content = reader.ReadBytes(upload.ContentLength);
                     }
-                    var user = new ApplicationUser
-                    {
-                        UserName = model.Email,
-                        Email = model.Email,
-                        OpenPassword = model.Password,
-                        FirstName = model.FirstName,
-                        LastName = model.LastName,
-                        NameInRoman = model.NameInRoman,
-                        Birthday = model.Birthday,
-                        Location = DbContext.Locations.Find(model.Location),
-                        //ResidencePermit = model.Location, // не ошибка
-                        Religion = DbContext.Religions.Find(model.Religion),
-                        Activity = DbContext.Activities.Find(model.Activity),
-                        Job = DbContext.Jobs.Find(model.Job),
-                        Education = DbContext.Educations.Find(model.Education),
-                        FirstLanguage = DbContext.Languages.Find(model.FirstLanguage),
-                        FirstLanguageLevel = DbContext.Levels.Find(model.FirstLanguageLevel),
-                        SecondLanguage = DbContext.Languages.Find(model.SecondLanguage),
-                        SecondLanguageLevel = DbContext.Levels.Find(model.SecondLanguageLevel),
-                        ThirdLanguage = DbContext.Languages.Find(model.ThirdLanguage),
-                        ThirdLanguageLevel = DbContext.Levels.Find(model.ThirdLanguageLevel),
-                        Relationship = DbContext.Relationships.Find(model.Relationship),
-                        NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren),
-                        Height = model.Height,
-                        Weight = model.Weight,
-                        Shape = DbContext.Shapes.Find(model.Shape),
-                        EyeColor = DbContext.EyeColors.Find(model.EyeColor),
-                        HairColor = DbContext.HairColors.Find(model.HairColor),
-                        Smoking = DbContext.Smokings.Find(model.Smoking),
-                        Alcohol = DbContext.Alcohols.Find(model.Alcohol),
-                        DesiredAge = DbContext.DesiredAges.Find(model.DesiredAge),
-                        Hobby = DbContext.Hobbies.Find(model.Hobby),
-                        Lifestyle = DbContext.Lifestyles.Find(model.Lifestyle),
-                        Knowledge = DbContext.Knowledges.Find(model.Knowledge),
-                        PhoneNumber = "+38" + model.PhoneNumber,
-                        Skype = model.Skype,
-                        Facebook = model.Facebook,
-                        Vk = model.Vk,
-                        Twitter = model.Twitter,
-                        InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport),
-                        CreationDate = DateTime.Now,
-                        LastLoginTime = DateTime.Now,
-                        Photos = new List<Photo> { avatar}
-                    };
-                    // инкрементировать номер анкеты. Пока нули дубасят.
-
-                    var result = await UserManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
-                    {
-                        await UserManager.AddToRoleAsync(user.Id, "user");
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
-                            protocol: Request.Url.Scheme);
-                        await
-                            UserManager.SendEmailAsync(user.Id, "Confirm your account",
-                                "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                        return View("DisplayEmail");
-
-                    }
-                    AddErrors(result);
+                    photos.Add(avatar);
                 }
-                
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    OpenPassword = model.Password,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    NameInRoman = model.NameInRoman,
+                    Birthday = model.Birthday,
+                    Location = DbContext.Locations.Find(model.Location),
+                    //ResidencePermit = model.Location, // не ошибка
+                    Religion = DbContext.Religions.Find(model.Religion),
+                    Activity = DbContext.Activities.Find(model.Activity),
+                    Job = DbContext.Jobs.Find(model.Job),
+                    Education = DbContext.Educations.Find(model.Education),
+                    FirstLanguage = DbContext.Languages.Find(model.FirstLanguage),
+                    FirstLanguageLevel = DbContext.Levels.Find(model.FirstLanguageLevel),
+                    SecondLanguage = DbContext.Languages.Find(model.SecondLanguage),
+                    SecondLanguageLevel = DbContext.Levels.Find(model.SecondLanguageLevel),
+                    ThirdLanguage = DbContext.Languages.Find(model.ThirdLanguage),
+                    ThirdLanguageLevel = DbContext.Levels.Find(model.ThirdLanguageLevel),
+                    Relationship = DbContext.Relationships.Find(model.Relationship),
+                    NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren),
+                    Height = model.Height,
+                    Weight = model.Weight,
+                    Shape = DbContext.Shapes.Find(model.Shape),
+                    EyeColor = DbContext.EyeColors.Find(model.EyeColor),
+                    HairColor = DbContext.HairColors.Find(model.HairColor),
+                    Smoking = DbContext.Smokings.Find(model.Smoking),
+                    Alcohol = DbContext.Alcohols.Find(model.Alcohol),
+                    DesiredAge = DbContext.DesiredAges.Find(model.DesiredAge),
+                    Hobby = DbContext.Hobbies.Find(model.Hobby),
+                    Lifestyle = DbContext.Lifestyles.Find(model.Lifestyle),
+                    Knowledge = DbContext.Knowledges.Find(model.Knowledge),
+                    PhoneNumber = "+38" + model.PhoneNumber,
+                    Skype = model.Skype,
+                    Facebook = model.Facebook,
+                    Vk = model.Vk,
+                    Twitter = model.Twitter,
+                    InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport),
+                    CreationDate = DateTime.Now,
+                    LastLoginTime = DateTime.Now,
+                    Photos = photos
+                };
+                // инкрементировать номер анкеты. Пока нули дубасят.
+
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, "user");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
+                        protocol: Request.Url.Scheme);
+                    await
+                        UserManager.SendEmailAsync(user.Id, "Confirm your account",
+                            "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    return View("DisplayEmail");
+
+                }
+                AddErrors(result);
+
             }
 
             // If we got this far, something failed, redisplay form

@@ -149,5 +149,7 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
 
         [Display(Name = "Загранпаспорт")]
         public int InternationalPassport { get; set; }
+
+        public ICollection<Photo> Photos { get; set; }
     }
 }
