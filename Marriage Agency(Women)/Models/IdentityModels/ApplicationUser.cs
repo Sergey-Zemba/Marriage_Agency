@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using Marriage_Agency_Women_.Models.Characteristics;
+using Marriage_Agency_Women_.Models.Characteristics.Files;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -135,7 +136,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         [Display(Name = "Загранпаспорт")]
         public virtual InternationalPassport InternationalPassport { get; set; }
 
-        public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<FilePath> FilePaths { get; set; }
 
         // ??
         [Display(Name = "Статус")]

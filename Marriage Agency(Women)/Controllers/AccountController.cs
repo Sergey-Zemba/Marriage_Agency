@@ -14,6 +14,7 @@ using Microsoft.Owin.Security;
 using Marriage_Agency_Women_.Models;
 using Marriage_Agency_Women_.Models.AccountViewModels;
 using Marriage_Agency_Women_.Models.Characteristics;
+using Marriage_Agency_Women_.Models.Characteristics.Files;
 using Marriage_Agency_Women_.Models.IdentityModels;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -187,20 +188,17 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                var photos = new List<Photo>();
+                var filePaths = new List<FilePath>();
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    var avatar = new Photo
+                    string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetFileName(upload.FileName);
+                    var file = new FilePath
                     {
-                        PhotoName = System.IO.Path.GetFileName(upload.FileName),
-                        FileType = FileType.Avatar,
-                        ContentType = upload.ContentType
+                        FileName = localFileName,
+                        FileType = FileType.Avatar
                     };
-                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                    {
-                        avatar.Content = reader.ReadBytes(upload.ContentLength);
-                    }
-                    photos.Add(avatar);
+                    upload.SaveAs(System.IO.Path.Combine(Server.MapPath("~/images"), localFileName));
+                    filePaths.Add(file);
                 }
                 var user = new ApplicationUser
                 {
@@ -244,7 +242,7 @@ namespace Marriage_Agency_Women_.Controllers
                     InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport),
                     CreationDate = DateTime.Now,
                     LastLoginTime = DateTime.Now,
-                    Photos = photos
+                    FilePaths = filePaths
                 };
                 // инкрементировать номер анкеты. Пока нули дубасят.
 

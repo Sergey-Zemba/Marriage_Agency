@@ -183,7 +183,6 @@
     <Compile Include="Controllers\PersonalDataControllers\LifestylesController.cs" />
     <Compile Include="Controllers\PersonalDataControllers\LocationsController.cs" />
     <Compile Include="Controllers\PersonalDataControllers\NumberOfChildrensController.cs" />
-    <Compile Include="Controllers\PersonalDataControllers\PhotoController.cs" />
     <Compile Include="Controllers\PersonalDataControllers\RelationshipsController.cs" />
     <Compile Include="Controllers\PersonalDataControllers\ReligionsController.cs" />
     <Compile Include="Controllers\PersonalDataControllers\ShapesController.cs" />
@@ -196,7 +195,8 @@
     <Compile Include="Models\Characteristics\DesiredAge.cs" />
     <Compile Include="Models\Characteristics\Education.cs" />
     <Compile Include="Models\Characteristics\EyeColor.cs" />
-    <Compile Include="Models\Characteristics\FileType.cs" />
+    <Compile Include="Models\Characteristics\Files\FilePath.cs" />
+    <Compile Include="Models\Characteristics\Files\FileType.cs" />
     <Compile Include="Models\Characteristics\HairColor.cs" />
     <Compile Include="Models\Characteristics\Hobby.cs" />
     <Compile Include="Models\Characteristics\InternationalPassport.cs" />
@@ -208,7 +208,6 @@
     <Compile Include="Models\Characteristics\Location.cs" />
     <Compile Include="Models\Characteristics\NumberOfChildren.cs" />
     <Compile Include="Models\Characteristics\PersonalData.cs" />
-    <Compile Include="Models\Characteristics\Photo.cs" />
     <Compile Include="Models\Characteristics\Relationship.cs" />
     <Compile Include="Models\Characteristics\Religion.cs" />
     <Compile Include="Models\Characteristics\Shape.cs" />

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Marriage_Agency_Women_.Models.Characteristics;
+using Marriage_Agency_Women_.Models.Characteristics.Files;
 
 namespace Marriage_Agency_Women_.Models.SharedViewModels
 {
@@ -150,6 +151,6 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
         [Display(Name = "Загранпаспорт")]
         public int InternationalPassport { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
+        public ICollection<FilePath> FilePaths { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Marriage_Agency_Women_.Models;
 using Marriage_Agency_Women_.Models.Characteristics;
+using Marriage_Agency_Women_.Models.Characteristics.Files;
 using Marriage_Agency_Women_.Models.IdentityModels;
 using Marriage_Agency_Women_.Models.ManageViewModels;
 
@@ -91,7 +92,7 @@ namespace Marriage_Agency_Women_.Controllers
                 Vk = user.Vk,
                 Twitter = user.Twitter,
                 InternationalPassport = user.InternationalPassport.Id,
-                Photos = user.Photos
+                FilePaths = user.FilePaths
             };
 
             IDictionary<string, IList<SelectListItem>> personalData = new Dictionary<string, IList<SelectListItem>>();
@@ -144,7 +145,7 @@ namespace Marriage_Agency_Women_.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(EditViewModel model, HttpPostedFileBase upload)
+        public async Task<ActionResult> Edit(EditViewModel model, HttpPostedFileBase upload, ICollection<HttpPostedFileBase> files)
         {
             if (ModelState.IsValid)
             {
@@ -197,23 +198,33 @@ namespace Marriage_Agency_Women_.Controllers
                 user.Status = false;
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    if (user.Photos.Any(f => f.FileType == FileType.Avatar))
+                    if (user.FilePaths.Any(f => f.FileType == FileType.Avatar))
                     {
-                        DbContext.Photos.Remove(user.Photos.First(f => f.FileType == FileType.Avatar));
+                        DbContext.FilePaths.Remove(user.FilePaths.First(f => f.FileType == FileType.Avatar));
                     }
-                    var avatar = new Photo
+                    string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetFileName(upload.FileName);
+                    var avatar = new FilePath
                     {
-                        PhotoName = System.IO.Path.GetFileName(upload.FileName),
-                        FileType = FileType.Avatar,
-                        ContentType = upload.ContentType
+                        FileName = localFileName,
+                        FileType = FileType.Avatar
                     };
-                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                    {
-                        avatar.Content = reader.ReadBytes(upload.ContentLength);
-                    }
-                    user.Photos = new List<Photo> { avatar };
+                    upload.SaveAs(System.IO.Path.Combine(Server.MapPath("~/images"), localFileName));
+                    user.FilePaths.Add(avatar);
                 }
-
+                foreach (var file in files)
+                {
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetFileName(file.FileName);
+                        var photo = new FilePath
+                        {
+                            FileName = localFileName,
+                            FileType = FileType.Photo
+                        };
+                        file.SaveAs(System.IO.Path.Combine(Server.MapPath("~/images"), localFileName));
+                        user.FilePaths.Add(photo);
+                    }
+                }
                 var result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
