@@ -202,26 +202,26 @@ namespace Marriage_Agency_Women_.Controllers
                     {
                         DbContext.FilePaths.Remove(user.FilePaths.First(f => f.FileType == FileType.Avatar));
                     }
-                    string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetFileName(upload.FileName);
+                    string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName);
                     var avatar = new FilePath
                     {
                         FileName = localFileName,
                         FileType = FileType.Avatar
                     };
-                    upload.SaveAs(System.IO.Path.Combine(Server.MapPath("~/images"), localFileName));
+                    upload.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName));
                     user.FilePaths.Add(avatar);
                 }
                 foreach (var file in files)
                 {
                     if (file != null && file.ContentLength > 0)
                     {
-                        string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetFileName(file.FileName);
+                        string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(file.FileName);
                         var photo = new FilePath
                         {
                             FileName = localFileName,
                             FileType = FileType.Photo
                         };
-                        file.SaveAs(System.IO.Path.Combine(Server.MapPath("~/images"), localFileName));
+                        file.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName));
                         user.FilePaths.Add(photo);
                     }
                 }

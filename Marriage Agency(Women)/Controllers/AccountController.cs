@@ -191,13 +191,13 @@ namespace Marriage_Agency_Women_.Controllers
                 var filePaths = new List<FilePath>();
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetFileName(upload.FileName);
+                    string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName);
                     var file = new FilePath
                     {
                         FileName = localFileName,
                         FileType = FileType.Avatar
                     };
-                    upload.SaveAs(System.IO.Path.Combine(Server.MapPath("~/images"), localFileName));
+                    upload.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName));
                     filePaths.Add(file);
                 }
                 var user = new ApplicationUser

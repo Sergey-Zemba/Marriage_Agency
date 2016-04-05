@@ -137,7 +137,6 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         public virtual InternationalPassport InternationalPassport { get; set; }
 
         public virtual ICollection<FilePath> FilePaths { get; set; }
-
         // ??
         [Display(Name = "Статус")]
         public bool Status { get; set; }
