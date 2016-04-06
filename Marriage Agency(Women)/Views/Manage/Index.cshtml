@@ -29,8 +29,6 @@
 
 <style type="text/css">
     .imgBox {
-        width: 200px;
-        height: 200px;
         opacity: 1.0;
         filter: alpha(opacity=100);
     }
@@ -98,9 +96,9 @@
                     @foreach (var photo in Model.FilePaths.Where(p => p.FileType == FileType.Photo).OrderByDescending(p => p.Id))
                     {
 
-                        <a class="fancybox" data-fancybox-group="gallery" href="/Content/Images/@photo.FileName">
-
-                            <img src="/Content/Images/@photo.FileName" alt="@photo.FileName" class="imgBox" />
+                        <a class="fancybox" data-fancybox-group="gallery" href="@photo.PathName">
+                            
+                            <img src="@Model.FilePaths.Where(p => p.FileType == FileType.Thumbnail).ToList().Find(t => t.FileName == photo.FileName).PathName" alt="@photo.FileName" class="imgBox" />
 
                         </a>
 
@@ -112,7 +110,7 @@
         <div class="form-group">
             @Html.Label("Uploading photos", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" multiple id="photoAlbum" name="files" />
+                <input type="file" multiple id="photoAlbum" name="files" onchange="validateFilesUpload();" />
             </div>
         </div>
         <div class="form-group">
@@ -376,4 +374,5 @@
             $(".fancybox").fancybox();
         });
     </script>
+    <script type="text/javascript" src="~/Scripts/photo.validation.js"></script>
 }

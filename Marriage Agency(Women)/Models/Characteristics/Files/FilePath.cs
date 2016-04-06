@@ -10,8 +10,8 @@ namespace Marriage_Agency_Women_.Models.Characteristics.Files
     public class FilePath
     {
         public int Id { get; set; }
-        [StringLength(255)]
         public string FileName { get; set; }
+        public string PathName { get; set; }
 
         public FileType FileType { get; set; }
         public string ApplicationUserId { get; set; }

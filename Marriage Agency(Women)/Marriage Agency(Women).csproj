@@ -387,6 +387,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\ShowAccounts.cshtml" />
     <Content Include="Views\Admin\TablesEditor.cshtml" />
+    <Content Include="Scripts\photo.validation.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

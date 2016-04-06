@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -52,7 +55,7 @@ namespace Marriage_Agency_Women_.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            
+
 
             EditViewModel model = new EditViewModel
             {
@@ -149,7 +152,7 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
 
                 var userName = User.Identity.Name;
                 var user = await UserManager.FindByNameAsync(userName);
@@ -203,26 +206,45 @@ namespace Marriage_Agency_Women_.Controllers
                         DbContext.FilePaths.Remove(user.FilePaths.First(f => f.FileType == FileType.Avatar));
                     }
                     string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName);
+                    string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName);
+                    var relativePath = MakeRelative(pathToSave, Server.MapPath("~"));
+                    upload.SaveAs(pathToSave);
                     var avatar = new FilePath
                     {
                         FileName = localFileName,
+                        PathName = relativePath,
                         FileType = FileType.Avatar
                     };
-                    upload.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName));
                     user.FilePaths.Add(avatar);
                 }
                 foreach (var file in files)
                 {
                     if (file != null && file.ContentLength > 0)
                     {
-                        string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(file.FileName);
-                        var photo = new FilePath
+                        string extension = System.IO.Path.GetExtension(file.FileName).ToLower();
+                        if (file.ContentLength < 5242880 && (extension == ".jpg" || extension == ".jpeg"))
                         {
-                            FileName = localFileName,
-                            FileType = FileType.Photo
-                        };
-                        file.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName));
-                        user.FilePaths.Add(photo);
+                            string localFileName = Guid.NewGuid().ToString() + extension;
+                            string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName);
+                            var relativePath = MakeRelative(pathToSave, Server.MapPath("~"));
+                            file.SaveAs(pathToSave);
+                            var photo = new FilePath
+                            {
+                                FileName = localFileName,
+                                PathName = relativePath,
+                                FileType = FileType.Photo
+                            };
+                            user.FilePaths.Add(photo);
+                            string thumbnailPathName = CreateThumbnail(localFileName, 100);
+                            var relativeThumbnailPath = MakeRelative(thumbnailPathName, Server.MapPath("~"));
+                            var thumbnail = new FilePath
+                            {
+                                FileName = localFileName,
+                                PathName = relativeThumbnailPath,
+                                FileType = FileType.Thumbnail
+                            };
+                            user.FilePaths.Add(thumbnail);
+                        }
                     }
                 }
                 var result = await UserManager.UpdateAsync(user);
@@ -524,6 +546,40 @@ namespace Marriage_Agency_Women_.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        private string CreateThumbnail(string source, int maxSize)
+        {
+            Image image = Image.FromFile(Server.MapPath("~/Content/Images/" + source));
+            double ratio = (double)image.Size.Width / image.Size.Height;
+            int thumbnailWidth = maxSize, thumbnailHeight = maxSize;
+            if (ratio > 1.0)
+            {
+                thumbnailHeight = (int)(100 / ratio);
+            }
+            else if (ratio < 1.0)
+            {
+                thumbnailWidth = (int)(100 * ratio);
+            }
+            Bitmap thumbnailBitmap = new Bitmap(thumbnailWidth, thumbnailHeight);
+            Graphics thumbnailGraph = Graphics.FromImage(thumbnailBitmap);
+            thumbnailGraph.CompositingQuality = CompositingQuality.HighQuality;
+            thumbnailGraph.SmoothingMode = SmoothingMode.HighQuality;
+            thumbnailGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            var imageRectangle = new Rectangle(0, 0, thumbnailWidth, thumbnailHeight);
+            thumbnailGraph.DrawImage(image, imageRectangle);
+            string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images/Thumbnails"), source);
+            thumbnailBitmap.Save(pathToSave);
+            thumbnailGraph.Dispose();
+            thumbnailBitmap.Dispose();
+            image.Dispose();
+            return pathToSave;
+        }
+
+        private static string MakeRelative(string filePath, string referencePath)
+        {
+            var fileUri = new Uri(filePath);
+            var referenceUri = new Uri(referencePath);
+            return referenceUri.MakeRelativeUri(fileUri).ToString();
+        }
         #region Helpers
         private bool HasPassword()
         {
