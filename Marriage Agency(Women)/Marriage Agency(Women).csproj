@@ -232,8 +232,8 @@
     <Content Include="Content\ControlItems\fancybox_overlay.png" />
     <Content Include="Content\ControlItems\fancybox_sprite%402x.png" />
     <Content Include="Content\ControlItems\fancybox_sprite.png" />
+    <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\jquery.fancybox.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
