@@ -231,7 +231,7 @@ namespace Marriage_Agency_Women_.Controllers
                             var photo = new FilePath
                             {
                                 FileName = localFileName,
-                                PathName = relativePath,
+                                PathName = "/" + relativePath,
                                 FileType = FileType.Photo
                             };
                             user.FilePaths.Add(photo);
@@ -240,7 +240,7 @@ namespace Marriage_Agency_Women_.Controllers
                             var thumbnail = new FilePath
                             {
                                 FileName = localFileName,
-                                PathName = relativeThumbnailPath,
+                                PathName = "/" + relativeThumbnailPath,
                                 FileType = FileType.Thumbnail
                             };
                             user.FilePaths.Add(thumbnail);

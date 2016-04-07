@@ -1,6 +1,8 @@
 ﻿@section styles{
     <link type="text/css" href="~/Content/jquery.fancybox.css?v=2.1.5" rel="stylesheet" />
 }
+@using System.Collections.Generic
+@using System.Linq
 @using Marriage_Agency_Women_.Models.Characteristics.Files
 @model Marriage_Agency_Women_.Models.ManageViewModels.EditViewModel
 @{
@@ -92,17 +94,17 @@
                 <dt>
                     Photo album
                 </dt>
-                <dd>
+                <dd class="photoContainer">
                     @foreach (var photo in Model.FilePaths.Where(p => p.FileType == FileType.Photo).OrderByDescending(p => p.Id))
                     {
-
-                        <a class="fancybox" data-fancybox-group="gallery" href="@photo.PathName">
-                            
-                            <img src="@Model.FilePaths.Where(p => p.FileType == FileType.Thumbnail).ToList().Find(t => t.FileName == photo.FileName).PathName" alt="@photo.FileName" class="imgBox" />
-
-                        </a>
-
-
+                        <div class="photoItem">
+                            <input type="hidden" class="hidden" value="@photo.Id" />
+                            <a class="fancybox" data-fancybox-group="gallery" href="@photo.PathName">
+                                <img src="@Model.FilePaths.Where(p => p.FileType == FileType.Thumbnail).ToList().Find(t => t.FileName == photo.FileName).PathName" alt="@photo.FileName" class="imgBox" />
+                            </a>
+                            <a href="#" class="delete">Delete</a>
+                            <a href="#">Make as avatar</a>
+                        </div>
                     }
                 </dd>
             }
@@ -375,4 +377,5 @@
         });
     </script>
     <script type="text/javascript" src="~/Scripts/photo.validation.js"></script>
+    <script type="text/javascript" src="~/Scripts/photo.management.js"></script>
 }
