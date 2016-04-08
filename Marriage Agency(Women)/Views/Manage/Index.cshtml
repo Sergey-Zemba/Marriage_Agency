@@ -102,7 +102,7 @@
                             <a class="fancybox" data-fancybox-group="gallery" href="@photo.PathName">
                                 <img src="@Model.FilePaths.Where(p => p.FileType == FileType.Thumbnail).ToList().Find(t => t.FileName == photo.FileName).PathName" alt="@photo.FileName" class="imgBox" />
                             </a>
-                            <a href="#" class="delete">Delete</a>
+                            <a href="/FilePath/Delete/@photo.Id" class="delete">Delete</a>
                             <a href="#">Make as avatar</a>
                         </div>
                     }

@@ -15,7 +15,8 @@ namespace Marriage_Agency_Women_.Controllers.PersonalDataControllers
         public void Delete(int id)
         {
             FilePath filePath = db.FilePaths.Find(id);
-            db.FilePaths.Remove(filePath);
+            IEnumerable<FilePath> filePathsToDelete = db.FilePaths.Where(f => f.FileName == filePath.FileName);
+            db.FilePaths.RemoveRange(filePathsToDelete);
             db.SaveChanges();
         }
     }

@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $(".homeCinema .delete").click(function (event) { remove(event); });
+    $(".delete").click(function (event) { remove(event); });
 });
 
 function remove(event) {
