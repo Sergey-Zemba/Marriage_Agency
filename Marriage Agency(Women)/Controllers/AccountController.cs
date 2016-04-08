@@ -184,24 +184,11 @@ namespace Marriage_Agency_Women_.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase upload)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var filePaths = new List<FilePath>();
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName);
-                    string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName);
-                    upload.SaveAs(pathToSave);
-                    var file = new FilePath
-                    {
-                        FileName = localFileName,
-                        PathName = pathToSave.Replace(@"\","/"),
-                        FileType = FileType.Avatar
-                    };
-                    filePaths.Add(file);
-                }
+                
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -244,7 +231,7 @@ namespace Marriage_Agency_Women_.Controllers
                     InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport),
                     CreationDate = DateTime.Now,
                     LastLoginTime = DateTime.Now,
-                    FilePaths = filePaths
+                    FilePaths = new List<FilePath>()
                 };
                 // инкрементировать номер анкеты. Пока нули дубасят.
 

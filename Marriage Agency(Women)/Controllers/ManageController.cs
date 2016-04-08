@@ -148,7 +148,7 @@ namespace Marriage_Agency_Women_.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(EditViewModel model, HttpPostedFileBase upload, ICollection<HttpPostedFileBase> files)
+        public async Task<ActionResult> Edit(EditViewModel model, ICollection<HttpPostedFileBase> files)
         {
             if (ModelState.IsValid)
             {
@@ -199,24 +199,7 @@ namespace Marriage_Agency_Women_.Controllers
                 user.InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport);
 
                 user.Status = false;
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    if (user.FilePaths.Any(f => f.FileType == FileType.Avatar))
-                    {
-                        DbContext.FilePaths.Remove(user.FilePaths.First(f => f.FileType == FileType.Avatar));
-                    }
-                    string localFileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName);
-                    string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName);
-                    var relativePath = MakeRelative(pathToSave, Server.MapPath("~"));
-                    upload.SaveAs(pathToSave);
-                    var avatar = new FilePath
-                    {
-                        FileName = localFileName,
-                        PathName = relativePath,
-                        FileType = FileType.Avatar
-                    };
-                    user.FilePaths.Add(avatar);
-                }
+                
                 foreach (var file in files)
                 {
                     if (file != null && file.ContentLength > 0)

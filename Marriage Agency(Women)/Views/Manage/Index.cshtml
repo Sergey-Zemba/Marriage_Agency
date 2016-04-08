@@ -71,24 +71,6 @@
         @Html.ValidationSummary("", new { @class = "text-danger" })
 
         <dl class="dl-horizontal">
-            @if (Model.FilePaths.Any(f => f.FileType == FileType.Avatar))
-            {
-                <dt>
-                    Avatar
-                </dt>
-                <dd>
-                    <img src="/Content/Images/@Model.FilePaths.First(f => f.FileType == FileType.Avatar).FileName" alt="avatar" />
-                </dd>
-            }
-        </dl>
-        <div class="form-group">
-            @Html.Label("New Avatar", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" id="Avatar" name="upload" />
-            </div>
-        </div>
-
-        <dl class="dl-horizontal">
             @if (Model.FilePaths.Any(f => f.FileType == FileType.Photo))
             {
                 <dt>
@@ -103,7 +85,6 @@
                                 <img src="@Model.FilePaths.Where(p => p.FileType == FileType.Thumbnail).ToList().Find(t => t.FileName == photo.FileName).PathName" alt="@photo.FileName" class="imgBox" />
                             </a>
                             <a href="/FilePath/Delete/@photo.Id" class="delete">Delete</a>
-                            <a href="#">Make as avatar</a>
                         </div>
                     }
                 </dd>
