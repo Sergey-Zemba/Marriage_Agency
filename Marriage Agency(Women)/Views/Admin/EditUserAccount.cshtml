@@ -1,0 +1,176 @@
+﻿@using System.Linq.Expressions
+@using Marriage_Agency_Women_.Models.Characteristics.Files
+@using Marriage_Agency_Women_.Models.IdentityModels
+@model ApplicationUser
+
+
+@{
+    ViewBag.Title = "EditModelAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    IDictionary<string, IList<SelectListItem>> content = (IDictionary<string, IList<SelectListItem>>) ViewBag.PersonalData;
+    IList<SelectListItem> activities = content["activities"];
+    IList<SelectListItem> alcohols = content["alcohols"];
+    IList<SelectListItem> desiredAges = content["desiredAges"];
+    IList<SelectListItem> educations = content["educations"];
+    IList<SelectListItem> eyeColors = content["eyeColors"];
+    IList<SelectListItem> hairColors = content["hairColors"];
+    IList<SelectListItem> hobbies = content["hobbies"];
+    IList<SelectListItem> internationalPassports = content["internationalPassports"];
+    IList<SelectListItem> jobs = content["jobs"];
+    IList<SelectListItem> knowledges = content["knowledges"];
+    IList<SelectListItem> languages = content["languages"];
+    IList<SelectListItem> levels = content["levels"];
+    IList<SelectListItem> lifestyles = content["lifestyles"];
+    IList<SelectListItem> locations = content["locations"];
+    IList<SelectListItem> numbersOfChildren = content["numbersOfChildren"];
+    IList<SelectListItem> relationships = content["relationships"];
+    IList<SelectListItem> religions = content["religions"];
+    IList<SelectListItem> shapes = content["shapes"];
+    IList<SelectListItem> smokings = content["smokings"];
+}
+
+@section styles{
+    <link type="text/css" href="~/Content/jquery.fancybox.css?v=2.1.5" rel="stylesheet" />
+}
+
+<h2>Редактирование данных анкеты № @Model.Number</h2>
+
+@using (Html.BeginForm("EditUserAccount", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <dl class="dl-horizontal">
+        @if (Model.FilePaths.Any(f => f.FileType == FileType.Photo))
+        {
+            <dt>
+                Photo album
+            </dt>
+            <dd class="photoContainer">
+                @foreach (var photo in Model.FilePaths.Where(p => p.FileType == FileType.Photo).OrderByDescending(p => p.Id))
+                {
+                    <div class="photoItem">
+                        <input type="hidden" class="hidden" value="@photo.Id" />
+                        <a class="fancybox" data-fancybox-group="gallery" href="@photo.PathName">
+                            <img src="@Model.FilePaths.Where(p => p.FileType == FileType.Thumbnail).ToList().Find(t => t.FileName == photo.FileName).PathName" alt="@photo.FileName" class="imgBox" />
+                        </a>
+                        <a href="/FilePath/Delete/@photo.Id" class="delete">Delete</a>
+                    </div>
+                }
+            </dd>
+        }
+    </dl>
+
+    <div class="form-group">
+        @Html.Label("Uploading photos", new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            <input type="file" multiple id="photoAlbum" name="files" onchange="validateFilesUpload();"/>
+        </div>
+    </div>
+    
+    @MyHelper.CreateCheckBoxFor(Html, m => m.Status)
+
+    @MyHelper.CreateDisplayFor(Html,m => m.Email)
+    @CreateDisplayBool("Email подтвержден", Model.EmailConfirmed)
+    @MyHelper.CreateDisplayFor(Html, m => m.Age)
+    @MyHelper.CreateDisplayFor(Html, m => m.CreationDate)
+    @MyHelper.CreateDisplayFor(Html, m => m.LastLoginTime)
+    @MyHelper.CreateDisplayFor(Html, m => m.Number)
+    @MyHelper.CreateDisplayFor(Html, m => m.OpenPassword)
+
+
+    @MyHelper.CreateEditorFor(Html, m => m.FirstName)
+    @MyHelper.CreateEditorFor(Html, m => m.LastName)
+    @MyHelper.CreateEditorFor(Html, m => m.NameInRoman)
+    @MyHelper.CreateEditorFor(Html, m => m.Birthday)
+
+
+    @CreateDropDownFor(m => m.Location, locations)
+    <p>???</p>
+    @CreateDropDownFor(m => m.ResidencePermit, locations)
+    @CreateDropDownFor(m => m.Religion, religions)
+    @CreateDropDownFor(m => m.Activity, activities)
+    @CreateDropDownFor(m => m.Job, jobs)
+    @CreateDropDownFor(m => m.Education, educations)
+
+    @CreateDropDownFor(m => m.FirstLanguageLevel, levels)
+    @CreateDropDownFor(m => m.FirstLanguage, languages)
+    @CreateDropDownFor(m => m.SecondLanguageLevel, levels)
+    @CreateDropDownFor(m => m.SecondLanguage, languages)
+    @CreateDropDownFor(m => m.ThirdLanguageLevel, levels)
+    @CreateDropDownFor(m => m.ThirdLanguage, languages)
+
+    @CreateDropDownFor(m => m.Relationship, relationships)
+    @CreateDropDownFor(m => m.NumberOfChildren, numbersOfChildren)
+
+    @MyHelper.CreateEditorFor(Html, m => m.Height)
+    @MyHelper.CreateEditorFor(Html, m => m.Weight)
+
+
+    @CreateDropDownFor(m => m.Shape, shapes)
+    @CreateDropDownFor(m => m.EyeColor, eyeColors)
+    @CreateDropDownFor(m => m.HairColor, hairColors)
+    @CreateDropDownFor(m => m.Smoking, smokings)
+    @CreateDropDownFor(m => m.Alcohol, alcohols)
+    @CreateDropDownFor(m => m.DesiredAge, desiredAges)
+    @CreateDropDownFor(m => m.Hobby, hobbies)
+    @CreateDropDownFor(m => m.Lifestyle, lifestyles)
+    @CreateDropDownFor(m => m.Knowledge, knowledges)
+
+    @MyHelper.CreateEditorFor(Html, m => m.PhoneNumber)
+    @MyHelper.CreateEditorFor(Html, m => m.Skype)
+    @MyHelper.CreateEditorFor(Html, m => m.Facebook)
+    @MyHelper.CreateEditorFor(Html, m => m.Vk)
+    @MyHelper.CreateEditorFor(Html, m => m.Twitter)
+
+    @CreateDropDownFor(m => m.InternationalPassport, internationalPassports)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Сохранить изменения" />
+        </div>
+    </div>
+}
+
+@helper CreateDropDownFor(Expression<Func<ApplicationUser, object>> expression, IList<SelectListItem> items)
+{
+    <div class="form-group">
+        @Html.LabelFor(expression, new { @class = "col-md-2 control-label" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(expression, items, new { @class = "form-control" })
+        </div>
+    </div>
+}
+
+@helper CreateDisplayBool(string label, bool value)
+{
+    <div class="form-group">
+        <label class="col-md-2 control-label">@label</label>
+        <div class="col-sm-10">
+
+            @if (value)
+            {
+                <span>Да</span>
+            }
+            else
+            {
+                <span>Нет</span>
+            }
+        </div>
+    </div>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.fancybox.js?v=2.1.5"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+    <script type="text/javascript" src="~/Scripts/photo.validation.js"></script>
+    <script type="text/javascript" src="~/Scripts/photo.management.js"></script>
+}

@@ -199,7 +199,7 @@ namespace Marriage_Agency_Women_.Controllers
                     NameInRoman = model.NameInRoman,
                     Birthday = model.Birthday,
                     Location = DbContext.Locations.Find(model.Location),
-                    //ResidencePermit = model.Location, // не ошибка
+                    ResidencePermit = DbContext.ResidencePermits.Find(model.Location), // не ошибка
                     Religion = DbContext.Religions.Find(model.Religion),
                     Activity = DbContext.Activities.Find(model.Activity),
                     Job = DbContext.Jobs.Find(model.Job),

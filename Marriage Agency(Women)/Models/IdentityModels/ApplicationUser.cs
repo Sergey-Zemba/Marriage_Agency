@@ -21,6 +21,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         [Display(Name = "Последний вход")]
         public DateTime LastLoginTime { get; set; }
 
+        [Display(Name = "Пароль")]
         public string OpenPassword { get; set; }
 
         [Display(Name = "Номер")]
@@ -50,7 +51,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         public virtual Location Location { get; set; }
 
         [Display(Name = "Прописка")]
-        public int ResidencePermit { get; set; }
+        public virtual ResidencePermit ResidencePermit { get; set; }
 
         [Display(Name = "Вера")]
         public virtual Religion Religion { get; set; }
@@ -138,7 +139,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
 
         public virtual ICollection<FilePath> FilePaths { get; set; }
         // ??
-        [Display(Name = "Статус")]
+        [Display(Name = "Статус подтвержден")]
         public bool Status { get; set; }
 
 

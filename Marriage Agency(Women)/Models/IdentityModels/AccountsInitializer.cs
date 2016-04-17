@@ -12,7 +12,7 @@ using Microsoft.Owin;
 
 namespace Marriage_Agency_Women_.Models.IdentityModels
 {
-    public class AccountsInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    public class AccountsInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
 
         protected override void Seed(ApplicationDbContext context)

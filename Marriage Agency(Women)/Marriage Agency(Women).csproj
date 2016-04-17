@@ -204,6 +204,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminViewModels\EditUserViewModel.cs" />
     <Compile Include="Models\Characteristics\Activity.cs" />
     <Compile Include="Models\Characteristics\Alcohol.cs" />
     <Compile Include="Models\Characteristics\DesiredAge.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Models\Characteristics\PersonalData.cs" />
     <Compile Include="Models\Characteristics\Relationship.cs" />
     <Compile Include="Models\Characteristics\Religion.cs" />
+    <Compile Include="Models\Characteristics\ResidencePermit.cs" />
     <Compile Include="Models\Characteristics\Shape.cs" />
     <Compile Include="Models\Characteristics\Smoking.cs" />
     <Compile Include="Models\SharedViewModels\BaseViewModel.cs" />
@@ -253,6 +255,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Code\MyHelper.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -403,6 +406,7 @@
     <Content Include="Views\Admin\ShowAccounts.cshtml" />
     <Content Include="Views\Admin\TablesEditor.cshtml" />
     <Content Include="Scripts\photo.validation.js" />
+    <Content Include="Views\Admin\EditUserAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

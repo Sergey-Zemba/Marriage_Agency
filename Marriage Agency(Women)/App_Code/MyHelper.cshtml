@@ -1,0 +1,64 @@
+﻿@using System.Linq.Expressions
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+
+@functions
+{
+    private const string LabelClass = "col-md-2 control-label";
+    private const string TextBoxClass = "form-control";
+    private const string CheckboxClass = "form-control";
+    private const string DisplayClass = "form-control";
+    private const string ValidationMessageClass = "text-danger";
+
+    public static HelperResult CreateEditorFor<TModel, TItem>(HtmlHelper<TModel> html, Expression<Func<TModel, TItem>> expr)
+    {
+        return RenderEditorFor(html.LabelFor(expr, new { @class = LabelClass }),
+            html.TextBoxFor(expr, new { @class = TextBoxClass }),
+            html.ValidationMessageFor(expr, "", new { @class = ValidationMessageClass }));
+    }
+
+    public static HelperResult CreateDisplayFor<TModel, TItem>(HtmlHelper<TModel> html, Expression<Func<TModel, TItem>> expr)
+    {
+        return RenderDisplayFor(html.LabelFor(expr, new { @class = LabelClass }),
+            html.DisplayFor(expr, new { @class = DisplayClass }));
+    }
+
+    public static HelperResult CreateCheckBoxFor<TModel>(HtmlHelper<TModel> html, Expression<Func<TModel, bool>> expr)
+    {
+        return RenderCheckboxFor(html.LabelFor(expr, new { @class = LabelClass }),
+            html.CheckBoxFor(expr, new { @class = CheckboxClass }));
+    }
+}
+
+}
+
+@helper RenderEditorFor(MvcHtmlString label, MvcHtmlString textbox, MvcHtmlString validationMessage)
+{
+    <div class="form-group">
+        @label
+        <div class="col-sm-10">
+            @textbox
+            @validationMessage
+        </div>
+    </div>
+}
+
+@helper RenderDisplayFor(MvcHtmlString label, MvcHtmlString display)
+{
+    <div class="form-group">
+        @label
+        <div class="col-sm-10">
+            @display
+        </div>
+    </div>
+}
+
+@helper RenderCheckboxFor(MvcHtmlString label, MvcHtmlString checkbox)
+{
+    <div class="form-group">
+        @label
+        <div class="col-sm-10">
+            @checkbox
+        </div>
+    </div>
+}

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Marriage_Agency_Women_.Models.AdminViewModels;
+using Marriage_Agency_Women_.Models.Characteristics;
+using Marriage_Agency_Women_.Models.Characteristics.Files;
 using Marriage_Agency_Women_.Models.IdentityModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -29,12 +33,264 @@ namespace Marriage_Agency_Women_.Controllers
 
         public ActionResult ShowAccounts()
         {
+            // Имя емайл номерТелефона возраст
             List<ApplicationUser> users = GetUsersInRole("user").OrderBy(u => u.Status).ToList();
             List<ApplicationUser> admins = GetUsersInRole("admin");
 
             ViewBag.admins = admins;
             return View(users);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> EditUserAccount(string userId)
+        {
+            if (userId == null)
+            {
+                return new HttpStatusCodeResult(400, "Bad request");
+            }
+
+            ApplicationUser user = await UserManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            IDictionary<string, IList<SelectListItem>> personalData = new Dictionary<string, IList<SelectListItem>>();
+            IList<SelectListItem> data = GetSelectListItems(new List<PersonalData>(DbContext.Activities));
+            personalData.Add("activities", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Alcohols));
+            personalData.Add("alcohols", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.DesiredAges));
+            personalData.Add("desiredAges", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Educations));
+            personalData.Add("educations", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.EyeColors));
+            personalData.Add("eyeColors", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.HairColors));
+            personalData.Add("hairColors", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Hobbies));
+            personalData.Add("hobbies", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.InternationalPassports));
+            personalData.Add("internationalPassports", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Jobs));
+            personalData.Add("jobs", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Knowledges));
+            personalData.Add("knowledges", data);
+
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Languages));
+            personalData.Add("languages", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Levels));
+            personalData.Add("levels", data);
+
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Lifestyles));
+            personalData.Add("lifestyles", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Locations));
+            personalData.Add("locations", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.NumbersOfChildren));
+            personalData.Add("numbersOfChildren", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Relationships));
+            personalData.Add("relationships", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Religions));
+            personalData.Add("religions", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Shapes));
+            personalData.Add("shapes", data);
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Smokings));
+            personalData.Add("smokings", data);
+            ViewBag.PersonalData = personalData;
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // ToDo
+        // ToDo
+        // ToDo
+        // ToDo
+        // ToDo
+            //
+        // EditUserViewModel
+            //
+        // Status
+        //FirstName
+        //LastName
+        //NameInRoman
+        //Birthday
+        //Location
+        //ResidencePermit
+        //Religion
+        //Activity
+        //Job
+        //Education
+        //FirstLanguageLevel
+        //FirstLanguage
+        //SecondLanguageLevel
+        //SecondLanguage
+        //ThirdLanguageLevel
+        //ThirdLanguage
+        //Relationship
+        //NumberOfChildren
+        //Height
+        //Weight
+        //Shape
+        //EyeColor
+        //HairColor
+        //Smoking
+        //Alcohol
+        //DesiredAge
+        //Hobby
+        //Lifestyle
+        //Knowledge
+        //PhoneNumber
+        //Skype
+        //Facebook
+        //Vk
+        //Twitter
+        //internationalPassports
+        public async Task<ActionResult> EditUserAccount(ApplicationUser model, ICollection<HttpPostedFileBase> files)
+        {
+            return RedirectToAction("ShowAccounts");
+
+            //if (ModelState.IsValid)
+            //{
+
+
+            //    var userName = User.Identity.Name;
+            //    var user = await UserManager.FindByNameAsync(userName);
+
+            //    if (user == null)
+            //    {
+            //        return RedirectToAction("Index", "Home");
+            //    }
+
+            //    user.FirstName = model.FirstName;
+            //    user.LastName = model.LastName;
+            //    user.NameInRoman = model.NameInRoman;
+            //    user.Birthday = model.Birthday;
+            //    user.Location = DbContext.Locations.Find(model.Location);
+            //    user.Religion = DbContext.Religions.Find(model.Religion);
+            //    user.Activity = DbContext.Activities.Find(model.Activity);
+            //    user.Job = DbContext.Jobs.Find(model.Job);
+            //    user.Education = DbContext.Educations.Find(model.Education);
+            //    user.FirstLanguage = DbContext.Languages.Find(model.FirstLanguage);
+            //    user.FirstLanguageLevel = DbContext.Levels.Find(model.FirstLanguageLevel);
+            //    user.SecondLanguage = DbContext.Languages.Find(model.SecondLanguage);
+            //    user.SecondLanguageLevel = DbContext.Levels.Find(model.SecondLanguageLevel);
+            //    user.ThirdLanguage = DbContext.Languages.Find(model.ThirdLanguage);
+            //    user.ThirdLanguageLevel = DbContext.Levels.Find(model.ThirdLanguageLevel);
+
+            //    user.Relationship = DbContext.Relationships.Find(model.Relationship);
+            //    user.NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren);
+            //    user.Height = model.Height;
+            //    user.Weight = model.Weight;
+            //    user.Shape = DbContext.Shapes.Find(model.Shape);
+            //    user.EyeColor = DbContext.EyeColors.Find(model.EyeColor);
+            //    user.HairColor = DbContext.HairColors.Find(model.HairColor);
+            //    user.Smoking = DbContext.Smokings.Find(model.Smoking);
+            //    user.Alcohol = DbContext.Alcohols.Find(model.Alcohol);
+            //    user.DesiredAge = DbContext.DesiredAges.Find(model.DesiredAge);
+            //    user.Hobby = DbContext.Hobbies.Find(model.Hobby);
+            //    user.Lifestyle = DbContext.Lifestyles.Find(model.Lifestyle);
+            //    user.Knowledge = DbContext.Knowledges.Find(model.Knowledge);
+            //    user.PhoneNumber = "+38" + model.PhoneNumber;
+            //    user.Skype = model.Skype;
+            //    user.Facebook = model.Facebook;
+            //    user.Vk = model.Vk;
+            //    user.Twitter = model.Twitter;
+            //    user.InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport);
+
+            //    user.Status = false;
+
+            //    foreach (var file in files)
+            //    {
+            //        if (file != null && file.ContentLength > 0)
+            //        {
+            //            string extension = System.IO.Path.GetExtension(file.FileName).ToLower();
+            //            if (file.ContentLength < 5242880 && (extension == ".jpg" || extension == ".jpeg"))
+            //            {
+            //                string localFileName = Guid.NewGuid().ToString() + extension;
+            //                string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName);
+            //                var relativePath = MakeRelative(pathToSave, Server.MapPath("~"));
+            //                file.SaveAs(pathToSave);
+            //                var photo = new FilePath
+            //                {
+            //                    FileName = localFileName,
+            //                    PathName = "/" + relativePath,
+            //                    FileType = FileType.Photo
+            //                };
+            //                user.FilePaths.Add(photo);
+            //                string thumbnailPathName = CreateThumbnail(localFileName, 100);
+            //                var relativeThumbnailPath = MakeRelative(thumbnailPathName, Server.MapPath("~"));
+            //                var thumbnail = new FilePath
+            //                {
+            //                    FileName = localFileName,
+            //                    PathName = "/" + relativeThumbnailPath,
+            //                    FileType = FileType.Thumbnail
+            //                };
+            //                user.FilePaths.Add(thumbnail);
+            //            }
+            //        }
+            //    }
+            //    var result = await UserManager.UpdateAsync(user);
+            //    if (result.Succeeded)
+            //    {
+
+            //        return RedirectToAction("ShowAccounts");
+            //    }
+            //    AddErrors(result);
+            //}
+
+
+            //IDictionary<string, IList<SelectListItem>> personalData = new Dictionary<string, IList<SelectListItem>>();
+            //IList<SelectListItem> data = GetSelectListItems(new List<PersonalData>(DbContext.Activities));
+            //personalData.Add("activities", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Alcohols));
+            //personalData.Add("alcohols", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.DesiredAges));
+            //personalData.Add("desiredAges", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Educations));
+            //personalData.Add("educations", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.EyeColors));
+            //personalData.Add("eyeColors", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.HairColors));
+            //personalData.Add("hairColors", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Hobbies));
+            //personalData.Add("hobbies", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.InternationalPassports));
+            //personalData.Add("internationalPassports", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Jobs));
+            //personalData.Add("jobs", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Knowledges));
+            //personalData.Add("knowledges", data);
+
+
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Languages));
+            //personalData.Add("languages", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Levels));
+            //personalData.Add("levels", data);
+
+
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Lifestyles));
+            //personalData.Add("lifestyles", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Locations));
+            //personalData.Add("locations", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.NumbersOfChildren));
+            //personalData.Add("numbersOfChildren", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Relationships));
+            //personalData.Add("relationships", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Religions));
+            //personalData.Add("religions", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Shapes));
+            //personalData.Add("shapes", data);
+            //data = GetSelectListItems(new List<PersonalData>(DbContext.Smokings));
+            //personalData.Add("smokings", data);
+            //ViewBag.PersonalData = personalData;
+
+            //return View(model);
+        } 
 
         public async Task<ActionResult> ToggleConfirmation(string userId)
         {
@@ -167,6 +423,41 @@ namespace Marriage_Agency_Women_.Controllers
                 rng.Style.Font.Color.SetColor(Color.Black);
             }
             return pck;
+        }
+
+        private string CreateThumbnail(string source, int maxSize)
+        {
+            Image image = Image.FromFile(Server.MapPath("~/Content/Images/" + source));
+            double ratio = (double)image.Size.Width / image.Size.Height;
+            int thumbnailWidth = maxSize, thumbnailHeight = maxSize;
+            if (ratio > 1.0)
+            {
+                thumbnailHeight = (int)(100 / ratio);
+            }
+            else if (ratio < 1.0)
+            {
+                thumbnailWidth = (int)(100 * ratio);
+            }
+            Bitmap thumbnailBitmap = new Bitmap(thumbnailWidth, thumbnailHeight);
+            Graphics thumbnailGraph = Graphics.FromImage(thumbnailBitmap);
+            thumbnailGraph.CompositingQuality = CompositingQuality.HighQuality;
+            thumbnailGraph.SmoothingMode = SmoothingMode.HighQuality;
+            thumbnailGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            var imageRectangle = new Rectangle(0, 0, thumbnailWidth, thumbnailHeight);
+            thumbnailGraph.DrawImage(image, imageRectangle);
+            string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images/Thumbnails"), source);
+            thumbnailBitmap.Save(pathToSave);
+            thumbnailGraph.Dispose();
+            thumbnailBitmap.Dispose();
+            image.Dispose();
+            return pathToSave;
+        }
+
+        private static string MakeRelative(string filePath, string referencePath)
+        {
+            var fileUri = new Uri(filePath);
+            var referenceUri = new Uri(referencePath);
+            return referenceUri.MakeRelativeUri(fileUri).ToString();
         }
 
         #region Helpers
