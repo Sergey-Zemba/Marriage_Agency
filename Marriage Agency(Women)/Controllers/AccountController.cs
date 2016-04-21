@@ -136,46 +136,8 @@ namespace Marriage_Agency_Women_.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            IDictionary<string, IList<SelectListItem>> personalData = new Dictionary<string, IList<SelectListItem>>();
-            IList<SelectListItem> data = GetSelectListItems(new List<PersonalData>(DbContext.Activities));
-            personalData.Add("activities", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Alcohols));
-            personalData.Add("alcohols", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.DesiredAges));
-            personalData.Add("desiredAges", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Educations));
-            personalData.Add("educations", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.EyeColors));
-            personalData.Add("eyeColors", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.HairColors));
-            personalData.Add("hairColors", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Hobbies));
-            personalData.Add("hobbies", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.InternationalPassports));
-            personalData.Add("internationalPassports", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Jobs));
-            personalData.Add("jobs", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Knowledges));
-            personalData.Add("knowledges", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Languages));
-            personalData.Add("languages", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Levels));
-            personalData.Add("levels", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Lifestyles));
-            personalData.Add("lifestyles", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Locations));
-            personalData.Add("locations", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.NumbersOfChildren));
-            personalData.Add("numbersOfChildren", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Relationships));
-            personalData.Add("relationships", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Religions));
-            personalData.Add("religions", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Shapes));
-            personalData.Add("shapes", data);
-            data = GetSelectListItems(new List<PersonalData>(DbContext.Smokings));
-            personalData.Add("smokings", data);
-            ViewBag.PersonalData = personalData;
+            ViewBag.PersonalData = GetSelectListItemsDictionary();
+
             return View();
         }
 
@@ -254,6 +216,8 @@ namespace Marriage_Agency_Women_.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            ViewBag.PersonalData = GetSelectListItemsDictionary();
+
             return View(model);
         }
 

@@ -71,6 +71,72 @@ namespace Marriage_Agency_Women_.Controllers
             return listToReturn;
         }
 
+        protected IDictionary<string, IList<SelectListItem>> GetSelectListItemsDictionary()
+        {
+            IDictionary<string, IList<SelectListItem>> personalData = new Dictionary<string, IList<SelectListItem>>();
+            IList<SelectListItem> data = null;
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Activities));
+            personalData.Add("activities", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Alcohols));
+            personalData.Add("alcohols", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.DesiredAges));
+            personalData.Add("desiredAges", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Educations));
+            personalData.Add("educations", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.EyeColors));
+            personalData.Add("eyeColors", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.HairColors));
+            personalData.Add("hairColors", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Hobbies));
+            personalData.Add("hobbies", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.InternationalPassports));
+            personalData.Add("internationalPassports", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Jobs));
+            personalData.Add("jobs", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Knowledges));
+            personalData.Add("knowledges", data);
+            
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Languages));
+            personalData.Add("languages", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Levels));
+            personalData.Add("levels", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Lifestyles));
+            personalData.Add("lifestyles", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Locations));
+            personalData.Add("locations", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.NumbersOfChildren));
+            personalData.Add("numbersOfChildren", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Relationships));
+            personalData.Add("relationships", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Religions));
+            personalData.Add("religions", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Shapes));
+            personalData.Add("shapes", data);
+
+            data = GetSelectListItems(new List<PersonalData>(DbContext.Smokings));
+            personalData.Add("smokings", data);
+
+
+            return personalData;
+        }
+
         protected void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
