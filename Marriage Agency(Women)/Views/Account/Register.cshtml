@@ -1,4 +1,7 @@
-﻿@model Marriage_Agency_Women_.Models.AccountViewModels.RegisterViewModel
+﻿@using System.Linq.Expressions
+@using Marriage_Agency_Women_.Models.AccountViewModels
+@using Marriage_Agency_Women_.Models.IdentityModels
+@model Marriage_Agency_Women_.Models.AccountViewModels.RegisterViewModel
 
 @{
     IDictionary<string, IList<SelectListItem>> content = (IDictionary<string, IList<SelectListItem>>) ViewBag.PersonalData;
@@ -31,13 +34,9 @@
     <h4>Create a new account.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "example@mail.com" })
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    
+    @MyHelper.CreateEditorFor(Html, m => m.Email)
+    
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
@@ -46,258 +45,56 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.ConfirmPassword, new {@class = "col-md-2 control-label"})
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.NameInRoman, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.NameInRoman, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.NameInRoman, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Birthday, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.EditorFor(m => m.Birthday, new {@class = "form-control"})
-        </div>
-        <p>1/1/1990</p>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Location, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Location, locations, new {@class = "form-control"})
+            @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new {@class = "text-danger"})
         </div>
     </div>
     
-    <div class="form-group">
-        @Html.LabelFor(m => m.Religion, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Religion, religions, new { @class = "form-control" })
-        </div>
-    </div>
+    @MyHelper.CreateEditorFor(Html, m => m.FirstName)
+    @MyHelper.CreateEditorFor(Html, m => m.LastName)
+    @MyHelper.CreateEditorFor(Html, m => m.NameInRoman)
+    @MyHelper.CreateEditorFor(Html, m => m.Birthday)
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Activity, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
+    @MyHelper.CreateDropDownFor(Html, m => m.Location, locations)
+   
+    @MyHelper.CreateDropDownFor(Html, m => m.Religion, religions)
+    @MyHelper.CreateDropDownFor(Html, m => m.Activity, activities)
+    @MyHelper.CreateDropDownFor(Html, m => m.Job, jobs)
+    @MyHelper.CreateDropDownFor(Html, m => m.Education, educations)
 
-            
-                @Html.DropDownListFor(m => m.Activity, activities, new { @class = "form-control" })
-            </div>
+    @MyHelper.CreateDropDownFor(Html, m => m.FirstLanguage, languages)
+    @MyHelper.CreateDropDownFor(Html, m => m.FirstLanguageLevel, levels)
+    @MyHelper.CreateDropDownFor(Html, m => m.SecondLanguage, languages)
+    @MyHelper.CreateDropDownFor(Html, m => m.SecondLanguageLevel, levels)
+    @MyHelper.CreateDropDownFor(Html, m => m.ThirdLanguage, languages)
+    @MyHelper.CreateDropDownFor(Html, m => m.ThirdLanguageLevel, levels)
 
+    @MyHelper.CreateDropDownFor(Html, m => m.Relationship, relationships)
+    @MyHelper.CreateDropDownFor(Html, m => m.Education, educations)
+    @MyHelper.CreateDropDownFor(Html, m => m.NumberOfChildren, numbersOfChildren)
 
-        </div>
+    @MyHelper.CreateEditorFor(Html, m => m.Height)
+    @MyHelper.CreateEditorFor(Html, m => m.Weight)
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Job, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Job, jobs, new { @class = "form-control" })
-        </div>
-    </div>
+    @MyHelper.CreateDropDownFor(Html, m => m.Shape, shapes)
+    @MyHelper.CreateDropDownFor(Html, m => m.EyeColor, eyeColors)
+    @MyHelper.CreateDropDownFor(Html, m => m.HairColor, hairColors)
+    @MyHelper.CreateDropDownFor(Html, m => m.Smoking, smokings)
+    @MyHelper.CreateDropDownFor(Html, m => m.Alcohol, alcohols)
+    @MyHelper.CreateDropDownFor(Html, m => m.DesiredAge, desiredAges)
+    @MyHelper.CreateDropDownFor(Html, m => m.Hobby, hobbies)
+    @MyHelper.CreateDropDownFor(Html, m => m.Lifestyle, lifestyles)
+    @MyHelper.CreateDropDownFor(Html, m => m.Knowledge, knowledges)
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Education, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Education, educations, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.FirstLanguage, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.FirstLanguage, languages, new {@class = "form-control"})
-        </div>
-        @Html.LabelFor(m => m.FirstLanguageLevel, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.FirstLanguageLevel, levels, new {@class = "form-control"})
-        </div>
-    </div>
+    @MyHelper.CreateEditorFor(Html, m => m.PhoneNumber)
+    @MyHelper.CreateEditorFor(Html, m => m.Skype)
+    @MyHelper.CreateEditorFor(Html, m => m.Facebook)
+    @MyHelper.CreateEditorFor(Html, m => m.Vk)
+    @MyHelper.CreateEditorFor(Html, m => m.Twitter)
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.SecondLanguage, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.SecondLanguage, languages, new {@class = "form-control"})
-        </div>
-        @Html.LabelFor(m => m.SecondLanguageLevel, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.SecondLanguageLevel, levels, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.ThirdLanguage, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.ThirdLanguage, languages, new { @class = "form-control" })
-        </div>
-        @Html.LabelFor(m => m.ThirdLanguageLevel, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.ThirdLanguageLevel, levels, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Relationship, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Relationship, relationships, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Education, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Education, educations, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.NumberOfChildren, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.NumberOfChildren, numbersOfChildren, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Height, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Height, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Weight, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Weight, new {@class = "form-control"})
-            @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Shape, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Shape, shapes, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.EyeColor, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.EyeColor, eyeColors, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.HairColor, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.HairColor, hairColors, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Smoking, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Smoking, smokings, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Alcohol, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Alcohol, alcohols, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.DesiredAge, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.DesiredAge, desiredAges, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Hobby, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Hobby, hobbies, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Lifestyle, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Lifestyle, lifestyles, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Knowledge, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.Knowledge, knowledges, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.PhoneNumber, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "0501234567" })
-            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Skype, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Skype, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Facebook, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Facebook, new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Vk, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Vk, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Twitter, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Twitter, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.InternationalPassport, new {@class = "col-md-2 control-label"})
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.InternationalPassport, internationalPassports, new {@class = "form-control"})
-        </div>
-    </div>
+    @MyHelper.CreateDropDownFor(Html, m => m.InternationalPassport, internationalPassports)
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
