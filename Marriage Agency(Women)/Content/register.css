@@ -1,6 +1,18 @@
-﻿body {
-   background-color: blue;
+﻿
+
+#on1{
+
+	display:block;
 }
-.loh{
-    background-color:white;
+#on2{
+	display:none;
+}
+#on3{
+	display:none;
+}
+.displey_none{
+	display:none !important;
+}
+.displey_block{
+	display:block !important;
 }

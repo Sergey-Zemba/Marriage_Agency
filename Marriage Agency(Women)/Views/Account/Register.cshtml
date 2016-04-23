@@ -39,74 +39,84 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     
-    @MyHelper.CreateEditorFor(Html, m => m.Email)
-    
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new {@class = "col-md-2 control-label"})
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
-            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new {@class = "text-danger"})
-        </div>
-    </div>
-    
-    @MyHelper.CreateEditorFor(Html, m => m.FirstName)
-    @MyHelper.CreateEditorFor(Html, m => m.LastName)
-    @MyHelper.CreateEditorFor(Html, m => m.NameInRoman)
-    @MyHelper.CreateEditorFor(Html, m => m.Birthday)
+    <div id="on1">
+        @MyHelper.CreateEditorFor(Html, m => m.Email)
 
-    @MyHelper.CreateDropDownFor(Html, m => m.Location, locations)
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @MyHelper.CreateEditorFor(Html, m => m.FirstName)
+        @MyHelper.CreateEditorFor(Html, m => m.LastName)
+        @MyHelper.CreateEditorFor(Html, m => m.NameInRoman)
+        @MyHelper.CreateEditorFor(Html, m => m.Birthday)
+
+        @MyHelper.CreateDropDownFor(Html, m => m.Location, locations)
+
+        @MyHelper.CreateDropDownFor(Html, m => m.Religion, religions)
+        @MyHelper.CreateDropDownFor(Html, m => m.Activity, activities)
+        @MyHelper.CreateDropDownFor(Html, m => m.Job, jobs)
+        @MyHelper.CreateDropDownFor(Html, m => m.Education, educations)
+
+        @MyHelper.CreateDropDownFor(Html, m => m.FirstLanguage, languages)
+        @MyHelper.CreateDropDownFor(Html, m => m.FirstLanguageLevel, levels)
+        @MyHelper.CreateDropDownFor(Html, m => m.SecondLanguage, languages)
+        @MyHelper.CreateDropDownFor(Html, m => m.SecondLanguageLevel, levels)
+        @MyHelper.CreateDropDownFor(Html, m => m.ThirdLanguage, languages)
+        @MyHelper.CreateDropDownFor(Html, m => m.ThirdLanguageLevel, levels)
+    </div>
+	<div id="on2">
+        @MyHelper.CreateDropDownFor(Html, m => m.Relationship, relationships)
+        @MyHelper.CreateDropDownFor(Html, m => m.Education, educations)
+        @MyHelper.CreateDropDownFor(Html, m => m.NumberOfChildren, numbersOfChildren)
+
+        @MyHelper.CreateEditorFor(Html, m => m.Height)
+        @MyHelper.CreateEditorFor(Html, m => m.Weight)
+
+        @MyHelper.CreateDropDownFor(Html, m => m.Shape, shapes)
+        @MyHelper.CreateDropDownFor(Html, m => m.EyeColor, eyeColors)
+        @MyHelper.CreateDropDownFor(Html, m => m.HairColor, hairColors)
+        @MyHelper.CreateDropDownFor(Html, m => m.Smoking, smokings)
+        @MyHelper.CreateDropDownFor(Html, m => m.Alcohol, alcohols)
+        @MyHelper.CreateDropDownFor(Html, m => m.DesiredAge, desiredAges)
+        @MyHelper.CreateDropDownFor(Html, m => m.Hobby, hobbies)
+        @MyHelper.CreateDropDownFor(Html, m => m.Lifestyle, lifestyles)
+        @MyHelper.CreateDropDownFor(Html, m => m.Knowledge, knowledges)
+    </div>
+	<div id="on3">
+        @MyHelper.CreateEditorFor(Html, m => m.PhoneNumber)
+        @MyHelper.CreateEditorFor(Html, m => m.Skype)
+        @MyHelper.CreateEditorFor(Html, m => m.Facebook)
+        @MyHelper.CreateEditorFor(Html, m => m.Vk)
+        @MyHelper.CreateEditorFor(Html, m => m.Twitter)
+
+        @MyHelper.CreateDropDownFor(Html, m => m.InternationalPassport, internationalPassports)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Register" />
+            </div>
+        </div>
+    </div>
+	<button id="next">next</button>
+	<button id="prev">prev</button>
    
-    @MyHelper.CreateDropDownFor(Html, m => m.Religion, religions)
-    @MyHelper.CreateDropDownFor(Html, m => m.Activity, activities)
-    @MyHelper.CreateDropDownFor(Html, m => m.Job, jobs)
-    @MyHelper.CreateDropDownFor(Html, m => m.Education, educations)
 
-    @MyHelper.CreateDropDownFor(Html, m => m.FirstLanguage, languages)
-    @MyHelper.CreateDropDownFor(Html, m => m.FirstLanguageLevel, levels)
-    @MyHelper.CreateDropDownFor(Html, m => m.SecondLanguage, languages)
-    @MyHelper.CreateDropDownFor(Html, m => m.SecondLanguageLevel, levels)
-    @MyHelper.CreateDropDownFor(Html, m => m.ThirdLanguage, languages)
-    @MyHelper.CreateDropDownFor(Html, m => m.ThirdLanguageLevel, levels)
 
-    @MyHelper.CreateDropDownFor(Html, m => m.Relationship, relationships)
-    @MyHelper.CreateDropDownFor(Html, m => m.Education, educations)
-    @MyHelper.CreateDropDownFor(Html, m => m.NumberOfChildren, numbersOfChildren)
-
-    @MyHelper.CreateEditorFor(Html, m => m.Height)
-    @MyHelper.CreateEditorFor(Html, m => m.Weight)
-
-    @MyHelper.CreateDropDownFor(Html, m => m.Shape, shapes)
-    @MyHelper.CreateDropDownFor(Html, m => m.EyeColor, eyeColors)
-    @MyHelper.CreateDropDownFor(Html, m => m.HairColor, hairColors)
-    @MyHelper.CreateDropDownFor(Html, m => m.Smoking, smokings)
-    @MyHelper.CreateDropDownFor(Html, m => m.Alcohol, alcohols)
-    @MyHelper.CreateDropDownFor(Html, m => m.DesiredAge, desiredAges)
-    @MyHelper.CreateDropDownFor(Html, m => m.Hobby, hobbies)
-    @MyHelper.CreateDropDownFor(Html, m => m.Lifestyle, lifestyles)
-    @MyHelper.CreateDropDownFor(Html, m => m.Knowledge, knowledges)
-
-    @MyHelper.CreateEditorFor(Html, m => m.PhoneNumber)
-    @MyHelper.CreateEditorFor(Html, m => m.Skype)
-    @MyHelper.CreateEditorFor(Html, m => m.Facebook)
-    @MyHelper.CreateEditorFor(Html, m => m.Vk)
-    @MyHelper.CreateEditorFor(Html, m => m.Twitter)
-
-    @MyHelper.CreateDropDownFor(Html, m => m.InternationalPassport, internationalPassports)
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/app/register.js")
 }
