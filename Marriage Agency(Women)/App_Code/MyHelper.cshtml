@@ -17,6 +17,13 @@
             html.TextBoxFor(expr, new { @class = TextBoxClass }),
             html.ValidationMessageFor(expr, "", new { @class = ValidationMessageClass }));
     }
+    
+    public static HelperResult CreateEditorFor<TModel, TItem>(HtmlHelper<TModel> html, Expression<Func<TModel, TItem>> expr, string placeHolder)
+    {
+        return RenderEditorFor(html.LabelFor(expr, new { @class = LabelClass }),
+           html.TextBoxFor(expr, new { @class = TextBoxClass, @placeholder = placeHolder }),
+           html.ValidationMessageFor(expr, "", new { @class = ValidationMessageClass }));
+    }
 
     public static HelperResult CreateDisplayFor<TModel, TItem>(HtmlHelper<TModel> html, Expression<Func<TModel, TItem>> expr)
     {
