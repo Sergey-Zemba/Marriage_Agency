@@ -449,40 +449,6 @@ namespace Marriage_Agency_Women_.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
-        private string CreateThumbnail(string source, int maxSize)
-        {
-            Image image = Image.FromFile(Server.MapPath("~/Content/Images/" + source));
-            double ratio = (double)image.Size.Width / image.Size.Height;
-            int thumbnailWidth = maxSize, thumbnailHeight = maxSize;
-            if (ratio > 1.0)
-            {
-                thumbnailHeight = (int)(100 / ratio);
-            }
-            else if (ratio < 1.0)
-            {
-                thumbnailWidth = (int)(100 * ratio);
-            }
-            Bitmap thumbnailBitmap = new Bitmap(thumbnailWidth, thumbnailHeight);
-            Graphics thumbnailGraph = Graphics.FromImage(thumbnailBitmap);
-            thumbnailGraph.CompositingQuality = CompositingQuality.HighQuality;
-            thumbnailGraph.SmoothingMode = SmoothingMode.HighQuality;
-            thumbnailGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            var imageRectangle = new Rectangle(0, 0, thumbnailWidth, thumbnailHeight);
-            thumbnailGraph.DrawImage(image, imageRectangle);
-            string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images/Thumbnails"), source);
-            thumbnailBitmap.Save(pathToSave);
-            thumbnailGraph.Dispose();
-            thumbnailBitmap.Dispose();
-            image.Dispose();
-            return pathToSave;
-        }
-
-        private static string MakeRelative(string filePath, string referencePath)
-        {
-            var fileUri = new Uri(filePath);
-            var referenceUri = new Uri(referencePath);
-            return referenceUri.MakeRelativeUri(fileUri).ToString();
-        }
         #region Helpers
         private bool HasPassword()
         {

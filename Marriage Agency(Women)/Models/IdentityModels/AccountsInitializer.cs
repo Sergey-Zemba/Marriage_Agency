@@ -337,6 +337,35 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
                 new Location(25, "Черниговская область", "Chernihiv Oblast", "チェルニーヒウ州"),
                 new Location(26, "Черновицкая область", "Chernivtsi Oblast", "チェルニウツィー州")
             };
+            ICollection<ResidencePermit> residencePermits = new List<ResidencePermit>
+            {
+                new ResidencePermit(1, "Крым", "Crimea", "クリミア半島"),
+                new ResidencePermit(2, "Винницкая область", "Vinnytsia Oblast", "ヴィーンヌィツャ州"),
+                new ResidencePermit(3, "Волынская область", "Volyn Oblast", "ヴォルィーニ州"),
+                new ResidencePermit(4, "Днепропетровская область", "Dnipropetrovsk Oblast", "ドニプロペトロウシク州"),
+                new ResidencePermit(5, "Донецкая область", "Donetsk Oblast", "ドネツク州"),
+                new ResidencePermit(6, "Житомирская область", "Zhytomyr Oblast", "ジトームィル州"),
+                new ResidencePermit(7, "Закарпатская область", "Zakarpattia Oblast", "ザカルパッチャ州"),
+                new ResidencePermit(8, "Запорожская область", "Zaporizhia Oblast", "ザポリージャ州"),
+                new ResidencePermit(9, "Ивано-Франковская область", "Ivano-Frankivsk Oblast", "イヴァーノ=フランキーウシク州"),
+                new ResidencePermit(-10, "Киев", "Kiev", "キエフ市"),
+                new ResidencePermit(11, "Киевская область", "Kiev Oblast", "キエフ州"),
+                new ResidencePermit(12, "Кировоградская область", "Kirovohrad Oblast", "キロヴォフラード州"),
+                new ResidencePermit(13, "Луганская область", "Lugansk Oblast", "ルガンスク州"),
+                new ResidencePermit(14, "Львовская область", "Lviv Oblast", "リヴィウ州"),
+                new ResidencePermit(15, "Николаевская область", "Nikolaevkskaya Oblast", "ニコラーエフ州"),
+                new ResidencePermit(16, "Одесская область", "Odessa Oblast", "オデッサ州"),
+                new ResidencePermit(17, "Полтавская область", "Poltava Oblast", "ポルタヴァ州"),
+                new ResidencePermit(18, "Ровенская область", "Rovenskaya Oblast", "ロブノ州"),
+                new ResidencePermit(19, "Сумская область", "Sumy Oblast", "スームィ州"),
+                new ResidencePermit(20, "Тернопольская область", "Ternopil Oblast", "テルノーピリ州"),
+                new ResidencePermit(21, "Харьковская область", "Kharkov Oblast", "ハリコフ州"),
+                new ResidencePermit(22, "Херсонская область", "Kherson Oblast", "ヘルソン州"),
+                new ResidencePermit(23, "Хмельницкая область", "Khmelnitsky Oblast", "フメリニツキー州"),
+                new ResidencePermit(24, "Черкасская область", "Cherkasy Oblast", "チェルカースィ州"),
+                new ResidencePermit(25, "Черниговская область", "Chernihiv Oblast", "チェルニーヒウ州"),
+                new ResidencePermit(26, "Черновицкая область", "Chernivtsi Oblast", "チェルニウツィー州")
+            };
             ICollection<NumberOfChildren> numbersOfChildren = new List<NumberOfChildren>
             {
                 new NumberOfChildren(1, "Нет", "No", "なし"),
@@ -387,6 +416,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             context.Levels.AddRange(levels);
             context.Lifestyles.AddRange(lifestyles);
             context.Locations.AddRange(locations);
+            context.ResidencePermits.AddRange(residencePermits);
             context.NumbersOfChildren.AddRange(numbersOfChildren);
             context.Relationships.AddRange(relationships);
             context.Religions.AddRange(religions);

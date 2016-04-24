@@ -1,7 +1,7 @@
 ﻿@using System.Linq.Expressions
 @using Marriage_Agency_Women_.Models.Characteristics.Files
 @using Marriage_Agency_Women_.Models.IdentityModels
-@model ApplicationUser
+@model Marriage_Agency_Women_.Models.AdminViewModels.EditUserViewModel
 
 
 @{
@@ -41,6 +41,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.Id)
 
     <dl class="dl-horizontal">
         @if (Model.FilePaths.Any(f => f.FileType == FileType.Photo))
@@ -72,7 +73,23 @@
     
     @MyHelper.CreateCheckBoxFor(Html, m => m.Status)
 
-    @MyHelper.CreateDisplayFor(Html,m => m.Email)
+    @MyHelper.CreateDisplayFor(Html, m => m.Email)
+    <div class="form-group">
+        <label class="col-md-2 control-label">
+            @Html.LabelFor(m => m.EmailConfirmed)
+        </label>
+        <div class="col-sm-10">
+
+            @if (Model.EmailConfirmed)
+            {
+                <span>Да</span>
+            }
+            else
+            {
+                <span>Нет</span>
+            }
+        </div>
+    </div>
     @CreateDisplayBool("Email подтвержден", Model.EmailConfirmed)
     @MyHelper.CreateDisplayFor(Html, m => m.Age)
     @MyHelper.CreateDisplayFor(Html, m => m.CreationDate)
@@ -85,48 +102,54 @@
     @MyHelper.CreateEditorFor(Html, m => m.LastName)
     @MyHelper.CreateEditorFor(Html, m => m.NameInRoman)
     @MyHelper.CreateEditorFor(Html, m => m.Birthday)
+    <p>1/1/1990</p>
 
-
-    @CreateDropDownFor(m => m.Location, locations)
+    @MyHelper.CreateDropDownFor(Html, m => m.Location, locations)
     <p>???</p>
-    @CreateDropDownFor(m => m.ResidencePermit, locations)
-    @CreateDropDownFor(m => m.Religion, religions)
-    @CreateDropDownFor(m => m.Activity, activities)
-    @CreateDropDownFor(m => m.Job, jobs)
-    @CreateDropDownFor(m => m.Education, educations)
+    @MyHelper.CreateDropDownFor(Html, m => m.ResidencePermit, locations)
+    @MyHelper.CreateDropDownFor(Html, m => m.Religion, religions)
+    @MyHelper.CreateDropDownFor(Html, m => m.Activity, activities)
+    @MyHelper.CreateDropDownFor(Html, m => m.Job, jobs)
+    @MyHelper.CreateDropDownFor(Html, m => m.Education, educations)
 
-    @CreateDropDownFor(m => m.FirstLanguageLevel, levels)
-    @CreateDropDownFor(m => m.FirstLanguage, languages)
-    @CreateDropDownFor(m => m.SecondLanguageLevel, levels)
-    @CreateDropDownFor(m => m.SecondLanguage, languages)
-    @CreateDropDownFor(m => m.ThirdLanguageLevel, levels)
-    @CreateDropDownFor(m => m.ThirdLanguage, languages)
+    @MyHelper.CreateDropDownFor(Html, m => m.FirstLanguage, languages)
+    @MyHelper.CreateDropDownFor(Html, m => m.FirstLanguageLevel, levels)
+    @MyHelper.CreateDropDownFor(Html, m => m.SecondLanguage, languages)
+    @MyHelper.CreateDropDownFor(Html, m => m.SecondLanguageLevel, levels)
+    @MyHelper.CreateDropDownFor(Html, m => m.ThirdLanguage, languages)
+    @MyHelper.CreateDropDownFor(Html, m => m.ThirdLanguageLevel, levels)
 
-    @CreateDropDownFor(m => m.Relationship, relationships)
-    @CreateDropDownFor(m => m.NumberOfChildren, numbersOfChildren)
+    @MyHelper.CreateDropDownFor(Html, m => m.Relationship, relationships)
+    @MyHelper.CreateDropDownFor(Html, m => m.NumberOfChildren, numbersOfChildren)
 
     @MyHelper.CreateEditorFor(Html, m => m.Height)
     @MyHelper.CreateEditorFor(Html, m => m.Weight)
 
+    @MyHelper.CreateDropDownFor(Html, m => m.Shape, shapes)
+    @MyHelper.CreateDropDownFor(Html, m => m.EyeColor, eyeColors)
+    @MyHelper.CreateDropDownFor(Html, m => m.HairColor, hairColors)
+    @MyHelper.CreateDropDownFor(Html, m => m.Smoking, smokings)
+    @MyHelper.CreateDropDownFor(Html, m => m.Alcohol, alcohols)
+    @MyHelper.CreateDropDownFor(Html, m => m.DesiredAge, desiredAges)
+    @MyHelper.CreateDropDownFor(Html, m => m.Hobby, hobbies)
+    @MyHelper.CreateDropDownFor(Html, m => m.Lifestyle, lifestyles)
+    @MyHelper.CreateDropDownFor(Html, m => m.Knowledge, knowledges)
 
-    @CreateDropDownFor(m => m.Shape, shapes)
-    @CreateDropDownFor(m => m.EyeColor, eyeColors)
-    @CreateDropDownFor(m => m.HairColor, hairColors)
-    @CreateDropDownFor(m => m.Smoking, smokings)
-    @CreateDropDownFor(m => m.Alcohol, alcohols)
-    @CreateDropDownFor(m => m.DesiredAge, desiredAges)
-    @CreateDropDownFor(m => m.Hobby, hobbies)
-    @CreateDropDownFor(m => m.Lifestyle, lifestyles)
-    @CreateDropDownFor(m => m.Knowledge, knowledges)
-
-    @MyHelper.CreateEditorFor(Html, m => m.PhoneNumber)
+    @MyHelper.CreateEditorFor(Html, m => m.PhoneNumber, "0501234567")
     @MyHelper.CreateEditorFor(Html, m => m.Skype)
     @MyHelper.CreateEditorFor(Html, m => m.Facebook)
     @MyHelper.CreateEditorFor(Html, m => m.Vk)
     @MyHelper.CreateEditorFor(Html, m => m.Twitter)
 
-    @CreateDropDownFor(m => m.InternationalPassport, internationalPassports)
+    @MyHelper.CreateDropDownFor(Html, m => m.InternationalPassport, internationalPassports)
 
+    <div class="form-group">
+        @Html.LabelFor(m => m.Notes, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Notes, new { @class = "control-label col-md-2" })
+        </div>
+    </div>
+    
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Сохранить изменения" />
@@ -134,32 +157,9 @@
     </div>
 }
 
-@helper CreateDropDownFor(Expression<Func<ApplicationUser, object>> expression, IList<SelectListItem> items)
-{
-    <div class="form-group">
-        @Html.LabelFor(expression, new { @class = "col-md-2 control-label" })
-        <div class="col-sm-10">
-            @Html.DropDownListFor(expression, items, new { @class = "form-control" })
-        </div>
-    </div>
-}
-
 @helper CreateDisplayBool(string label, bool value)
 {
-    <div class="form-group">
-        <label class="col-md-2 control-label">@label</label>
-        <div class="col-sm-10">
 
-            @if (value)
-            {
-                <span>Да</span>
-            }
-            else
-            {
-                <span>Нет</span>
-            }
-        </div>
-    </div>
 }
 
 @section scripts{

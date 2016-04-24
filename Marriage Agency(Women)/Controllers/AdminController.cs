@@ -56,153 +56,158 @@ namespace Marriage_Agency_Women_.Controllers
                 return HttpNotFound();
             }
 
+            EditUserViewModel model = new EditUserViewModel()
+            {
+                Id = user.Id,
+                Number = user.Number,
+                ResidencePermit = user.ResidencePermit.Id,
+                Status = user.Status,
+                Email = user.Email,
+                EmailConfirmed = user.EmailConfirmed,
+                Age = user.Age,
+                CreationDate = user.CreationDate,
+                LastLoginTime = user.LastLoginTime,
+                OpenPassword = user.OpenPassword,
+                Notes = user.Notes,
+
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                NameInRoman = user.NameInRoman,
+                Birthday = user.Birthday,
+                Location = user.Location.Id,
+                Religion = user.Religion.Id,
+                Activity = user.Activity.Id,
+                Job = user.Job.Id,
+                Education = user.Education.Id,
+                FirstLanguage = user.FirstLanguage.Id,
+                FirstLanguageLevel = user.FirstLanguageLevel.Id,
+                SecondLanguage = user.SecondLanguage.Id,
+                SecondLanguageLevel = user.SecondLanguageLevel.Id,
+                ThirdLanguage = user.ThirdLanguage.Id,
+                ThirdLanguageLevel = user.ThirdLanguageLevel.Id,
+                Relationship = user.Relationship.Id,
+                NumberOfChildren = user.NumberOfChildren.Id,
+                Height = user.Height,
+                Weight = user.Weight,
+                Shape = user.Shape.Id,
+                EyeColor = user.EyeColor.Id,
+                HairColor = user.HairColor.Id,
+                Smoking = user.Smoking.Id,
+                Alcohol = user.Alcohol.Id,
+                DesiredAge = user.DesiredAge.Id,
+                Hobby = user.Hobby.Id,
+                Lifestyle = user.Lifestyle.Id,
+                Knowledge = user.Knowledge.Id,
+                PhoneNumber = user.PhoneNumber.Substring(3),
+                Skype = user.Skype,
+                Facebook = user.Facebook,
+                Vk = user.Vk,
+                Twitter = user.Twitter,
+                InternationalPassport = user.InternationalPassport.Id,
+                FilePaths = user.FilePaths
+            };
+
+
             ViewBag.PersonalData = GetSelectListItemsDictionary();
 
-            return View(user);
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // ToDo
-        // ToDo
-        // ToDo
-        // ToDo
-        // ToDo
-            //
-        // EditUserViewModel
-            //
-        // Status
-        //FirstName
-        //LastName
-        //NameInRoman
-        //Birthday
-        //Location
-        //ResidencePermit
-        //Religion
-        //Activity
-        //Job
-        //Education
-        //FirstLanguageLevel
-        //FirstLanguage
-        //SecondLanguageLevel
-        //SecondLanguage
-        //ThirdLanguageLevel
-        //ThirdLanguage
-        //Relationship
-        //NumberOfChildren
-        //Height
-        //Weight
-        //Shape
-        //EyeColor
-        //HairColor
-        //Smoking
-        //Alcohol
-        //DesiredAge
-        //Hobby
-        //Lifestyle
-        //Knowledge
-        //PhoneNumber
-        //Skype
-        //Facebook
-        //Vk
-        //Twitter
-        //internationalPassports
-        public async Task<ActionResult> EditUserAccount(ApplicationUser model, ICollection<HttpPostedFileBase> files)
+        public async Task<ActionResult> EditUserAccount(EditUserViewModel model, ICollection<HttpPostedFileBase> files)
         {
-            return RedirectToAction("ShowAccounts");
 
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
 
+                var user = await UserManager.FindByIdAsync(model.Id);
 
-            //    var userName = User.Identity.Name;
-            //    var user = await UserManager.FindByNameAsync(userName);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
 
-            //    if (user == null)
-            //    {
-            //        return RedirectToAction("Index", "Home");
-            //    }
+                user.Notes = model.Notes;
 
-            //    user.FirstName = model.FirstName;
-            //    user.LastName = model.LastName;
-            //    user.NameInRoman = model.NameInRoman;
-            //    user.Birthday = model.Birthday;
-            //    user.Location = DbContext.Locations.Find(model.Location);
-            //    user.Religion = DbContext.Religions.Find(model.Religion);
-            //    user.Activity = DbContext.Activities.Find(model.Activity);
-            //    user.Job = DbContext.Jobs.Find(model.Job);
-            //    user.Education = DbContext.Educations.Find(model.Education);
-            //    user.FirstLanguage = DbContext.Languages.Find(model.FirstLanguage);
-            //    user.FirstLanguageLevel = DbContext.Levels.Find(model.FirstLanguageLevel);
-            //    user.SecondLanguage = DbContext.Languages.Find(model.SecondLanguage);
-            //    user.SecondLanguageLevel = DbContext.Levels.Find(model.SecondLanguageLevel);
-            //    user.ThirdLanguage = DbContext.Languages.Find(model.ThirdLanguage);
-            //    user.ThirdLanguageLevel = DbContext.Levels.Find(model.ThirdLanguageLevel);
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.NameInRoman = model.NameInRoman;
+                user.Birthday = model.Birthday;
+                user.Location = DbContext.Locations.Find(model.Location);
+                user.Religion = DbContext.Religions.Find(model.Religion);
+                user.Activity = DbContext.Activities.Find(model.Activity);
+                user.Job = DbContext.Jobs.Find(model.Job);
+                user.Education = DbContext.Educations.Find(model.Education);
+                user.FirstLanguage = DbContext.Languages.Find(model.FirstLanguage);
+                user.FirstLanguageLevel = DbContext.Levels.Find(model.FirstLanguageLevel);
+                user.SecondLanguage = DbContext.Languages.Find(model.SecondLanguage);
+                user.SecondLanguageLevel = DbContext.Levels.Find(model.SecondLanguageLevel);
+                user.ThirdLanguage = DbContext.Languages.Find(model.ThirdLanguage);
+                user.ThirdLanguageLevel = DbContext.Levels.Find(model.ThirdLanguageLevel);
 
-            //    user.Relationship = DbContext.Relationships.Find(model.Relationship);
-            //    user.NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren);
-            //    user.Height = model.Height;
-            //    user.Weight = model.Weight;
-            //    user.Shape = DbContext.Shapes.Find(model.Shape);
-            //    user.EyeColor = DbContext.EyeColors.Find(model.EyeColor);
-            //    user.HairColor = DbContext.HairColors.Find(model.HairColor);
-            //    user.Smoking = DbContext.Smokings.Find(model.Smoking);
-            //    user.Alcohol = DbContext.Alcohols.Find(model.Alcohol);
-            //    user.DesiredAge = DbContext.DesiredAges.Find(model.DesiredAge);
-            //    user.Hobby = DbContext.Hobbies.Find(model.Hobby);
-            //    user.Lifestyle = DbContext.Lifestyles.Find(model.Lifestyle);
-            //    user.Knowledge = DbContext.Knowledges.Find(model.Knowledge);
-            //    user.PhoneNumber = "+38" + model.PhoneNumber;
-            //    user.Skype = model.Skype;
-            //    user.Facebook = model.Facebook;
-            //    user.Vk = model.Vk;
-            //    user.Twitter = model.Twitter;
-            //    user.InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport);
+                user.Relationship = DbContext.Relationships.Find(model.Relationship);
+                user.NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren);
+                user.Height = model.Height;
+                user.Weight = model.Weight;
+                user.Shape = DbContext.Shapes.Find(model.Shape);
+                user.EyeColor = DbContext.EyeColors.Find(model.EyeColor);
+                user.HairColor = DbContext.HairColors.Find(model.HairColor);
+                user.Smoking = DbContext.Smokings.Find(model.Smoking);
+                user.Alcohol = DbContext.Alcohols.Find(model.Alcohol);
+                user.DesiredAge = DbContext.DesiredAges.Find(model.DesiredAge);
+                user.Hobby = DbContext.Hobbies.Find(model.Hobby);
+                user.Lifestyle = DbContext.Lifestyles.Find(model.Lifestyle);
+                user.Knowledge = DbContext.Knowledges.Find(model.Knowledge);
+                user.PhoneNumber = "+38" + model.PhoneNumber;
+                user.Skype = model.Skype;
+                user.Facebook = model.Facebook;
+                user.Vk = model.Vk;
+                user.Twitter = model.Twitter;
+                user.InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport);
 
-            //    user.Status = false;
+                foreach (var file in files)
+                {
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string extension = System.IO.Path.GetExtension(file.FileName).ToLower();
+                        if (file.ContentLength < 5242880 && (extension == ".jpg" || extension == ".jpeg"))
+                        {
+                            string localFileName = Guid.NewGuid().ToString() + extension;
+                            string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName);
+                            var relativePath = MakeRelative(pathToSave, Server.MapPath("~"));
+                            file.SaveAs(pathToSave);
+                            var photo = new FilePath
+                            {
+                                FileName = localFileName,
+                                PathName = "/" + relativePath,
+                                FileType = FileType.Photo
+                            };
+                            user.FilePaths.Add(photo);
+                            string thumbnailPathName = CreateThumbnail(localFileName, 100);
+                            var relativeThumbnailPath = MakeRelative(thumbnailPathName, Server.MapPath("~"));
+                            var thumbnail = new FilePath
+                            {
+                                FileName = localFileName,
+                                PathName = "/" + relativeThumbnailPath,
+                                FileType = FileType.Thumbnail
+                            };
+                            user.FilePaths.Add(thumbnail);
+                        }
+                    }
+                }
+                var result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
 
-            //    foreach (var file in files)
-            //    {
-            //        if (file != null && file.ContentLength > 0)
-            //        {
-            //            string extension = System.IO.Path.GetExtension(file.FileName).ToLower();
-            //            if (file.ContentLength < 5242880 && (extension == ".jpg" || extension == ".jpeg"))
-            //            {
-            //                string localFileName = Guid.NewGuid().ToString() + extension;
-            //                string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName);
-            //                var relativePath = MakeRelative(pathToSave, Server.MapPath("~"));
-            //                file.SaveAs(pathToSave);
-            //                var photo = new FilePath
-            //                {
-            //                    FileName = localFileName,
-            //                    PathName = "/" + relativePath,
-            //                    FileType = FileType.Photo
-            //                };
-            //                user.FilePaths.Add(photo);
-            //                string thumbnailPathName = CreateThumbnail(localFileName, 100);
-            //                var relativeThumbnailPath = MakeRelative(thumbnailPathName, Server.MapPath("~"));
-            //                var thumbnail = new FilePath
-            //                {
-            //                    FileName = localFileName,
-            //                    PathName = "/" + relativeThumbnailPath,
-            //                    FileType = FileType.Thumbnail
-            //                };
-            //                user.FilePaths.Add(thumbnail);
-            //            }
-            //        }
-            //    }
-            //    var result = await UserManager.UpdateAsync(user);
-            //    if (result.Succeeded)
-            //    {
+                    return RedirectToAction("ShowAccounts");
+                }
+                AddErrors(result);
+            }
 
-            //        return RedirectToAction("ShowAccounts");
-            //    }
-            //    AddErrors(result);
-            //}
+            ViewBag.PersonalData = GetSelectListItemsDictionary();
 
-            //ViewBag.PersonalData = GetSelectListItemsDictionary();
-
-            //return View(model);
+            return View(model);
         } 
 
         public async Task<ActionResult> ToggleConfirmation(string userId)
@@ -336,41 +341,6 @@ namespace Marriage_Agency_Women_.Controllers
                 rng.Style.Font.Color.SetColor(Color.Black);
             }
             return pck;
-        }
-
-        private string CreateThumbnail(string source, int maxSize)
-        {
-            Image image = Image.FromFile(Server.MapPath("~/Content/Images/" + source));
-            double ratio = (double)image.Size.Width / image.Size.Height;
-            int thumbnailWidth = maxSize, thumbnailHeight = maxSize;
-            if (ratio > 1.0)
-            {
-                thumbnailHeight = (int)(100 / ratio);
-            }
-            else if (ratio < 1.0)
-            {
-                thumbnailWidth = (int)(100 * ratio);
-            }
-            Bitmap thumbnailBitmap = new Bitmap(thumbnailWidth, thumbnailHeight);
-            Graphics thumbnailGraph = Graphics.FromImage(thumbnailBitmap);
-            thumbnailGraph.CompositingQuality = CompositingQuality.HighQuality;
-            thumbnailGraph.SmoothingMode = SmoothingMode.HighQuality;
-            thumbnailGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            var imageRectangle = new Rectangle(0, 0, thumbnailWidth, thumbnailHeight);
-            thumbnailGraph.DrawImage(image, imageRectangle);
-            string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images/Thumbnails"), source);
-            thumbnailBitmap.Save(pathToSave);
-            thumbnailGraph.Dispose();
-            thumbnailBitmap.Dispose();
-            image.Dispose();
-            return pathToSave;
-        }
-
-        private static string MakeRelative(string filePath, string referencePath)
-        {
-            var fileUri = new Uri(filePath);
-            var referenceUri = new Uri(referencePath);
-            return referenceUri.MakeRelativeUri(fileUri).ToString();
         }
 
         #region Helpers
