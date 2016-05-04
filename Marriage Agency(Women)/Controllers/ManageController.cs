@@ -161,9 +161,8 @@ namespace Marriage_Agency_Women_.Controllers
                 {
                     if (file != null && file.ContentLength > 0)
                     {
-                        HttpPostedFileBase innerFile = file;
-                        string extension = System.IO.Path.GetExtension(innerFile.FileName).ToLower();
-                        if (innerFile.ContentLength < 5242880 && (extension == ".jpg" || extension == ".jpeg"))
+                        string extension = System.IO.Path.GetExtension(file.FileName).ToLower();
+                        if (file.ContentLength < 5242880 && (extension == ".jpg" || extension == ".jpeg"))
                         {
                             string localFileName = Guid.NewGuid().ToString() + extension;
                             string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName);
