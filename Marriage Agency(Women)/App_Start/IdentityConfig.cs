@@ -20,7 +20,7 @@ namespace Marriage_Agency_Women_
         public Task SendAsync(IdentityMessage message)
         {
             var from = "test.marriage.agency@gmail.com";
-            var pass = "agencytest";
+            var pass = "dfvgbh99";
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
