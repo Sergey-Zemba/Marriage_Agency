@@ -167,7 +167,10 @@ namespace Marriage_Agency_Women_.Controllers
                             string localFileName = Guid.NewGuid().ToString() + extension;
                             string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName);
                             var relativePath = MakeRelative(pathToSave, Server.MapPath("~"));
-                            file.SaveAs(pathToSave);
+                            var originalImage = Image.FromStream(file.InputStream,true,true);
+                            var originalBitmap = new Bitmap(originalImage);
+                            originalBitmap.Save(pathToSave, ImageFormat.Jpeg);
+                            //file.SaveAs(pathToSave);
                             var photo = new FilePath
                             {
                                 FileName = localFileName,
