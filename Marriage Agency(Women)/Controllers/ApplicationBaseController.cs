@@ -107,7 +107,7 @@ namespace Marriage_Agency_Women_.Controllers
 
             data = GetSelectListItems(new List<PersonalData>(DbContext.Knowledges));
             personalData.Add("knowledges", data);
-            
+
             data = GetSelectListItems(new List<PersonalData>(DbContext.Languages));
             personalData.Add("languages", data);
 

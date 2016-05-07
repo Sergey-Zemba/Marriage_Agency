@@ -156,7 +156,7 @@ namespace Marriage_Agency_Women_.Controllers
                 user.InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport);
 
                 user.Status = false;
-                
+
                 foreach (var file in files)
                 {
                     if (file != null && file.ContentLength > 0)
@@ -167,11 +167,10 @@ namespace Marriage_Agency_Women_.Controllers
                             string localFileName = Guid.NewGuid().ToString() + extension;
                             string pathToSave = System.IO.Path.Combine(Server.MapPath("~/Content/Images"), localFileName);
                             var relativePath = MakeRelative(pathToSave, Server.MapPath("~"));
-                            var originalImage = Image.FromStream(file.InputStream,true,true);
-                            var originalBitmap = new Bitmap(originalImage);
-                            originalBitmap.Save(pathToSave, ImageFormat.Jpeg);
-                            //file.SaveAs(pathToSave);
-                            var photo = new FilePath
+                            file.SaveAs(pathToSave);
+                            file.SaveAs(pathToSave);
+                            FilePath photo = null;
+                            photo = new FilePath
                             {
                                 FileName = localFileName,
                                 PathName = "/" + relativePath,

@@ -249,6 +249,7 @@
     <Content Include="Content\ControlItems\fancybox_sprite%402x.png" />
     <Content Include="Content\ControlItems\fancybox_sprite.png" />
     <Content Include="Content\Images\favicon.ico" />
+    <Content Include="Content\Images\Thumbnails\favicon.ico" />
     <Content Include="Content\jquery.fancybox.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -257,7 +258,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Code\MyHelper.cshtml" />
     <None Include="Properties\PublishProfiles\Marriage Agency %28Women%29.pubxml" />
-    <None Include="Properties\PublishProfiles\Tokyo.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
