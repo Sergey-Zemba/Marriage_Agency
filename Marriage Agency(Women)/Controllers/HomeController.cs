@@ -10,7 +10,7 @@ namespace Marriage_Agency_Women_.Controllers
     {
         public ActionResult Index()
         {
-             return View();
+            return View();
         }
 
         public ActionResult About()
