@@ -178,6 +178,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationBaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageMessageId.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Models\ManageViewModels\EditViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\ExceptionHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\ControlItems\blank.gif" />
@@ -415,6 +417,7 @@
     <Folder Include="Migrations\" />
     <Folder Include="Scripts\app\" />
     <Folder Include="Views\ApplicationBase\" />
+    <Folder Include="Views\Error\" />
     <Folder Include="Views\FilePath\" />
     <Folder Include="Views\Photo\" />
   </ItemGroup>
