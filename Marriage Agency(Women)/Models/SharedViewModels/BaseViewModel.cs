@@ -13,22 +13,19 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
         private const string PhoneNumberRegexp =
             @"^0(?:(?:39)|(?:50)|(?:63)|(?:66)|(?:67)|(?:68)|(?:91)|(?:92)|(?:93)|(?:94)|(?:95)|(?:96)|(?:97)|(?:98)|(?:99))\d{7}$";
 
-        [Required(ErrorMessage = "Поле {0} является обязательным")]
+        //[Required(ErrorMessage = "Поле {0} является обязательным")]
         [RegularExpression(@"^[а-яіїєґА-ЯІЇЄҐ\-\s]{3,}$", ErrorMessage = "Поле должно содержать только русские или украинские буквы")]
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Поле {0} является обязательным")]
         [RegularExpression(@"^[а-яіїєґА-ЯІЇЄҐ\-\s]{3,}$", ErrorMessage = "Поле должно содержать только русские или украинские буквы")]
         [Display(Name = "Фамилия")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Поле {0} является обязательным")]
         [RegularExpression(@"^[A-z\s]{1,}$", ErrorMessage = "Поле должно содержать только латинские буквы")]
         [Display(Name = "Имя латиницей")]
         public string NameInRoman { get; set; }
 
-        [Required]
         [Display(Name = "Дата рождения")]
         public DateTime Birthday { get; set; }
 
@@ -84,15 +81,13 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
         [Display(Name = "Дети")]
         public int NumberOfChildren { get; set; }
 
-        [Required]
         [Range(140, 200, ErrorMessage = "Значение должно быть в пределах от {1} до {2}")]
         [Display(Name = "Рост")]
-        public int Height { get; set; }
+        public int? Height { get; set; }
 
-        [Required]
         [Range(40, 100, ErrorMessage = "Значение должно быть в пределах от {1} до {2}")]
         [Display(Name = "Вес")]
-        public int Weight { get; set; }
+        public int? Weight { get; set; }
 
         [Required]
         [Display(Name = "Фигура")]
@@ -128,7 +123,6 @@ namespace Marriage_Agency_Women_.Models.SharedViewModels
         public int Knowledge { get; set; }
 
         // PhoneNumber из IdentityUser
-        [Required]
         [RegularExpression(PhoneNumberRegexp, ErrorMessage = "Номер телефона указан в неверном формате")]
         [Display(Name = "Номер мобильного")]
         [DataType(DataType.PhoneNumber)]

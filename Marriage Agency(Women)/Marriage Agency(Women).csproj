@@ -226,7 +226,6 @@
     <Compile Include="Models\Characteristics\PersonalData.cs" />
     <Compile Include="Models\Characteristics\Relationship.cs" />
     <Compile Include="Models\Characteristics\Religion.cs" />
-    <Compile Include="Models\Characteristics\ResidencePermit.cs" />
     <Compile Include="Models\Characteristics\Shape.cs" />
     <Compile Include="Models\Characteristics\Smoking.cs" />
     <Compile Include="Models\SharedViewModels\BaseViewModel.cs" />

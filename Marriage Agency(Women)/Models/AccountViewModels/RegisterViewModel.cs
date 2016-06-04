@@ -8,7 +8,7 @@ using Marriage_Agency_Women_.Models.SharedViewModels;
 
 namespace Marriage_Agency_Women_.Models.AccountViewModels
 {
-    public class RegisterViewModel : BaseViewModel
+    public class RegisterViewModel
     {
         [Required]
         [EmailAddress]

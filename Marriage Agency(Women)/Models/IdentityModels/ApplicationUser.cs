@@ -24,6 +24,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         [Display(Name = "Пароль")]
         public string OpenPassword { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "Номер")]
         public int Number { get; set; }
 
@@ -44,14 +45,12 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         [Display(Name = "Возраст")]
         public int Age
         {
+            // todo
             get { return DateTime.Now.Year - Birthday.Year; }
         }
 
         [Display(Name = "Место проживания")]
         public virtual Location Location { get; set; }
-
-        [Display(Name = "Прописка")]
-        public virtual ResidencePermit ResidencePermit { get; set; }
 
         [Display(Name = "Вера")]
         public virtual Religion Religion { get; set; }
@@ -90,10 +89,10 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         public virtual NumberOfChildren NumberOfChildren { get; set; }
 
         [Display(Name = "Рост")]
-        public int Height { get; set; }
+        public int? Height { get; set; }
 
         [Display(Name = "Вес")]
-        public int Weight { get; set; }
+        public int? Weight { get; set; }
 
         [Display(Name = "Фигура")]
         public virtual Shape Shape { get; set; }

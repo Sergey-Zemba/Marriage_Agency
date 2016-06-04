@@ -55,48 +55,7 @@ namespace Marriage_Agency_Women_.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-
-
-            EditViewModel model = new EditViewModel
-            {
-                HasPassword = HasPassword(),
-
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                NameInRoman = user.NameInRoman,
-                Birthday = user.Birthday,
-                Location = user.Location.Id,
-                Religion = user.Religion.Id,
-                Activity = user.Activity.Id,
-                Job = user.Job.Id,
-                Education = user.Education.Id,
-                FirstLanguage = user.FirstLanguage.Id,
-                FirstLanguageLevel = user.FirstLanguageLevel.Id,
-                SecondLanguage = user.SecondLanguage.Id,
-                SecondLanguageLevel = user.SecondLanguageLevel.Id,
-                ThirdLanguage = user.ThirdLanguage.Id,
-                ThirdLanguageLevel = user.ThirdLanguageLevel.Id,
-                Relationship = user.Relationship.Id,
-                NumberOfChildren = user.NumberOfChildren.Id,
-                Height = user.Height,
-                Weight = user.Weight,
-                Shape = user.Shape.Id,
-                EyeColor = user.EyeColor.Id,
-                HairColor = user.HairColor.Id,
-                Smoking = user.Smoking.Id,
-                Alcohol = user.Alcohol.Id,
-                DesiredAge = user.DesiredAge.Id,
-                Hobby = user.Hobby.Id,
-                Lifestyle = user.Lifestyle.Id,
-                Knowledge = user.Knowledge.Id,
-                PhoneNumber = user.PhoneNumber.Substring(3),
-                Skype = user.Skype,
-                Facebook = user.Facebook,
-                Vk = user.Vk,
-                Twitter = user.Twitter,
-                InternationalPassport = user.InternationalPassport.Id,
-                FilePaths = user.FilePaths
-            };
+            EditViewModel model = GetEditViewModelFromApplicationUser(user);
 
             ViewBag.PersonalData = GetSelectListItemsDictionary();
 
@@ -148,7 +107,7 @@ namespace Marriage_Agency_Women_.Controllers
                 user.Hobby = DbContext.Hobbies.Find(model.Hobby);
                 user.Lifestyle = DbContext.Lifestyles.Find(model.Lifestyle);
                 user.Knowledge = DbContext.Knowledges.Find(model.Knowledge);
-                user.PhoneNumber = "+38" + model.PhoneNumber;
+                user.PhoneNumber = model.PhoneNumber;
                 user.Skype = model.Skype;
                 user.Facebook = model.Facebook;
                 user.Vk = model.Vk;
@@ -470,6 +429,52 @@ namespace Marriage_Agency_Women_.Controllers
                 return user.PhoneNumber != null;
             }
             return false;
+        }
+
+        private EditViewModel GetEditViewModelFromApplicationUser(ApplicationUser user)
+        {
+            EditViewModel model = new EditViewModel
+            {
+                HasPassword = HasPassword(),
+
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                NameInRoman = user.NameInRoman,
+                Birthday = user.Birthday,
+                Location = user.Location.Id,
+                Religion = user.Religion.Id,
+                Activity = user.Activity.Id,
+                Job = user.Job.Id,
+                Education = user.Education.Id,
+                FirstLanguage = user.FirstLanguage.Id,
+                FirstLanguageLevel = user.FirstLanguageLevel.Id,
+                SecondLanguage = user.SecondLanguage.Id,
+                SecondLanguageLevel = user.SecondLanguageLevel.Id,
+                ThirdLanguage = user.ThirdLanguage.Id,
+                ThirdLanguageLevel = user.ThirdLanguageLevel.Id,
+                Relationship = user.Relationship.Id,
+                NumberOfChildren = user.NumberOfChildren.Id,
+                Height = user.Height,
+                Weight = user.Weight,
+                Shape = user.Shape.Id,
+                EyeColor = user.EyeColor.Id,
+                HairColor = user.HairColor.Id,
+                Smoking = user.Smoking.Id,
+                Alcohol = user.Alcohol.Id,
+                DesiredAge = user.DesiredAge.Id,
+                Hobby = user.Hobby.Id,
+                Lifestyle = user.Lifestyle.Id,
+                Knowledge = user.Knowledge.Id,
+                PhoneNumber = user.PhoneNumber,
+                Skype = user.Skype,
+                Facebook = user.Facebook,
+                Vk = user.Vk,
+                Twitter = user.Twitter,
+                InternationalPassport = user.InternationalPassport.Id,
+                FilePaths = user.FilePaths
+            };
+
+            return model;
         }
 
         #endregion

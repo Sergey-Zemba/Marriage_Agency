@@ -150,52 +150,17 @@ namespace Marriage_Agency_Women_.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                var user = new ApplicationUser
+                ApplicationUser user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
                     OpenPassword = model.Password,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    NameInRoman = model.NameInRoman,
-                    Birthday = model.Birthday,
-                    Location = DbContext.Locations.Find(model.Location),
-                    ResidencePermit = DbContext.ResidencePermits.Find(model.Location), // не ошибка
-                    Religion = DbContext.Religions.Find(model.Religion),
-                    Activity = DbContext.Activities.Find(model.Activity),
-                    Job = DbContext.Jobs.Find(model.Job),
-                    Education = DbContext.Educations.Find(model.Education),
-                    FirstLanguage = DbContext.Languages.Find(model.FirstLanguage),
-                    FirstLanguageLevel = DbContext.Levels.Find(model.FirstLanguageLevel),
-                    SecondLanguage = DbContext.Languages.Find(model.SecondLanguage),
-                    SecondLanguageLevel = DbContext.Levels.Find(model.SecondLanguageLevel),
-                    ThirdLanguage = DbContext.Languages.Find(model.ThirdLanguage),
-                    ThirdLanguageLevel = DbContext.Levels.Find(model.ThirdLanguageLevel),
-                    Relationship = DbContext.Relationships.Find(model.Relationship),
-                    NumberOfChildren = DbContext.NumbersOfChildren.Find(model.NumberOfChildren),
-                    Height = model.Height,
-                    Weight = model.Weight,
-                    Shape = DbContext.Shapes.Find(model.Shape),
-                    EyeColor = DbContext.EyeColors.Find(model.EyeColor),
-                    HairColor = DbContext.HairColors.Find(model.HairColor),
-                    Smoking = DbContext.Smokings.Find(model.Smoking),
-                    Alcohol = DbContext.Alcohols.Find(model.Alcohol),
-                    DesiredAge = DbContext.DesiredAges.Find(model.DesiredAge),
-                    Hobby = DbContext.Hobbies.Find(model.Hobby),
-                    Lifestyle = DbContext.Lifestyles.Find(model.Lifestyle),
-                    Knowledge = DbContext.Knowledges.Find(model.Knowledge),
-                    PhoneNumber = "+38" + model.PhoneNumber,
-                    Skype = model.Skype,
-                    Facebook = model.Facebook,
-                    Vk = model.Vk,
-                    Twitter = model.Twitter,
-                    InternationalPassport = DbContext.InternationalPassports.Find(model.InternationalPassport),
                     CreationDate = DateTime.Now,
                     LastLoginTime = DateTime.Now,
-                    FilePaths = new List<FilePath>()
+                    FilePaths = new List<FilePath>(),
                 };
-                // инкрементировать номер анкеты. Пока нули дубасят.
+
+                SetDefaultValues(user);
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -472,6 +437,37 @@ namespace Marriage_Agency_Women_.Controllers
         }
 
         #region Helpers
+        private void SetDefaultValues(ApplicationUser user)
+        {
+            int defaultId = 1;
+
+            user.Activity = DbContext.Activities.Find(defaultId);
+            user.Alcohol = DbContext.Alcohols.Find(defaultId);
+            user.DesiredAge = DbContext.DesiredAges.Find(defaultId);
+            user.Education = DbContext.Educations.Find(defaultId);
+            user.EyeColor = DbContext.EyeColors.Find(defaultId);
+            user.HairColor = DbContext.HairColors.Find(defaultId);
+            user.Hobby = DbContext.Hobbies.Find(defaultId);
+            user.InternationalPassport = DbContext.InternationalPassports.Find(defaultId);
+            user.Job = DbContext.Jobs.Find(defaultId);
+            user.Knowledge = DbContext.Knowledges.Find(defaultId);
+            user.FirstLanguage = DbContext.Languages.Find(defaultId);
+            user.FirstLanguageLevel = DbContext.Levels.Find(defaultId);
+            user.SecondLanguage = DbContext.Languages.Find(defaultId);
+            user.SecondLanguageLevel = DbContext.Levels.Find(defaultId);
+            user.ThirdLanguage = DbContext.Languages.Find(defaultId);
+            user.ThirdLanguageLevel = DbContext.Levels.Find(defaultId);
+            user.Lifestyle = DbContext.Lifestyles.Find(defaultId);
+            user.Location = DbContext.Locations.Find(defaultId);
+            user.NumberOfChildren = DbContext.NumbersOfChildren.Find(defaultId);
+            user.Relationship = DbContext.Relationships.Find(defaultId);
+            user.Religion = DbContext.Religions.Find(defaultId);
+            user.Shape = DbContext.Shapes.Find(defaultId);
+            user.Smoking = DbContext.Smokings.Find(defaultId);
+
+            user.Birthday = new DateTime(1900, 1, 1);
+        }
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))

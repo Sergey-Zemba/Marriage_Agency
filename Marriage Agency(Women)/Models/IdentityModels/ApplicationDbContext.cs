@@ -35,7 +35,6 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
         public DbSet<Level> Levels { get; set; }
         public DbSet<Lifestyle> Lifestyles { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<ResidencePermit> ResidencePermits { get; set; } 
         public DbSet<NumberOfChildren> NumbersOfChildren { get; set; }
         public DbSet<Relationship> Relationships { get; set; }
         public DbSet<Religion> Religions { get; set; }

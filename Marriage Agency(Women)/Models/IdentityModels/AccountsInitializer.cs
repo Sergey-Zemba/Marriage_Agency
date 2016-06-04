@@ -29,19 +29,20 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             roleManager.Create(editorRole);
             roleManager.Create(userRole);
 
-            ApplicationUser user = new ApplicationUser
+            ApplicationUser admin = new ApplicationUser
             {
                 Email = "admin@email.com",
                 UserName = "admin@email.com",
                 CreationDate = DateTime.Now,
-                LastLoginTime = DateTime.Now
+                LastLoginTime = DateTime.Now,
             };
 
-            userManager.Create(user, "1234");
-            userManager.AddToRole(user.Id, "admin");
+            userManager.Create(admin, "1234");
+            userManager.AddToRole(admin.Id, "admin");
 
             ICollection<Activity> activities = new List<Activity>
             {
+                new Activity(0, "Не указано", "", ""),
                 new Activity(1, "Горная промышленность", "Mining industry", "鉱業"),
                 new Activity(2, "Строительство", "Construction industry ", "建設業 "), 
                 new Activity(3, "Производство", "Manufacturing industry", "製造業 "),
@@ -62,6 +63,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Alcohol> alcohols = new List<Alcohol>
             {
+                new Alcohol(0, "Не указано", "", ""),
                 new Alcohol(1, "Нет", "No", "いいえ"),
                 new Alcohol(2, "Да, только по праздникам", "Yes, only on holidays", "祭日にだけ"),
                 new Alcohol(3, "Да, раз в месяц", "Yes, once a month", "月に一度程度"),
@@ -69,6 +71,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<DesiredAge> desiredAges = new List<DesiredAge>
             {
+                new DesiredAge(0, "Не указано", "", ""),
                 new DesiredAge(1, "Нет", "No", "なし"),
                 new DesiredAge(2, "До 30 лет", "Up to 30 years", "30 歳まで"),
                 new DesiredAge(3, "До 35 лет", "Up to 35 years", "35 歳まで"),
@@ -80,6 +83,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Education> educations = new List<Education>
             {
+                new Education(0, "Не указано", "", ""),
                 new Education(1, "Аспирантура", "Graduate school", ""),
                 new Education(2, "Университет", "University", "大学"),
                 new Education(3, "ПТУ", "Vocational school", "専門学校"),
@@ -88,6 +92,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<EyeColor> eyeColors = new List<EyeColor>
             {
+                new EyeColor(0, "Не указано", "", ""),
                 new EyeColor(1, "Голубые", "Blue", "青色"),
                 new EyeColor(2, "Серые", "Gray", "灰色"),
                 new EyeColor(3, "Зеленые", "Green", "緑色"),
@@ -96,6 +101,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<HairColor> hairColors = new List<HairColor>
             {
+                new HairColor(0, "Не указано", "", ""),
                 new HairColor(1, "Тёмные", "Black", "黒髪"),
                 new HairColor(2, "Каштановые", "Brown", "栗毛"),
                 new HairColor(3, "Светлые", "Blond", "金髪"),
@@ -103,6 +109,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Hobby> hobbies = new List<Hobby>
             {
+                new Hobby(0, "Не указано", "", ""),
                 new Hobby(1, "Футбол", "Football", "サッカー"),
                 new Hobby(2, "Волейбол", "Volleyball", "バレーボール"),
                 new Hobby(3, "Баскетбол", "Basketball", "バスケットボール"),
@@ -165,11 +172,13 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<InternationalPassport> internationalPassports = new List<InternationalPassport>
             {
+                new InternationalPassport(0, "Не указано", "", ""),
                 new InternationalPassport(1, "Да", "Yes", "はい"),
                 new InternationalPassport(1, "Нет", "No", "いいえ")
             };
             ICollection<Job> jobs = new List<Job>
             {
+                new Job(0, "Не указано", "", ""),
                 new Job(1, "Должностное лицо", "Executive", "役員"),
                 new Job(2, "Сотрудник компании", "Employee", "会社員"),
                 new Job(3, "Частный предприниматель", "Self-employment", "自営業 "),
@@ -183,6 +192,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Knowledge> knowledges = new List<Knowledge>
             {
+                new Knowledge(0, "Не указано", "", ""),
                 new Knowledge(1, "Кулинария", "Cooking", "料理"),
                 new Knowledge(2, "Кондитерские изделия", "Pastry making", "お菓子作り"),
                 new Knowledge(3, "Прогулка по ресторанам", "Eating tour", "食べ歩き"),
@@ -217,6 +227,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Language> languages = new List<Language>
             {
+                new Language(0, "Не указано", "", ""),
                 new Language(1, "Английский", "English", "英語"),
                 new Language(2, "Китайский", "Chinese", "中国語"),
                 new Language(3, "Японский", "Japanese", "日本語"),
@@ -259,6 +270,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Level> levels = new List<Level>
             {
+                new Level(0, "Не указано", "", ""),
                 new Level(1, "Базовый", "Elementary", "エレメンタリー"),
                 new Level(2, "Средний", "Intermediate", "中間体"),
                 new Level(3, "Продвинутый", "Upper", "アッパー"),
@@ -266,6 +278,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Lifestyle> lifestyles = new List<Lifestyle>
             {
+                new Lifestyle(0, "Не указано", "", ""),
                 new Lifestyle(1, "Йога", "Yoga", "ヨガ"),
                 new Lifestyle(2, "Проводить время с питомцами", "Spending time with pets", "ペット飼育"),
                 new Lifestyle(3, "Шоппинг", "Shopping", "ショッピング"),
@@ -310,6 +323,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Location> locations = new List<Location>
             {
+                new Location(0, "Не указано", "", ""),
                 new Location(1, "Крым", "Crimea", "クリミア半島"),
                 new Location(2, "Винницкая область", "Vinnytsia Oblast", "ヴィーンヌィツャ州"),
                 new Location(3, "Волынская область", "Volyn Oblast", "ヴォルィーニ州"),
@@ -337,37 +351,10 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
                 new Location(25, "Черниговская область", "Chernihiv Oblast", "チェルニーヒウ州"),
                 new Location(26, "Черновицкая область", "Chernivtsi Oblast", "チェルニウツィー州")
             };
-            ICollection<ResidencePermit> residencePermits = new List<ResidencePermit>
-            {
-                new ResidencePermit(1, "Крым", "Crimea", "クリミア半島"),
-                new ResidencePermit(2, "Винницкая область", "Vinnytsia Oblast", "ヴィーンヌィツャ州"),
-                new ResidencePermit(3, "Волынская область", "Volyn Oblast", "ヴォルィーニ州"),
-                new ResidencePermit(4, "Днепропетровская область", "Dnipropetrovsk Oblast", "ドニプロペトロウシク州"),
-                new ResidencePermit(5, "Донецкая область", "Donetsk Oblast", "ドネツク州"),
-                new ResidencePermit(6, "Житомирская область", "Zhytomyr Oblast", "ジトームィル州"),
-                new ResidencePermit(7, "Закарпатская область", "Zakarpattia Oblast", "ザカルパッチャ州"),
-                new ResidencePermit(8, "Запорожская область", "Zaporizhia Oblast", "ザポリージャ州"),
-                new ResidencePermit(9, "Ивано-Франковская область", "Ivano-Frankivsk Oblast", "イヴァーノ=フランキーウシク州"),
-                new ResidencePermit(-10, "Киев", "Kiev", "キエフ市"),
-                new ResidencePermit(11, "Киевская область", "Kiev Oblast", "キエフ州"),
-                new ResidencePermit(12, "Кировоградская область", "Kirovohrad Oblast", "キロヴォフラード州"),
-                new ResidencePermit(13, "Луганская область", "Lugansk Oblast", "ルガンスク州"),
-                new ResidencePermit(14, "Львовская область", "Lviv Oblast", "リヴィウ州"),
-                new ResidencePermit(15, "Николаевская область", "Nikolaevkskaya Oblast", "ニコラーエフ州"),
-                new ResidencePermit(16, "Одесская область", "Odessa Oblast", "オデッサ州"),
-                new ResidencePermit(17, "Полтавская область", "Poltava Oblast", "ポルタヴァ州"),
-                new ResidencePermit(18, "Ровенская область", "Rovenskaya Oblast", "ロブノ州"),
-                new ResidencePermit(19, "Сумская область", "Sumy Oblast", "スームィ州"),
-                new ResidencePermit(20, "Тернопольская область", "Ternopil Oblast", "テルノーピリ州"),
-                new ResidencePermit(21, "Харьковская область", "Kharkov Oblast", "ハリコフ州"),
-                new ResidencePermit(22, "Херсонская область", "Kherson Oblast", "ヘルソン州"),
-                new ResidencePermit(23, "Хмельницкая область", "Khmelnitsky Oblast", "フメリニツキー州"),
-                new ResidencePermit(24, "Черкасская область", "Cherkasy Oblast", "チェルカースィ州"),
-                new ResidencePermit(25, "Черниговская область", "Chernihiv Oblast", "チェルニーヒウ州"),
-                new ResidencePermit(26, "Черновицкая область", "Chernivtsi Oblast", "チェルニウツィー州")
-            };
+
             ICollection<NumberOfChildren> numbersOfChildren = new List<NumberOfChildren>
             {
+                new NumberOfChildren(0, "Не указано", "", ""),
                 new NumberOfChildren(1, "Нет", "No", "なし"),
                 new NumberOfChildren(2, "Один", "One", "1 人"),
                 new NumberOfChildren(3, "Двое", "Two", "2 人"),
@@ -376,6 +363,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Relationship> relationships = new List<Relationship>
             {
+                new Relationship(0, "Не указано", "", ""),
                 new Relationship(1, "Нет", "No", "なし"),
                 new Relationship(2, "Была замужем", "Yes", "あり"),
                 new Relationship(3, "Вдова", "Widow", "未亡人"),
@@ -383,6 +371,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Religion> religions = new List<Religion>
             {
+                new Religion(0, "Не указано", "", ""),
                 new Religion(1, "Христианство", "Christian", "キリスト教"),
                 new Religion(2, "Мусульманство", "Muslim", "イスラム教"),
                 new Religion(3, "Буддизм", "Buddhism", "仏教"),
@@ -391,6 +380,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Shape> shapes = new List<Shape>
             {
+                new Shape(0, "Не указано", "", ""),
                 new Shape(1, "Худое", "Slender", "細身"),
                 new Shape(2, "Спортивное", "Athletic", "アスリート"),
                 new Shape(3, "Стандартное", "Standards", "標準"),
@@ -399,6 +389,7 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             };
             ICollection<Smoking> smokings = new List<Smoking>
             {
+                new Smoking(0, "Не указано", "", ""),
                 new Smoking(1, "Да", "Yes", "はい"),
                 new Smoking(1, "Нет", "No", "いいえ")
             };
@@ -416,7 +407,6 @@ namespace Marriage_Agency_Women_.Models.IdentityModels
             context.Levels.AddRange(levels);
             context.Lifestyles.AddRange(lifestyles);
             context.Locations.AddRange(locations);
-            context.ResidencePermits.AddRange(residencePermits);
             context.NumbersOfChildren.AddRange(numbersOfChildren);
             context.Relationships.AddRange(relationships);
             context.Religions.AddRange(religions);

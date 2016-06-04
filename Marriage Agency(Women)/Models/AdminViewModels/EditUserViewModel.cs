@@ -11,7 +11,7 @@ namespace Marriage_Agency_Women_.Models.AdminViewModels
     {
         public string Id { get; set; }
 
-        [Required]
+        [ScaffoldColumn(false)]
         [Display(Name = "Номер анкеты")]
         public int Number { get; set; }
 
@@ -47,7 +47,6 @@ namespace Marriage_Agency_Women_.Models.AdminViewModels
         [Display(Name = "Пароль")]
         public string OpenPassword { get; set; }
 
-        [Required]
         [Display(Name = "Заметки")]
         public string Notes { get; set; }
     }
